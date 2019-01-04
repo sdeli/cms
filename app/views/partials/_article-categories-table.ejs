@@ -1,0 +1,24 @@
+
+<table class="article-categories-list-table table" title="article-categories-list-table">
+
+    <tbody class="article-categories-list-table__body">
+        <tr>
+            <th>Article Categories Name</th>
+            <th>Creations Date</th> 
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        
+        <% articleCategories.forEach(function(articleCateg) { %>
+            <tr class="article-categories-list-table__body__row" id="<%= articleCateg.articleCategoryId %>">
+                <td><a class="article-categories-list-table__body__row__article-name" href="/admin/article-category/edit-view/<%= articleCateg.articleCategoryName %>"><%= articleCateg.articleCategoryName %></a></td>
+
+                <td><%= articleCateg.createdAt %></td>
+
+                <td><a href="/admin/article-category/edit-view/<%= articleCateg.articleCategoryName %>">edit</a></td>
+
+                <td><a class="article-categories-list-table__body__row__delete-link" href="/admin/article-category/delete/<%= articleCateg.articleCategoryName %>">delete</a></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <% include ../partials/_head.ejs %>
+</head>
+<body>
+    <% include ../partials/_navbar.ejs %>
+    
+    <section class="container main">
+        <div class="row mt-4">
+            <div class="col-12 col-lg-3">
+                <% include ../partials/_product-categories.ejs %>
+            </div>
+            
+            <div class="col-12 mt-4 mt-lg-0 col-lg-8 offset-lg-1">
+                <% include ../partials/_flash-messages.ejs %>
+                <% include ../partials/_log-in-form.ejs %>
+            </div>
+        </div>
+    </section>
+
+    <% include ../partials/_footer.ejs %>
+    <% include ../partials/_scripts.ejs %>
+</body>
+</html>

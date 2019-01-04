@@ -1,0 +1,36 @@
+
+{   
+    "general" : {
+        "ajaxCallJsonContentType" : "application/json",
+        "ajaxCallPostMethod" : "post",
+        "fallbackErr" : "An error has occured. Please contact the site admin."
+    },
+    "bundles" : {
+        "articleList" : {
+            "reorgTableRowWidthClass" : "draggedRowsWidth",
+            "reorgTableStyleTagId" : "for-sortable-articles-table",
+            "articlesTablesClass" : ".article-list-table__body",
+            "reorgTableContainment" : "parent",
+            "reorgTablePlaceholdersClass" : "border border-success",
+            "deleteArticleLinksSel" : ".article-list-table__body__row__delete-link",
+            "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article?"
+        },
+        "createEditArticle" : {
+            "htmlContainerElement1Sel" : "#article-body"
+        },
+        "articleCategoriesList" : {
+            "reorgTable" : {
+                "rowWidthClass" : "draggedRowsWidth",
+                "styleTagId" : "for-sortable-articles-categories-table",
+                "tablesClass" : ".article-categories-list-table__body",
+                "containment" : "parent",
+                "placeholdersClass" : "border border-success",
+                "updateSort" : "/admin/article-category/update-sort"
+            },
+            "deleteArticleAlert" : {
+                "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
+                "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
+            }
+        } 
+    }
+}

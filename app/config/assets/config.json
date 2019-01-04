@@ -1,0 +1,260 @@
+
+{   
+    "restEndpoints" : {
+        "admin" : {
+            "article" : { 
+                "ListView" : "/admin/articles",
+                "createView" : "/admin/article/create-view",
+                "editView" : "/admin/article/edit-view/:articleId",
+                "create" : "/admin/article/create",
+                "updateSort" : "/admin/article/update-sort",
+                "update" : "/admin/article/update",
+                "delete" : "/admin/article/delete/:articleId"
+            },
+            "articleCategory" : {
+                "listView" : "/admin/article-categories",
+                "createView" : "/admin/article-category/create-view",
+                "editView" : "/admin/article-category/edit-view/:articleCategoryName",
+                "create" : "/admin/article-category/create",
+                "updateSort" : "/admin/article-category/update-sort",
+                "update" : "/admin/article-category/update",
+                "delete" : "/admin/article-category/delete/:articleCategoryName"
+            }
+        },
+        "registerUser" : {
+            "registerView" : "/register-user",
+            "create" : "/register-user/create"
+    
+        },
+        "blog" : {
+            "index" : "/",
+            "article" : "/article/:articleFileName",
+            "article1" : "/a"
+            
+        },
+        "login" : {
+            "view" : "/login"
+        },
+        "googleOAuth" : {
+            "login" : "/login/google-login",
+            "red" : "/login/google-login/redirect",
+            "succRed" : "/login/google-login/success",
+            "errRed" : "/login/google-login/failed"
+        },
+        "localOAuth" : {
+            "createUserEp" : "/login/post-login-data",
+            "succRedEp" : "/login/local/success",
+            "errRedEp" : "/login/local/failed"
+        }
+    },
+    "errorMsgs" : {
+        "admin" : {
+            "articleCategory" : {
+                "notFoundInDb" : "this cateogry isnt found in db:"
+
+            }
+        },
+        "general" : {
+            "fallbackErr" : "An error has occured. Please contact the stie admin.",
+            "articleDataNotFoundInDb" : "article category not found in db",
+            "articleCategoryNotFoundInDb" : "article category not found in db",
+            "fileDoesntExist" : "the file trying to read doesnt exist",
+            "articleNotFound" : "requested article not found in the system"
+        }
+    },
+    "errHandling" : {
+        "errLogRelativeFilePath" : "logs/err-log.txt",
+        "errEvents" : {
+            "warningWithReq" : "warningWithReq"
+        }
+    },
+    "routesConfig" : {
+        "adminDeleteArticleEpPathVar" : "articleId"
+    },
+    "viewPathes" : {
+        "blog" : {
+            "index" : "blog/index.ejs",
+            "article" : "blog/article.ejs"
+        },
+        "login" : "log-in/log-in.ejs",
+        "register" : "register/register.ejs",
+        "fourOFour" : "404/404.ejs",
+        "admin" : {
+            "article" : {
+                "createEdit" : "admin/article/create-edit-article.ejs",
+                "list" : "admin/article/articles-list.ejs"
+            },
+            "articleCategory" : {
+                "createEdit" : "admin/article-category/create-edit-article-category.ejs",
+                "list" : "admin/article-category/article-categories-list.ejs"
+            }
+        }
+    },
+    "templateConf" : {
+        "admin" : {
+            "index" : {
+                "title" : "AdminArea",
+                "id" : "admin-area"
+            },
+            "article" : {
+                "list" : {
+                    "title" : "Articles List",
+                    "id" : "articles-list"
+                },
+                "create" : {
+                    "title" : "Publish An Article",
+                    "id" : "publish-article"
+                },
+                "edit" : {
+                    "title" : "Edit:",
+                    "id" : "edit-article"
+                }
+            },
+            "articleCategory" : {
+                "list" : {
+                    "title" : "Article Categories List",
+                    "id" : "article-categories-list"
+                },
+                "create" : {
+                    "title" : "Create An Article Categorie",
+                    "id" : "create-article-category"
+                },
+                "edit" : {
+                    "title" : "Edit:",
+                    "id" : "edit-article-category"
+                }
+            }
+        },
+        "blog" : {
+            "index" : {
+                "title" : "HomePage",
+                "id" : "home"
+            },
+            "article" : {
+                "id" : "article"
+            }
+        },
+        "login" : {
+            "title" : "Login",
+            "id" : "login"
+        },
+        "registe" : {
+            "title" : "Regsiter",
+            "id" : "register"
+        },
+        "fourOFour" : {
+            "title" : "PageNotFound",
+            "id" : "404"
+        }
+    },
+    "flashMsgs" : {
+        "types" : {
+            "success" : "success",
+            "info" : "info",
+            "warning" : "danger"
+        },
+        "admin" : {
+            "article" : {
+                "update" : {
+                    "succ" : "The updates you made to the article have been succesfully saved",
+                    "err" : "There was an error during saving you article, please contact the site admin"
+                },
+                "delete" : {
+                    "succ" : "The article has been succefully deleted",
+                    "err" : "there has been an issue with the deletion of your article, please contact the site admin"
+                },
+                "updateSort" : {
+                    "succ" : "The changes you made have been succesfully initiated.",
+                    "err" : "there has been an error with the update please contact the site admin."
+                },
+                "saved" : {
+                    "succ" : "article saved"
+                },
+                "create" : {
+                    "succ" : "your article has been publshed, it should be in the article queue"
+                }
+            },
+            "articleCategory" : {
+                "create" : {
+                    "succ" : "The new article category has been created and should be in the list below."
+                },
+                "update" : {
+                    "succ" : "The update you made to the article category have been succesfully saved",
+                    "err" : "There was an error during updating you article category, please contact the site admin"
+                },
+                "delete" : {
+                    "succ" : "The article category has been succefully deleted",
+                    "err" : "there has been an issue with the deletion of your article category, please contact the site admin"
+                },
+                "updateSort" : {
+                    "succ" : "The changes you made have been succesfully initiated.",
+                    "err" : "there has been an error with the update please contact the site admin."
+                },
+                "saved" : {
+                    "succ" : "article saved"
+                }
+            }
+        },
+        "googleLogin" : {
+            "err" : "failed google login"
+        },
+        "localLogin" : {
+            "succ" : "you are now succefully logged in",
+            "err" : "failed local login"
+        },
+        "validationErr" : {
+            "viewTitle" : {
+                "notEmpty" : "The page title shouldnt be empty!",
+                "charCount" : "The page title should be between 1 and 25 characters!"
+            },
+            "articleName" : {
+                "notEmpty" : "please enter a name for the article!"
+            },
+            "email" : {
+                "charCount" : "The length of your email should be between 5 and 100!"
+            },
+            "teaser" : {
+                "notEmpty" : "teaser shouldn`t be empty!"
+            },
+            "article" : {
+                "notEmpty" : "article shouldn`t be empty!"
+            },
+            "articleCategory" : {
+                "nameIsEmpty" : "Please enter a name for article category!",
+                "nameCharCount" : "Article Category should be between 1 and 25 characters!",
+                "notUnique" : "The new article category is already in the list, so it couldnt be created."
+            }
+        },
+        "generalErr" : {
+            "request" : "there has been an issue with your request please contact the siteadmin"
+        }
+    },
+    "absolutePathes" : {
+        "wwwPath" : "/home/sandor/Documents/cms-tut/app/www",
+        "articlesPath" : "/home/sandor/Documents/cms-tut/app/www/articles",
+        "teasersPath" : "/home/sandor/Documents/cms-tut/app/www/teasers",
+        "modelsPath" : "/home/sandor/Documents/cms-tut/app/models"
+    },
+    "relativePathes" : {
+        "publicFolder" : "/public"
+    },
+    "expressSession" : {
+        "salt" : "whatareallygreatsaltysalt",
+        "resave" : false,
+        "saveUninitialized" : false
+    },
+    "googleLogin" : {
+        "Type" : "profile"
+    },
+    "localLogin" : {
+        "Type" : "local"
+    },
+    "validation" : {
+        "articleCategory" : {
+            "term" : "articleCategory",
+            "maxLength" : "25",
+            "minLength" : "1"
+
+        }
+    }
+}
