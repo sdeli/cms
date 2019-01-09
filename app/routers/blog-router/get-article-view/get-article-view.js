@@ -1,13 +1,14 @@
-const adminModel = require('admin-model').getInst();
+const articlesModel = require('articles-model').getInst();
+const categsOfArticlesModel = require('categories-of-articles-model').getInst();
+
 const {getFilesContent} = require('server-utils');
 
 module.exports = ((config) => {
     const {
-        ARTICLE_FOLDERS__PATH, 
-        ARTICLE__VIEW, 
+        ARTICLE_FOLDERS___PATH, 
+        ARTICLE_VIEW__PATH, 
         ARTICLE_VIEW__ID, 
-        WARNING_EVENT,
-        ARTICLE_NOT_FOUND,
+        ARTICLE_NOT_FOUND__ERR_MSG,
         FOUR_O_FOUR_VIEW,
         FOUR_O_FOUR_VIEW__TITLE,
         FOUR_O_FOUR_VIEW__ID
@@ -16,12 +17,13 @@ module.exports = ((config) => {
     return getArticleView;
 
     function getArticleView(req, res, next){
-        let {articleFileName} = req.params
+        req.params.articleId = req.params.articleFileName.match(/(?<=-)[^-]*$/);
 
-        Promise.all([
-            adminModel.getArticleTitleAndName(articleFileName),
-            getFilesContent(ARTICLE_FOLDERS__PATH, articleFileName)
-        ]).then(articleData => {
+        getArticleData(req)
+        .then(articleData => {
+            renderEditArticleView(res, articleData);
+        })
+        .then(articleData => {
             let doesArticleExist = articleData[0] !== false && articleData[1] !== false;
 
             if (doesArticleExist) {
@@ -30,7 +32,7 @@ module.exports = ((config) => {
                 renderArticle(res, articleName, pageTitle, articleBody);
             } else {
                 render404page(res);
-                throw new Error(ARTICLE_NOT_FOUND);
+                throw new Error(ARTICLE_NOT_FOUND__ERR_MSG);
             }
         })
         .catch(e => {
@@ -40,7 +42,7 @@ module.exports = ((config) => {
     }
 
     function renderArticle(res, articleName, pageTitle, articleBody) {
-        res.render(ARTICLE__VIEW, {
+        res.render(ARTICLE_VIEW__PATH, {
             pageTitle : pageTitle,
             pageId : ARTICLE_VIEW__ID,
             articleName,

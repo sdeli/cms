@@ -1,5 +1,6 @@
 drop database if exists cms;
-create database cms;
+create database cms
+CHARACTER SET latin2 COLLATE latin2_hungarian_ci;
 
 use cms;
 
@@ -7,10 +8,10 @@ drop table if exists articles;
 create table articles (
 	article_id char(18) not null unique,
 	article_name char(50) not null,
-    article_name_in_url char(50) not null,
     page_title char(25) not null,
     article_file_name char(69) not null unique,
     teaser_file_name char(25) not null unique,
+    article_prof_img_file_name char(43) default null unique,
     sort tinyint default 0,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     primary key (article_id)
@@ -18,7 +19,7 @@ create table articles (
 
 drop table if exists article_categories;
 create table article_categories (
-	article_category_id char(18) default null,
+	article_category_id char(18) default null unique,
 	article_category_name char(50) not null unique,
     sort tinyint default 0,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -27,14 +28,20 @@ create table article_categories (
 
 drop table if exists categories_of_articles;
 create table categories_of_articles (
-	article_category_name char(50) not null unique,
-    article_id char(18) not null unique
+	id int auto_increment primary key,
+	article_category_id char(18) not null,
+    article_id char(18) not null
 );
 
-DROP TRIGGER if exists article_categories;
+# ==== articles table changes ====
+alter table articles 
+add index article_file_name_index (article_file_name);
+
+# ==== article_categories table changes ====
+DROP TRIGGER if exists inserCategIdOnIsertIntoArticleCategories;
 
 DELIMITER //
-CREATE TRIGGER article_categories 
+CREATE TRIGGER inserCategIdOnIsertIntoArticleCategories 
     before insert ON article_categories
     FOR EACH ROW 
 BEGIN
@@ -43,15 +50,15 @@ BEGIN
 END //
 DELIMITER ;
 
-alter table articles 
-add index article_file_name_index (article_file_name);
-
+# ==== categories_of_articles table changes ====
 alter table categories_of_articles
-add constraint article_category_name_fk
-foreign key (article_category_name) 
-references article_categories(article_category_name);
+add constraint article_category_id_fk
+foreign key (article_category_id)
+references article_categories(article_category_id) 
+on delete cascade;
 
 alter table categories_of_articles
 add constraint article_id_fk
 foreign key (article_id) 
-references articles(article_id);
+references articles(article_id) 
+on delete cascade;

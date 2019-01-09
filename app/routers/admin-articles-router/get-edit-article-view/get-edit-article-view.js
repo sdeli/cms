@@ -1,47 +1,50 @@
-const adminModel = require('admin-model').getInst();
-const {getFilesContent} = require('server-utils');
+let {getArticleData} = require('server-utils');
 
 module.exports = ((config) => {
-    let {TEASERS_PATH, ARTICLES_PATH, EDIT_ARTICLE__VIEW, EDIT_ARTICLE_VIEW__TITLE, EDIT_ARTICLE_VIEW__ID, UPDATE_ARTICLE__EP, FILE_DOESNT_EXIST__ERR_MSG} = config;
-
+    let {
+        ARTICLE_NOT_FOUND__ERR_MSG,
+        EDIT_ARTICLE_VIEW__PATH, 
+        EDIT_ARTICLE_VIEW__TITLE, 
+        EDIT_ARTICLE_VIEW__ID, 
+        UPDATE_ARTICLE__EP, 
+        FAILURE_REDIRECT__EP,
+        FALIRUE__ERR_FLASH,
+        ARTICLE_CATEGORY_CHECKBOX_GROUP__NAME,
+        TEASERS__PATH,
+        ARTICLES__PATH
+    } = config;
+    
+    getArticleData = getArticleData({
+        ARTICLE_NOT_FOUND__ERR_MSG,
+        ARTICLE_CATEGORY_CHECKBOX_GROUP__NAME,
+        TEASERS__PATH,
+        ARTICLES__PATH
+    });
+    
     return getEditArticleView;
 
-    function getEditArticleView(req, res) {
-        let {articleId} = req.params;
-        let articleData;
-    
-        adminModel.getArticle(articleId)
-        .then(({results}) => {
-            articleData = results[0];
-            articleData.articleId = articleId;
-            
-            return Promise.all([
-                getFilesContent(ARTICLES_PATH, articleData.articleFileName),
-                getFilesContent(TEASERS_PATH, articleData.teaserFileName)
-            ]);
-        }).then(results => {
-            let fileExists = results[0] !== false;
-                fileExists &= results[1] !== false;
-
-            if (fileExists) {
-                articleData.articleHtml = results[0];
-                articleData.teasersHtml = results[1];
-                renderEditArticleView(res, articleData);
-            } else {
-                throw new Error()
-            }
+    function getEditArticleView(req, res, next) {
+        getArticleData(req)
+        .then(articleData => {
+            renderEditArticleView(res, articleData);
         })
         .catch(e => {
-            console.log(e);
+            failureRedirect(res)
+            next(e);
         });
     }
     
     function renderEditArticleView(res, articleData) {
-        res.render(EDIT_ARTICLE__VIEW, {
+        res.render(EDIT_ARTICLE_VIEW__PATH, {
             pageTitle : `${EDIT_ARTICLE_VIEW__TITLE} ${articleData.articleName}`,
             pageId : EDIT_ARTICLE_VIEW__ID,
             postDataToRoute : UPDATE_ARTICLE__EP,
             articleData
         });
+    }
+
+    function failureRedirect(res) {
+        res.flash.toNext(res.flash.WARNING, FALIRUE__ERR_FLASH);
+        res.redirect(FAILURE_REDIRECT__EP);
     }
 });

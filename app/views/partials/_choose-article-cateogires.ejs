@@ -1,0 +1,29 @@
+<% categs = articleData.articleCategories %>
+
+<div class="form-group choose-article-categs">
+    <% if (typeof articleData !== 'undefined' && pageId === 'edit-article') { %>
+        <label for="#article-name">Edit the Categories</label>
+    <% } else { %>
+        <label for="#article-name">Add Categories</label>
+    <% } %>
+
+    <div>
+        <button class="btn btn-dark choose-article-categs__btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Choose Categories
+        </button>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body mt-2">
+            <p class="text-info">Check the checkbox which you want to be displayed at your article and you want to have your article be categorized by.</p>
+
+            <div class="choose-article-categs__checkb-articleCategoriescont">
+                <% categs.forEach(function(categ) { %>
+                    <div class="d-inline-block mr-1 choose-article-categs__checkb-cont__checkb">
+                        <input type="checkbox" name="<%= categGroupName %>[]" value="<%= categ.articleCategoryId %>" <%= categ.checked %>>
+                        <label for="defaultCheck2"><%= categ.articleCategoryName %></label>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</div>

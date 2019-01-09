@@ -1,14 +1,12 @@
 const fs = require('fs');
 
+let getArticleData = require('./moduls/get-article-data/get-article-data.js');
+
+
+
 function getFilesContent(foldersPath, fileName) {
     return new Promise((resolve, reject) => {
         let currArticlesPath = `${foldersPath}/${fileName}`;
-
-        let doesFileExist = fs.existsSync(currArticlesPath);
-        if(!doesFileExist) {
-            resolve(false);
-            return;
-        }
 
         fs.readFile(currArticlesPath, (err, buffer) => {
             if (err) reject(err)
@@ -19,6 +17,10 @@ function getFilesContent(foldersPath, fileName) {
 }
 
 function updateFile(filePath, fileBody) {
+    return saveFile(filePath, fileBody);
+}
+
+function saveFile(filePath, fileBody) {
     return new Promise((resolve, reject) => {
         fs.writeFile(filePath, fileBody, (err) => {
             if (err) reject(err);
@@ -51,9 +53,23 @@ function deleteFile(filePath) {
     });
 }
 
+
+function getValidFileName(datasName, id) {
+    let validFileName = datasName
+        .normalize('NFD')
+        .toLowerCase()
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/gi, '_').toLocaleLowerCase() + `-${id}`;
+    
+    return validFileName;
+}
+
 module.exports = {
+    getArticleData,
     getFilesContent,
     updateFile,
     renameFile,
-    deleteFile
+    deleteFile,
+    getValidFileName,
+    saveFile
 };

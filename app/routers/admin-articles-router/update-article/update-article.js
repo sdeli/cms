@@ -1,84 +1,103 @@
-const fs = require('fs');
-const adminModel = require('admin-model').getInst();
-
-const {updateFile, renameFile} = require('server-utils');
+let updateArticleData = require('./moduls/update-article-data/update-article-data.js'); 
 
 module.exports = ((config) => {
-    // create closure for config constants
     const {
-        TEASERS_PATH, 
-        ARTICLES_PATH, 
-        EDIT_ARTICLE__VIEW, 
+        VIEW_TITLE_NOT_EMPTY__ERR_FLASH,
+        VIEW_TITLE_CHAR_COUNT__ERR_FLASH,
+        ARTICLE_NAME_NOT_EMPTY__ERR_FLASH,
+        EMAIL_CHAR_COUNT__ERR_FLASH,
+        TEASER_NOT_EMPTY__ERR_FLASH,
+        ARTICLE_NOT_EMPTY__ERR_FLASH,
+        TEASERS__PATH, 
+        ARTICLES__PATH,
+        ARTICLE_PROFILE_IMG__PATH,
+        ARTICLE_PROFILE_IMG__LINK,
+        EDIT_ARTICLE_VIEW__PATH,
+        EDIT_ARTICLE_VIEW__EP,
         EDIT_ARTICLE_VIEW__ID, 
         EDIT_ARTICLE_VIEW__TITLE, 
         UPDATE_ARTICLE__EP,
         UPDATE_ARTICLE__SUCC_FLASH, 
         UPDATE_ARTICLE__ERR_FLASH, 
     } = config;
-
-    // route start
+    
+    updateArticleData = updateArticleData({
+        TEASERS__PATH, 
+        ARTICLES__PATH,
+        ARTICLE_PROFILE_IMG__PATH,
+        ARTICLE_PROFILE_IMG__LINK
+    });
+    
     return updateArticle;
     
-    function updateArticle(req, res) {
-        let articleNameInUrl = req.body.articleName.normalize('NFD').toLowerCase().replace(/[\u0300-\u036f]/g, "");
+    function updateArticle(req, res, next) {
+        let validationErrs = validateRegisterFormData(req);
 
-        let newArticleDetails = {
-            articleId : req.body.articleId, 
-            articleName : req.body.articleName,
-            articleNameInUrl,
-            pageTitle : req.body.pageTitle,
-            articleFileName : `${articleNameInUrl.replace(/\s/gi ,'_')}-${req.body.articleId}`,
-            teasersHtml : req.body.teasersHtml,
-            articleHtml : req.body.articleHtml
+        let articleFormDataCorrect = validationErrs.length === 0;
+        if (!articleFormDataCorrect) {
+            denyUpdateArticle(req, res, validationErrs);
+            return;
         }
 
-        adminModel.updateArticleData(newArticleDetails)
-        .then((updatedArticleDataFromDb) => {
-            return updateFilesOfArticle({
-                currArticleFileName : updatedArticleDataFromDb.oldArticleFileName, 
-                newArticleFileName : updatedArticleDataFromDb.newArticleFileName, 
-                newArticleBody : newArticleDetails.articleHtml,
-                teaserFileName : updatedArticleDataFromDb.teaserFileName,
-                newTeaser : newArticleDetails.teasersHtml
-            });
-        })
+        updateArticleData(req)
         .then(() => {
-            redirect('success', res, newArticleDetails);
+            redirectToEditUpdatedArticlePage(req, res);
         })
         .catch(e => {
-            process.emit(WARNING_EVENT, e.stack, req);
-            redirect('deny', res, newArticleDetails);
+            denyUpdateArticle(req, res, UPDATE_ARTICLE__ERR_FLASH);
+            next(e);
         });
     }
-    
-    function updateFilesOfArticle(updateParams) {
-        let {currArticleFileName, newArticleFileName, newArticleBody, teaserFileName, newTeaser} = updateParams;
 
-        newArticleFilePath = `${ARTICLES_PATH}/${newArticleFileName}`;
-        currArticleFilePath = `${ARTICLES_PATH}/${currArticleFileName}`;
-        teaserFilePath = `${TEASERS_PATH}/${teaserFileName}`;
+    function validateRegisterFormData(req) {
+        req.checkBody('pageTitle')
+        .notEmpty().withMessage(VIEW_TITLE_NOT_EMPTY__ERR_FLASH)
+        .len(4, 25)
+        .withMessage(VIEW_TITLE_CHAR_COUNT__ERR_FLASH)
+        .trim();
     
-        return Promise.all([
-            updateFile(currArticleFilePath, newArticleBody),
-            updateFile(teaserFilePath, newTeaser)
-        ])
-        .then(() => {
-            renameFile(currArticleFilePath, newArticleFilePath)
-        })
+        req.checkBody('articleName')
+        .notEmpty().withMessage(ARTICLE_NAME_NOT_EMPTY__ERR_FLASH)
+        .len(4, 25).withMessage(EMAIL_CHAR_COUNT__ERR_FLASH);
+    
+        req.checkBody('teasersHtml')
+        .notEmpty().withMessage(TEASER_NOT_EMPTY__ERR_FLASH);
+    
+        req.checkBody('articleHtml')
+        .notEmpty().withMessage(ARTICLE_NOT_EMPTY__ERR_FLASH);
+
+        validationErrs = req.validationErrors({
+            onlyFirstError: true
+        });
+
+        var validationErrs = Object.values(validationErrs);
+        return validationErrs;
     }
-    
-    function redirect(type, res, articleData) {
-        if (type === 'success') {
-            res.flash.toCurr(res.flash.SUCCESS, UPDATE_ARTICLE__SUCC_FLASH);
-        } else if ('deny') {
-            res.flash.toCurr(res.flash.WARNING, UPDATE_ARTICLE__ERR_FLASH);
-        }
 
-        res.render(EDIT_ARTICLE__VIEW, {
-            pageTitle : `${EDIT_ARTICLE_VIEW__TITLE} ${articleData.articleName}`,
+    function denyUpdateArticle(req, res, errs) {
+        let isNotJustASingleErrThanArrOfErrs = Array.isArray(errs);
+        if (isNotJustASingleErrThanArrOfErrs) {
+            validationErrs.forEach(validationErr => {
+                res.flash.toCurr(res.flash.WARNING, validationErr.msg);
+            });
+        } else {
+            res.flash.toCurr(res.flash.WARNING, errs);
+        }
+    
+        res.render(EDIT_ARTICLE_VIEW__PATH, {
+            pageTitle : `${EDIT_ARTICLE_VIEW__TITLE} ${req.body.articleName}`,
             pageId : EDIT_ARTICLE_VIEW__ID,
             postDataToRoute : UPDATE_ARTICLE__EP,
-            articleData
+            articleData : req.body
         });
-    } 
+    }
+    
+    function redirectToEditUpdatedArticlePage(req, res) {
+        res.flash.toNext(res.flash.SUCCESS, UPDATE_ARTICLE__SUCC_FLASH);
+
+        let articleId = req.body.articleId;
+        let editArticleViewEp = EDIT_ARTICLE_VIEW__EP.replace(':articleId', articleId);
+
+        res.redirect(editArticleViewEp);
+    }
 });

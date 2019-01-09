@@ -5,14 +5,14 @@ const adminArticleCategoriesRouter = express.Router();
 let restEp = config.restEndpoints;
 
 let getAddArticleCategoryView = require('./get-add-article-category-view/get-add-article-category-view.js')({
-    CREATE_ARTICLE_CATEGORY__VIEW : config.viewPathes.admin.articleCategory.createEdit, 
+    CREATE_ARTICLE_CATEGORY_VIEW__PATH : config.viewPathes.admin.articleCategory.createEdit, 
     CREATE_ARTICLE_CATEGORY_VIEW__TITLE : config.templateConf.admin.articleCategory.create.title, 
     CREATE_ARTICLE_VIEW__ID : config.templateConf.admin.articleCategory.create.id, 
     CREATE_ARTICLE_CATEGORY__EP : config.restEndpoints.admin.articleCategory.create
 });
 
-let getArticleListView = require('./get-article-categories-list-view/get-article-categories-list-view.js')({
-    ARTICLE_CATEGORY_LIST__VIEW : config.viewPathes.admin.articleCategory.list, 
+let getArticleCategoriesListView = require('./get-article-categories-list-view/get-article-categories-list-view.js')({
+    ARTICLE_CATEGORY_LIST_VIEW__PATH : config.viewPathes.admin.articleCategory.list, 
     ARTICLE_CATEGORY_LIST_VIEW__TITLE : config.templateConf.admin.articleCategory.list.title, 
     ARTICLE_CATEGORY_LIST_VIEW__ID : config.templateConf.admin.articleCategory.list.id, 
     ARTICLE_CATEGORY_CREATE_VIEW__EP : config.restEndpoints.admin.articleCategory.createView,
@@ -23,7 +23,7 @@ let createArticleCategory = require('./create-article-category/create-article-ca
     ARTICLE_CATEGORY_NAME_CHAR_COUNT__ERR_FLASH : config.flashMsgs.validationErr.articleCategory.nameCharCount,
     ARTICLE_CATEGORY_CREATED__SUCC_FLASH : config.flashMsgs.admin.articleCategory.create.succ,
     ARTICLE_CATEGORY_NOT_UNIQUE__ERR_FLASH : config.flashMsgs.validationErr.articleCategory.notUnique,
-    CREATE_EDIT_ARTICLE_CATEGORY__VIEW : config.viewPathes.admin.articleCategory.createEdit,
+    CREATE_EDIT_ARTICLE_CATEGORY_VIEW__PATH : config.viewPathes.admin.articleCategory.createEdit,
     CREATE_ARTICLE_CATEGORY_VIEW__TITLE : config.templateConf.admin.articleCategory.create.title,
     CREATE_ARTICLE_CATEGORY_VIEW__ID : config.templateConf.admin.articleCategory.create.id,
     CREATE_ARTICLE_CATEGORY_EP : config.restEndpoints.admin.articleCategory.create,
@@ -43,7 +43,7 @@ let deleteArticleCategory = require('./delete-article-category/delete-article-ca
 let getEditArticleCategoryView = require('./get-edit-article-category-view/get-edit-article-category-view.js')({
     ARTICLE_CATEGORY_NOT_FOUND_IN_DB__ERR_MSG : config.errorMsgs.general.articleCategoryNotFoundInDb, 
     UNEXPECTED_ERR_EVENT__ERR_FLASH : config.errorMsgs.general.fallbackErr,
-    EDIT_ARTICLE_CATEGORY__VIEW : config.viewPathes.admin.articleCategory.createEdit,
+    EDIT_ARTICLE_CATEGORY_VIEW__PATH : config.viewPathes.admin.articleCategory.createEdit,
     EDIT_ARTICLE_CATEGORY_VIEW__TITLE : config.templateConf.admin.articleCategory.edit.title, 
     EDIT_ARTICLE_CATEGORY_VIEW__ID : config.templateConf.admin.articleCategory.edit.id, 
     UPDATE_ARTICLE_CATEGORY__EP : restEp.admin.articleCategory.update,
@@ -52,7 +52,7 @@ let getEditArticleCategoryView = require('./get-edit-article-category-view/get-e
 });
 
 let updateArticleCategory = require('./update-article-category/update-article-category.js')({
-    EDIT_ARTICLE_CATEGORY__VIEW : config.viewPathes.admin.articleCategory.createEdit,
+    EDIT_ARTICLE_CATEGORY_VIEW__PATH : config.viewPathes.admin.articleCategory.createEdit,
     EDIT_ARTICLE_CATEGORY_VIEW__ID : config.templateConf.admin.articleCategory.edit.id,
     EDIT_ARTICLE_CATEGORY_VIEW__TITLE : config.templateConf.admin.articleCategory.edit.title,
     UPDATE_ARTICLE_CATEGORY__EP : restEp.admin.articleCategory.update,
@@ -61,17 +61,11 @@ let updateArticleCategory = require('./update-article-category/update-article-ca
     WARNING_EVENT : config.errHandling.errEvents.warningWithReq
 });
 
-let updateArticleCategoriesSort = require('./update-article-categorie-sort/update-article-categories-sort.js')({
-    UPDATE_ARTICLE_CATEGORIES_SORT__SUCC_FLASH : config.flashMsgs.admin.articleCategory.updateSort.succ,
-    UPDATE_ARTICLE_CATEGORIES_SORT__ERR_FLASH : config.flashMsgs.admin.articleCategory.updateSort.err
-});
-
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.createView, getAddArticleCategoryView);
-adminArticleCategoriesRouter.get(restEp.admin.articleCategory.listView, getArticleListView);
+adminArticleCategoriesRouter.get(restEp.admin.articleCategory.listView, getArticleCategoriesListView);
 adminArticleCategoriesRouter.post(restEp.admin.articleCategory.create, createArticleCategory);
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.delete, deleteArticleCategory);
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.editView, getEditArticleCategoryView);
 adminArticleCategoriesRouter.post(restEp.admin.articleCategory.update, updateArticleCategory);
-adminArticleCategoriesRouter.post(restEp.admin.articleCategory.updateSort, updateArticleCategoriesSort);
 
 module.exports = adminArticleCategoriesRouter;

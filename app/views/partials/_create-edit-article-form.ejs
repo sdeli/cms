@@ -1,42 +1,66 @@
 <% 
-    if (typeof articleData === 'undefined') {
-        articleData = {};
-    }
-
     articleId = articleData.articleId
     pageTitle = articleData.pageTitle
     articleName = articleData.articleName
     teasersHtml = articleData.teasersHtml
     articleHtml = articleData.articleHtml
+    articleProfImgLink = articleData.articleProfImgLink
+    categGroupName = articleData.categGroupName
 %>
-<form class='add-article-form' action="<%= postDataToRoute %>" method="post">
-    <% if (typeof articleData !== 'undefined' && pageId === 'edit-article') { %>
-        <input type="text" name="articleId" value='<%= articleId %>' hidden>
-    <% } %>
 
-    <div class="form-group">
-        <label for="#page-title">Page Title</label>
-        <input type="text" class="form-control" id="page-title" name='pageTitle' value='<%= pageTitle %>'>
-    </div>
-    
-    <div class="form-group">
-        <label for="#article-name">Article Name</label>
-        <input type="text" class="form-control" id="article-name" name="articleName" value='<%= articleName %>'>
-    </div>
+<div>
+    <form class='add-article-form' action="<%= postDataToRoute %>" method="post" enctype="multipart/form-data">
+        <% if (typeof articleData !== 'undefined' && pageId === 'edit-article') { %>
+            <input type="text" name="articleId" value='<%= articleId %>' hidden>
+        <% } %>
 
-    <div class="form-group">
-        <label for="#teaser">Teaser</label>
-        <textarea type='text' class="form-control" id="teaser" name='teasersHtml' rows="5" ><%= teasersHtml %></textarea>
-    </div>
+        <div class="row">    
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <label for="#page-title">Page Title</label>
+                    <input type="text" class="form-control" id="page-title" name='pageTitle' value='<%= pageTitle %>'>
+                </div>
+                
+                <div class="form-group">
+                    <label for="#article-name">Article Name</label>
+                    <input type="text" class="form-control" id="article-name" name="articleName" value='<%= articleName %>'>
+                </div>
 
-    <div class="form-group">
-        <label for="#article-body">Example textarea</label>
-        <textarea type='text' class="form-control" id="article-body" name='articleHtml' rows="30c"><%= articleHtml %></textarea>
-    </div>
-    
-    <% if (pageId === 'publish-article') { %>
-        <button type="submit" class="btn btn-primary">Publish Article</button>
-    <% } else if (pageId === 'edit-article') { %>
-        <button type="submit" class="btn btn-primary">Update Article</button>
-    <% } %>
-</form>
+                <% include _choose-article-cateogires.ejs %>
+                
+                <div class="form-group">
+                    <label for="#teaser">Teaser</label>
+                    <textarea type='text' class="form-control" id="teaser" name='teasersHtml' rows="5" ><%= teasersHtml %></textarea>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input class="form-control-file image-browse-btn-sel" id="article-profile-img" name="articleProfileImg" type='file'>
+                </div>
+                
+                <div class="article-image-preview">
+                    <% if (typeof articleData !== 'undefined' && pageId === 'edit-article') { %>
+                        <img src="<%= articleProfImgLink %>" alt="" height="292px">
+                        <input type="text" name="articleProfImgLink" value='<%= articleProfImgLink %>' hidden>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="#article-body">Example textarea</label>
+                    <textarea type='text' class="form-control" id="article-body-editor" name='articleHtml' rows="30c"><%= articleHtml %></textarea>
+                </div>
+                <% if (pageId === 'publish-article') { %>
+                    <button type="submit" class="btn btn-primary">Publish Article</button>
+                <% } else if (pageId === 'edit-article') { %>
+                    <button type="submit" class="btn btn-primary">Update Article</button>
+                <% } %>
+            </div>
+        </div>
+        
+    </form>
+</div>

@@ -13,9 +13,9 @@ function postRegisterData(req, res){
         var isTrue = bcrypt.compareSync("Bgfkszm1234_", hash); // true
         var isTrue2 = bcrypt.compareSync("not_bacon", hash);
         req.session.password = req.body.password;
-        res.render(env.REGISTER__VIEW);
+        res.render(env.REGISTER_VIEW__PATH);
     } else {
-        res.render(env.REGISTER__VIEW, {
+        res.render(env.REGISTER_VIEW__PATH, {
             messages : validationErrs
         });
     }

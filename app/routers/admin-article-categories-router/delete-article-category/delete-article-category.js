@@ -1,4 +1,4 @@
-const adminModel = require('admin-model').getInst();
+const articleCategsModel = require('article-categs-model').getInst();
 
 const {deleteFile} = require('server-utils');
 
@@ -22,7 +22,7 @@ module.exports = ((config) => {
     function deleteArticleCategory(req, res) {
         let {articleCategoryName} = req.params;
 
-        adminModel.deleteArticleCategory(articleCategoryName)
+        articleCategsModel.deleteArticleCategory(articleCategoryName)
         .then((affectedRows) => {
             redirect('success', res);
         })

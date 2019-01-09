@@ -1,9 +1,3 @@
-function setUpFroalaEditor(containerElementSel) {
-	$(containerElementSel).froalaEditor({
-	   height: 300
-	});
-}
-
 function getUniqueStr(randStrLength) {
 	var randStr = "";
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

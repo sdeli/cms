@@ -2,27 +2,24 @@
 const reorganizeArticles = require('reorganize-table')
 const letConfirmArticleDeletion = require('front-end-utils').alertOnClick;
 
-reorganizeArticles({
-    SORTABLE_TABLES__CLASS : ".article-list-table__body", 
-    REORG_TABLE_CONTAINMENT : "parent",
-    REORG_TABLE_PLACEHOLDERS__CLASS : "border border-success",
-    FALLBACK_ERR_FLASH : "An error has occured. Please contact the stie admin.",
-    ADMIN_ARTICLE_UPDATE_SORT__EP : "/admin/article/update-sort",
-    AJAX_CALL__CONTENT_TYPE : "application/json", 
-    AJAX_CALL__METHOD : "POST"
+$(document).ready(() => {
+    reorganizeArticles({
+        SORTABLE_TABLES__CLASS : ".article-list-table__body", 
+        REORG_TABLE_CONTAINMENT : "parent",
+        REORG_TABLE_PLACEHOLDERS__CLASS : "border border-success",
+        FALLBACK_ERR_FLASH : "An error has occured. Please contact the stie admin.",
+        ADMIN_ARTICLE_UPDATE_SORT__EP : "/admin/article/update-sort",
+        AJAX_CALL__CONTENT_TYPE : "application/json", 
+        AJAX_CALL__METHOD : "POST"
+    });
+    
+    letConfirmArticleDeletion({
+        alertTriggerElemClass : ".article-list-table__body__row__delete-link", 
+        alertMsg : "are your sure you want to delete this article?"
+    });
 });
 
-letConfirmArticleDeletion({
-    alertTriggerElemClass : ".article-list-table__body__row__delete-link", 
-    alertMsg : "are your sure you want to delete this article?"
-});
 },{"front-end-utils":2,"reorganize-table":3}],2:[function(require,module,exports){
-function setUpFroalaEditor(containerElementSel) {
-	$(containerElementSel).froalaEditor({
-	   height: 300
-	});
-}
-
 function getUniqueStr(randStrLength) {
 	var randStr = "";
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -1,7 +1,20 @@
-stacoveflow - npm require by foldername same name *
+error answer to last link -> redirect to page where it came from display flash err
+user auth
+flash on client config
+grow articles size
+modilize editor
+WYSIWYG HTML Editor => teaser
+categories
+custom err responses in catch blocks, on err redirect to prev page
+in promise errors are fine but out of promise errs are still not
+normalize querypromise
 
-WYSIWYG HTML Editor
-tooltips in table
-error handler class
-script, footer tag, config
-
+err types:
+    page not found by express router err => 404 handler
+        after page request
+    page not found in the db => throw 404
+    user caused errs => validation err => no err - json answer to curr page
+        after user interaction post req
+    backend errs => redirect to last visited page flash general error
+        after page request
+        after user interaction post request

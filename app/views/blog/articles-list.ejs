@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/_head.ejs %>
+</head>
+<body>
+    <% include ../partials/_navbar.ejs %>
+
+    <section class="container main">
+        <div class="row">
+            <div class="col-12">
+                <% include ../partials/_flash-messages.ejs %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% include ../partials/_articles-list/_articles-blog-list.ejs %>
+            </div>
+        </div>
+    </section>
+
+    <% include ../partials/_footer.ejs %>
+    <% include ../partials/_scripts.ejs %>
+</body>
+</html>

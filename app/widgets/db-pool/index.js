@@ -35,9 +35,22 @@ const db = (function(){
         });
     }
 
+    function queryPromise(sql) {
+        return new Promise((resolve, reject) => {
+            connPool.query(sql, (err, results, fields) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
+
     return {
         escape : mysql.escape,
         queryProm,
+        queryPromise,
         queryCb : (sql, cb) => connPool.query(sql, cb)
     }
 }());

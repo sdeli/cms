@@ -1,0 +1,9 @@
+<%if (typeof articleBlogListData !== 'undefined') { %>
+    
+    <div class="articles-list">
+        <% articleBlogListData.forEach(function(articleData) { %>
+            <% include partials/_single-article.ejs %>
+        <% }); %>
+    </div>
+
+<% } %>

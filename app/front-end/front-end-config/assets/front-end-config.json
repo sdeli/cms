@@ -2,8 +2,13 @@
 {   
     "general" : {
         "ajaxCallJsonContentType" : "application/json",
-        "ajaxCallPostMethod" : "post",
+        "ajaxCallPostMethod" : "POST",
         "fallbackErr" : "An error has occured. Please contact the site admin."
+    },
+    "endPoints" : {
+        "uploadArticleImage" : "/admin/article-image/upload",
+        "removeArticleImage" : "/admin/article-image/remove",
+        "updateSort" : "/admin/article-category/update-sort"
     },
     "bundles" : {
         "articleList" : {
@@ -16,7 +21,13 @@
             "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article?"
         },
         "createEditArticle" : {
-            "htmlContainerElement1Sel" : "#article-body"
+            "articleBodyTextAreaId" : "#article-body-editor",
+            "imageDataParamName" : "imageFileInfo",
+            "imageAllowedTypes" : ["jpeg", "jpg", "png"],
+            "articleBodyEditorHeight" : 300,
+            "imagePreviewElemSel" : ".article-image-preview",
+            "imageBrowseBtnSel" : ".image-browse-btn-sel",
+            "displayedImgaesHeight" : "292px"
         },
         "articleCategoriesList" : {
             "reorgTable" : {
@@ -24,13 +35,28 @@
                 "styleTagId" : "for-sortable-articles-categories-table",
                 "tablesClass" : ".article-categories-list-table__body",
                 "containment" : "parent",
-                "placeholdersClass" : "border border-success",
-                "updateSort" : "/admin/article-category/update-sort"
+                "placeholdersClass" : "border border-success"
             },
             "deleteArticleAlert" : {
                 "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
                 "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
             }
         } 
+    },
+    "froala" : {
+        "events" : {
+            "image" : {
+                "uploaded" : "froalaEditor.image.uploaded",
+                "inserted" : "froalaEditor.image.inserted",
+                "replaced" : "froalaEditor.image.replaced",
+                "removed" : "froalaEditor.image.removed",
+                "error" : "froalaEditor.image.error"
+            }
+        },
+        "general" : {
+            "imgRemovedMsg" : "Image was deleted",
+            "imageCouldntBeDeletedErrMsg" : "Image delete problem: "
+        }
+        
     }
 }

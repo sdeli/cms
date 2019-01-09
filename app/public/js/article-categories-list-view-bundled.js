@@ -3,8 +3,13 @@ module.exports=
 {   
     "general" : {
         "ajaxCallJsonContentType" : "application/json",
-        "ajaxCallPostMethod" : "post",
+        "ajaxCallPostMethod" : "POST",
         "fallbackErr" : "An error has occured. Please contact the site admin."
+    },
+    "endPoints" : {
+        "uploadArticleImage" : "/admin/article-image/upload",
+        "removeArticleImage" : "/admin/article-image/remove",
+        "updateSort" : "/admin/article-category/update-sort"
     },
     "bundles" : {
         "articleList" : {
@@ -17,7 +22,13 @@ module.exports=
             "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article?"
         },
         "createEditArticle" : {
-            "htmlContainerElement1Sel" : "#article-body"
+            "articleBodyTextAreaId" : "#article-body-editor",
+            "imageDataParamName" : "imageFileInfo",
+            "imageAllowedTypes" : ["jpeg", "jpg", "png"],
+            "articleBodyEditorHeight" : 300,
+            "imagePreviewElemSel" : ".article-image-preview",
+            "imageBrowseBtnSel" : ".image-browse-btn-sel",
+            "displayedImgaesHeight" : "292px"
         },
         "articleCategoriesList" : {
             "reorgTable" : {
@@ -25,14 +36,29 @@ module.exports=
                 "styleTagId" : "for-sortable-articles-categories-table",
                 "tablesClass" : ".article-categories-list-table__body",
                 "containment" : "parent",
-                "placeholdersClass" : "border border-success",
-                "updateSort" : "/admin/article-category/update-sort"
+                "placeholdersClass" : "border border-success"
             },
             "deleteArticleAlert" : {
                 "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
                 "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
             }
         } 
+    },
+    "froala" : {
+        "events" : {
+            "image" : {
+                "uploaded" : "froalaEditor.image.uploaded",
+                "inserted" : "froalaEditor.image.inserted",
+                "replaced" : "froalaEditor.image.replaced",
+                "removed" : "froalaEditor.image.removed",
+                "error" : "froalaEditor.image.error"
+            }
+        },
+        "general" : {
+            "imgRemovedMsg" : "Image was deleted",
+            "imageCouldntBeDeletedErrMsg" : "Image delete problem: "
+        }
+        
     }
 }
 },{}],2:[function(require,module,exports){
@@ -47,27 +73,23 @@ const reorganizeArticlesCategoires = require('reorganize-table')
 let {reorgTable, deleteArticleAlert} = config.bundles.articleCategoriesList;
 let {general} = config;
 
-reorganizeArticlesCategoires({
-    SORTABLE_TABLES__CLASS : reorgTable.tablesClass, 
-    REORG_TABLE_CONTAINMENT : reorgTable.containment,
-    REORG_TABLE_PLACEHOLDERS__CLASS : reorgTable.placeholdersClass,
-    FALLBACK_ERR_FLASH : general.fallbackErr,
-    ADMIN_ARTICLE_UPDATE_SORT__EP : reorgTable.updateSort,
-    AJAX_CALL__CONTENT_TYPE : general.ajaxCallJsonContentType, 
-    AJAX_CALL__METHOD : general.ajaxCallPostMethod
-});
-
-letConfirmArticleCategoryDeletion({
-    alertTriggerElemClass : deleteArticleAlert.deleteArticleLinksSel, 
-    alertMsg : deleteArticleAlert.deleteArticleConfirmationWarningAlert
+$(document).ready(() => {
+    reorganizeArticlesCategoires({
+        SORTABLE_TABLES__CLASS : reorgTable.tablesClass, 
+        REORG_TABLE_CONTAINMENT : reorgTable.containment,
+        REORG_TABLE_PLACEHOLDERS__CLASS : reorgTable.placeholdersClass,
+        FALLBACK_ERR_FLASH : general.fallbackErr,
+        ADMIN_ARTICLE_UPDATE_SORT__EP : config.endPoints.updateSort,
+        AJAX_CALL__CONTENT_TYPE : general.ajaxCallJsonContentType, 
+        AJAX_CALL__METHOD : general.ajaxCallPostMethod
+    });
+    
+    letConfirmArticleCategoryDeletion({
+        alertTriggerElemClass : deleteArticleAlert.deleteArticleLinksSel, 
+        alertMsg : deleteArticleAlert.deleteArticleConfirmationWarningAlert
+    });
 });
 },{"front-end-config":2,"front-end-utils":4,"reorganize-table":5}],4:[function(require,module,exports){
-function setUpFroalaEditor(containerElementSel) {
-	$(containerElementSel).froalaEditor({
-	   height: 300
-	});
-}
-
 function getUniqueStr(randStrLength) {
 	var randStr = "";
 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

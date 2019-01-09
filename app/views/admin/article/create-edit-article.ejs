@@ -8,15 +8,20 @@
 
     <section class="container-fluid main">
         <div class="row" title="add pages area">
-            <div class="col-12 offset-md-1 col-md-10 mt-4">
+            <div class="col-12 offset-md-1 col-md-10">
                 <% include ../../partials/_flash-messages.ejs %>
             </div>
-    
-            <div class="col-12 offset-md-1 col-md-10 mt-4">
-                <h1>Create An Article</h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-12 offset-md-1 col-md-10 mt-2">
+                <% if (pageId === 'edit-article') { %>
+                    <h1>Edit</h1>
+                <% } else { %>
+                    <h1>Create An Article</h1>
+                <% } %>
                 <% include ../../partials/_create-edit-article-form.ejs %>
             </div>
-
         </div>
     </section>
 

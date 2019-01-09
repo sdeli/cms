@@ -1,20 +1,20 @@
-const adminModel = require('admin-model').getInst();
+const articlesModel = require('articles-model').getInst();
 
 const {deleteFile} = require('server-utils');
 
 module.exports = ((config) => {
-    const {TEASERS_PATH, ARTICLES_PATH, SUCC_REDIRECT__EP, DELETE_ARTICLE__SUCC_FLASH, DELETE_ARTICLE__ERR_FLASH} = config;
+    const {TEASERS__PATH, ARTICLES__PATH, SUCC_REDIRECT__EP, DELETE_ARTICLE__SUCC_FLASH, DELETE_ARTICLE__ERR_FLASH} = config;
 
     return deleteArticle;
 
     function deleteArticle(req, res) {
         let {articleId} = req.params;
 
-        adminModel.deleteArticleData(articleId)
+        articlesModel.deleteArticleData(articleId)
         .then((deletedArticle) => {
             return Promise.all([
-                deleteFile(`${ARTICLES_PATH}/${deletedArticle.bodysCurrFile}`),
-                deleteFile(`${TEASERS_PATH}/${deletedArticle.teasersCurrFile}`)
+                deleteFile(`${ARTICLES__PATH}/${deletedArticle.bodysCurrFile}`),
+                deleteFile(`${TEASERS__PATH}/${deletedArticle.teasersCurrFile}`)
             ]);
         })
         .then((results) => {

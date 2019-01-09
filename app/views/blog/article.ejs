@@ -8,14 +8,13 @@
 
     <section class="container main">
         <div class="row">
-
-            <div class="col-12 mt-4">
+            <div class="col-12 flash messages">
                 <% include ../partials/_flash-messages.ejs %>
-                <h1><%= articleName %></h1>
             </div>
-            
-            <div><%= articleBody %></div>
-            
+        </div>
+        
+        <div class="row">
+            <div class="fr-view"><%- articleBody %></div>
         </div>
     </section>
 

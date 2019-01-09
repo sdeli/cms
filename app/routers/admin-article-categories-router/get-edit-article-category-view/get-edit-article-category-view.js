@@ -1,10 +1,10 @@
-const adminModel = require('admin-model').getInst();
+const articleCategsModel = require('article-categs-model').getInst();
 
 module.exports = ((config) => {
     let {
         ARTICLE_CATEGORY_NOT_FOUND_IN_DB__ERR_MSG, 
         UNEXPECTED_ERR_EVENT__ERR_FLASH,
-        EDIT_ARTICLE_CATEGORY__VIEW,
+        EDIT_ARTICLE_CATEGORY_VIEW__PATH,
         EDIT_ARTICLE_CATEGORY_VIEW__TITLE, 
         EDIT_ARTICLE_CATEGORY_VIEW__ID, 
         UPDATE_ARTICLE_CATEGORY__EP,
@@ -17,7 +17,7 @@ module.exports = ((config) => {
     function getEditArticleCategoryView(req, res) {
         let {articleCategoryName} = req.params;
     
-        adminModel.checkIfArticleCategExists(articleCategoryName)
+        articleCategsModel.checkIfArticleCategExists(articleCategoryName)
         .then((doesArticleCategExists) => {
             if (doesArticleCategExists) {
                 renderEditArticleView(res, articleCategoryName)
@@ -33,7 +33,7 @@ module.exports = ((config) => {
     }
     
     function renderEditArticleView(res, articleCategoryName) {
-        res.render(EDIT_ARTICLE_CATEGORY__VIEW, {
+        res.render(EDIT_ARTICLE_CATEGORY_VIEW__PATH, {
             pageTitle : `${EDIT_ARTICLE_CATEGORY_VIEW__TITLE} ${articleCategoryName}`,
             pageId : EDIT_ARTICLE_CATEGORY_VIEW__ID,
             postDataToRoute : UPDATE_ARTICLE_CATEGORY__EP,

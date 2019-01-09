@@ -9,7 +9,11 @@
                 "create" : "/admin/article/create",
                 "updateSort" : "/admin/article/update-sort",
                 "update" : "/admin/article/update",
-                "delete" : "/admin/article/delete/:articleId"
+                "delete" : "/admin/article/delete/:articleId",
+                "image" : {
+                    "upload" : "/admin/article-image/upload",
+                    "remove" : "/admin/article-image/remove"
+                }
             },
             "articleCategory" : {
                 "listView" : "/admin/article-categories",
@@ -28,9 +32,8 @@
         },
         "blog" : {
             "index" : "/",
-            "article" : "/article/:articleFileName",
-            "article1" : "/a"
-            
+            "article" : "/blog/article/:articleFileName",
+            "articlesList" : "/blog/articles/"
         },
         "login" : {
             "view" : "/login"
@@ -56,7 +59,7 @@
         },
         "general" : {
             "fallbackErr" : "An error has occured. Please contact the stie admin.",
-            "articleDataNotFoundInDb" : "article category not found in db",
+            "dataNotFoundInDb" : "requested data not found in db",
             "articleCategoryNotFoundInDb" : "article category not found in db",
             "fileDoesntExist" : "the file trying to read doesnt exist",
             "articleNotFound" : "requested article not found in the system"
@@ -74,7 +77,8 @@
     "viewPathes" : {
         "blog" : {
             "index" : "blog/index.ejs",
-            "article" : "blog/article.ejs"
+            "article" : "blog/article.ejs",
+            "articlesList" : "blog/articles-list.ejs"
         },
         "login" : "log-in/log-in.ejs",
         "register" : "register/register.ejs",
@@ -132,6 +136,10 @@
             },
             "article" : {
                 "id" : "article"
+            },
+            "articlesList" : {
+                "id" : "blog-articles-list",
+                "title" : "blog"
             }
         },
         "login" : {
@@ -225,6 +233,9 @@
                 "notUnique" : "The new article category is already in the list, so it couldnt be created."
             }
         },
+        "articlesBlogList" : {
+            "noArtiles" : "There is an issue with the requested page, so you have been redirected"
+        },
         "generalErr" : {
             "request" : "there has been an issue with your request please contact the siteadmin"
         }
@@ -236,7 +247,26 @@
         "modelsPath" : "/home/sandor/Documents/cms-tut/app/models"
     },
     "relativePathes" : {
-        "publicFolder" : "/public"
+        "publicFolder" : "/public",
+        "public" : {
+            "self" : "./public/",
+            "img" : {
+                "article" : {
+                    "body" : "./public/img/article/body",
+                    "profile" : "./public/img/article/profile"
+                }
+            }
+        },
+        "articlesPath" : "./www/articles",
+        "teasersPath" : "./www/teasers"
+    },
+    "links" : {
+        "article" : {
+            "img" : {
+                "body" : "/img/article/body",
+                "profile" : "/img/article/profile"
+            }
+        }
     },
     "expressSession" : {
         "salt" : "whatareallygreatsaltysalt",
@@ -256,5 +286,9 @@
             "minLength" : "1"
 
         }
+    },
+    "general" : {
+        "publicFoldersName" : "public",
+        "articleCategoryCheckboxGroupName" : "articleCategories"
     }
 }

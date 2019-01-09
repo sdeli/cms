@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./app/app.js",
     "debug": "nodemon --inspect=9229 ./app.js",
-    "links": "npm link db-pool flash-messages admin-model flash-on-client server-utils front-end-utils set-up-passport-auth error-handler reorganize-table config front-end-config"
+    "links": "npm link db-pool flash-messages admin-model article-categs-model categories-of-articles-model flash-on-client server-utils front-end-utils set-up-passport-auth error-handler reorganize-table config front-end-config upload-image display-browsed-image singleton",
+    "install": "npm install; npm run links"
   },
   "dependencies": {
-    "autoprefixer": "^9.4.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "browserify": "^16.2.3",
@@ -21,26 +21,30 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
+    "froala-editor": "^2.9.1",
     "gulp": "^3.9.1",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
+    "multer": "^1.4.1",
     "mysql": "^2.13.0",
     "nodemon": "^1.18.7",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
+    "serve-favicon": "^2.5.0",
+    "uniqid": "^5.0.3",
+    "wysiwyg-editor-node-sdk": "^2.3.4"
+  },
+  "devDependencies": {
+    "envify": "^4.1.0",
+    "gulp-envify": "^1.0.0",
+    "autoprefixer": "^9.4.0",
     "postcss-hexrgba": "^1.0.1",
     "postcss-import": "^12.0.1",
     "postcss-mixins": "^6.2.0",
     "postcss-nested": "^4.1.0",
     "postcss-simple-vars": "^5.0.1",
-    "serve-favicon": "^2.5.0",
-    "uniqid": "^5.0.3",
     "vinyl-source-stream": "^2.0.0"
-  },
-  "devDependencies": {
-    "envify": "^4.1.0",
-    "gulp-envify": "^1.0.0"
   }
 }

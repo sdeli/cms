@@ -1,5 +1,4 @@
-const adminModel = require('admin-model').getInst();
-const env = process.env;
+const articleCategsModel = require('article-categs-model').getInst();
 
 module.exports = ((config) => {
     const {
@@ -12,7 +11,7 @@ module.exports = ((config) => {
     function updateArticleCategoriesSort(req, res) {
         let articlesNewSortArr = req.body;
     
-        adminModel.updateArticlesCategoriesSort(articlesNewSortArr)
+        articleCategsModel.updateArticlesCategoriesSort(articlesNewSortArr)
         .then(() => {
             res.json({
                 msg : UPDATE_ARTICLE_CATEGORIES_SORT__SUCC_FLASH

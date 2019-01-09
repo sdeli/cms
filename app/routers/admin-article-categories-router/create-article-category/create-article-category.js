@@ -1,4 +1,4 @@
-const adminModel = require('admin-model').getInst();
+const articleCategsModel = require('article-categs-model').getInst();
 
 module.exports = ((config) => {
     const {
@@ -6,7 +6,7 @@ module.exports = ((config) => {
         ARTICLE_CATEGORY_NAME_CHAR_COUNT__ERR_FLASH, 
         ARTICLE_CATEGORY_CREATED__SUCC_FLASH,
         ARTICLE_CATEGORY_NOT_UNIQUE__ERR_FLASH,
-        CREATE_EDIT_ARTICLE_CATEGORY__VIEW, 
+        CREATE_EDIT_ARTICLE_CATEGORY_VIEW__PATH, 
         CREATE_ARTICLE_CATEGORY_VIEW__TITLE, 
         CREATE_ARTICLE_CATEGORY_VIEW__ID, 
         CREATE_ARTICLE_CATEGORY_EP,
@@ -23,7 +23,7 @@ module.exports = ((config) => {
         let articleCategoryIsCorrect = validationErrs.length === 0;
         
         if (articleCategoryIsCorrect) {
-            adminModel.insertArticleCategoryDataIfUnique(req.body.articleCategory)
+            articleCategsModel.insertArticleCategoryDataIfUnique(req.body.articleCategory)
             .then(isArticleCategoryUnique => {
                 if (isArticleCategoryUnique) {
                     successRedirect(res);
@@ -31,7 +31,7 @@ module.exports = ((config) => {
                     denyArticleCreation(req, res, ARTICLE_CATEGORY_NOT_UNIQUE__ERR_FLASH);
                 }
             }).catch(e => {
-                process.emitWarning(e);
+                next(e);
             });
         } else {
             denyArticleCreation(req, res, validationErrs);
@@ -68,7 +68,7 @@ module.exports = ((config) => {
             res.flash.toCurr(res.flash.WARNING, validationErrs);
         }
     
-        res.render(CREATE_EDIT_ARTICLE_CATEGORY__VIEW, {
+        res.render(CREATE_EDIT_ARTICLE_CATEGORY_VIEW__PATH, {
             pageTitle : CREATE_ARTICLE_CATEGORY_VIEW__TITLE,
             pageId : CREATE_ARTICLE_CATEGORY_VIEW__ID,
             postDataToRoute : CREATE_ARTICLE_CATEGORY_EP,

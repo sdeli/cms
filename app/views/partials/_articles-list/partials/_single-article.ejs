@@ -1,0 +1,28 @@
+<div class="articles-list__single border-bottom mb-4 border-primary row">
+
+    <div class="col-12 col-md-4 d-none d-md-block">
+        <div class="articles-list__single__head mb-2">
+            <img class="img-fluid" src="<%= articleData.articleProfImgLink %>"></img>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-8">
+        <div class="articles-list__single__head mb-2">
+            <div class="articles-list__single__head__h3">
+                <%= articleData.articleName %>
+            </div>
+        </div>
+
+        <div class="articles-list__single__head mb-2 d-md-none">
+            <div class="img-fluid">
+                <%= articleData.articleProfImgLink %>
+            </div>
+        </div>
+    
+        <div class="articles-list__single__teaser">
+            <div class="articles-list__single__teaser__p">
+                <%= articleData.teaser %>
+            </div>
+        </div>
+    </div>
+</div>

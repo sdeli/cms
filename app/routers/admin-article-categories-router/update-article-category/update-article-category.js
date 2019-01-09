@@ -1,9 +1,9 @@
-const adminModel = require('admin-model').getInst();
+const articleCategsModel = require('article-categs-model').getInst();
 
 module.exports = ((config) => {
     // create closure for config constants
     const {
-        EDIT_ARTICLE_CATEGORY__VIEW,
+        EDIT_ARTICLE_CATEGORY_VIEW__PATH,
         EDIT_ARTICLE_CATEGORY_VIEW__ID,
         EDIT_ARTICLE_CATEGORY_VIEW__TITLE,
         UPDATE_ARTICLE_CATEGORY__EP,
@@ -21,7 +21,7 @@ module.exports = ((config) => {
             newName :  req.body.articleCategory
         }
 
-        adminModel.updateArticleCategoryName(articleCategoryData)
+        articleCategsModel.updateArticleCategoryName(articleCategoryData)
         .then(() => {
             renderEditArticleView('success', res, articleCategoryData.newName);
         })
@@ -38,7 +38,7 @@ module.exports = ((config) => {
             res.flash.toCurr(res.flash.WARNING, UPDATE_ARTICLE_CATEGORY__ERR_FLASH);
         }
 
-        res.render(EDIT_ARTICLE_CATEGORY__VIEW, {
+        res.render(EDIT_ARTICLE_CATEGORY_VIEW__PATH, {
             pageTitle : `${EDIT_ARTICLE_CATEGORY_VIEW__TITLE} ${currArticleCategoryName}`,
             pageId : EDIT_ARTICLE_CATEGORY_VIEW__ID,
             postDataToRoute : UPDATE_ARTICLE_CATEGORY__EP,

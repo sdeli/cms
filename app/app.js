@@ -19,18 +19,25 @@ const validatior = require('express-validator');
 const setUpPassportAuth = require('set-up-passport-auth');
 const FlashMessaging = require('flash-messages');
 const errorHandler = require('error-handler')({
-    ERR_LOG_FILE_PATH : `${__dirname}/${config.errHandling.errLogRelativeFilePath}`,
+    ERR_LOG_FILE__PATH : `${__dirname}/${config.errHandling.errLogRelativeFilePath}`,
     NODE_ENV : env.NODE_ENV, 
     ERR_HANDLER__FLASH : config.flashMsgs.generalErr.request
 });
 
 // ==== Cofigure Models ====
-const adminModel = require('admin-model');
-adminModel.configure({
-    ARTICLE_DATA_NOT_FOUND_IN_DB__ERR_MSG : config.errorMsgs.general.articleDataNotFoundInDb,
-    ARTICLE_CATOGERIE_IS_NOT_FOUND_IN_DB__ERR : config.errorMsgs.admin.articleCategory.notFoundInDb
+const articlesModel = require('articles-model');
+articlesModel.configure({
+    ARTICLE_DATA_NOT_FOUND_IN_DB__ERR_MSG : config.errorMsgs.general.dataNotFoundInDb,
+    ARTICLE_PROFILE_IMG__LINK : config.links.article.img.profile
 });
 
+const articleCategsModel = require('article-categs-model');
+articleCategsModel.configure({
+    ARTICLE_CATOGERIE_IS_NOT_FOUND_IN_DB__ERR : config.errorMsgs.admin.articleCategory.notFoundInDb,
+});
+
+const categsOfArticles = require('categories-of-articles-model');
+categsOfArticles.configure();
 // ==== Routers ====
 const blogRouter = require('./routers/blog-router/blog-router.js');
 const registerRouter = require('./routers/register-router/register-router.js');
@@ -38,7 +45,7 @@ const loginRouter = require('./routers/login-router/login-router.js');
 const adminArticlesRouter = require('./routers/admin-articles-router/admin-articles-router.js');
 const adminArticleCategoriesRouter = require('./routers/admin-article-categories-router/admin-article-categories-router.js');
 const fourOfourPg = require('./routers/404-pg/404-pg.js')({
-    FOUR_O_FOUR_VIEW__VIEW : config.viewPathes.fourOFour,
+    FOUR_O_FOUR_VIEW_VIEW__PATH : config.viewPathes.fourOFour,
     FOUR_O_FOUR_VIEW__TITLE : config.templateConf.fourOFour.title,
     FOUR_O_FOUR_VIEW__ID : config.templateConf.fourOFour.id
 });

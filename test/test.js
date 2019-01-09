@@ -7,29 +7,36 @@ const express = require('express');
 let app = express();
 let majomRouter = require('./majom.js');
 
-const errorHandler = require('error-handler')({
-    ERR_LOG_FILE_PATH : `${__dirname}/${config.errHandling.errLogRelativeFilePath}`,
-    NODE_ENV : env.NODE_ENV, 
-    ERR_HANDLER__FLASH : config.flashMsgs.generalErr.request
-})
 
-process.on('error', (err) => {
-    console.log('1');
-    errorHandler(err)
-})
-process.on('uncaughtException', (err) => {
-    console.log('2');
-    console.log('asdasd');
-    errorHandler(err)
+
+
+var server = http.createServer((req,res) => { 
+    var image = collectRequestBody(req);
+    console.log(image);
 });
 
-// var server = http.createServer((req,res) => { 
-    //     majom();
-    // });
+server.listen(3500, '127.0.0.1'	);
+
+function collectRequestBody(req) {
+    return new Promise((resolve, reject) => {
+        let requestBodyUnknownType = '';
+
+        req.on('data', (chunk) => {
+            requestBodyUnknownType += chunk;
+        });
+
+        req.on('end', () => {
+            try {
+                resolve(requestBodyObj);
+            } catch(e) {
+                resolve(requestBodyUnknownType);
+            }
+        });
+
+        req.on('error', (err) => {
+            console.log(err);
+            reject(err);
+        });
+    });
+}
     
-    // server.listen(3500, '127.0.0.1'	);
-app.use(majomRouter);
-
-app.use(errorHandler)
-
-app.listen(3500);

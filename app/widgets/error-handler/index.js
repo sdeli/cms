@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = ((config) => {
-    const {ERR_LOG_FILE_PATH, NODE_ENV, ERR_HANDLER__FLASH} = config;
+    const {ERR_LOG_FILE__PATH, NODE_ENV, ERR_HANDLER__FLASH} = config;
 
     return errorHandler;
 
@@ -70,7 +70,7 @@ module.exports = ((config) => {
     }
 
     function logErr(errText) {
-        fs.appendFile(ERR_LOG_FILE_PATH, errText, (err) => {
+        fs.appendFile(ERR_LOG_FILE__PATH, errText, (err) => {
             if (err) console.log(err);
         });
     }
