@@ -16,6 +16,7 @@ function getFilesContent(foldersPath, fileName) {
     })
 }
 
+
 function updateFile(filePath, fileBody) {
     return saveFile(filePath, fileBody);
 }
