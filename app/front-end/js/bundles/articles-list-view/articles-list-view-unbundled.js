@@ -1,5 +1,5 @@
-const reorganizeArticles = require('reorganize-table')
-const letConfirmArticleDeletion = require('front-end-utils').alertOnClick;
+const reorganizeArticles = require('front-end-widgets/reorganize-table')
+const letConfirmArticleDeletion = require('front-end-widgets/utils').alertOnClick;
 
 $(document).ready(() => {
     reorganizeArticles({
@@ -7,7 +7,7 @@ $(document).ready(() => {
         REORG_TABLE_CONTAINMENT : process.env.REORG_TABLE_CONTAINMENT,
         REORG_TABLE_PLACEHOLDERS__CLASS : process.env.REORG_TABLE_PLACEHOLDERS__CLASS,
         FALLBACK_ERR_FLASH : process.env.FALLBACK_ERR_FLASH,
-        ADMIN_ARTICLE_UPDATE_SORT__EP : process.env.ADMIN_ARTICLE_UPDATE_SORT__EP,
+        UPDATE_TABLE_SORT__EP : process.env.UPDATE_TABLE_SORT__EP,
         AJAX_CALL__CONTENT_TYPE : process.env.AJAX_CALL__JSON_CONTENT_TYPE, 
         AJAX_CALL__METHOD : process.env.AJAX_CALL__POST_METHOD
     });

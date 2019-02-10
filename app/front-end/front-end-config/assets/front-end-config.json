@@ -41,7 +41,13 @@
                 "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
                 "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
             }
-        } 
+        },
+        "registerUser" : {
+            "imagePreviewElemSel" : ".user-avatar-image-preview",
+            "imageBrowseBtnSel" : ".image-browse-btn-sel",
+            "displayedImgesHeight" : "250px"
+            
+        }
     },
     "froala" : {
         "events" : {

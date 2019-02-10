@@ -1,7 +1,7 @@
 <form class='add-article-category-form' action="<%= postDataToRoute %>" method="post">
     <% if (typeof articleCategoryName !== 'undefined' && pageId === 'edit-article-category') { %>
         <input type="text" name="currArticleCategoryName" value='<%= articleCategoryName %>' hidden>
-    <% } else { articleCategoryName = '' } %>
+    <% } %>
 
     <div class="form-group">
         <label for="#page-title">New Article Categorie</label>

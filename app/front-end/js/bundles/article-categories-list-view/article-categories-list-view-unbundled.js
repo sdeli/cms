@@ -1,9 +1,11 @@
-const config = require('front-end-config');
-const letConfirmArticleCategoryDeletion = require('front-end-utils').alertOnClick;
-const reorganizeArticlesCategoires = require('reorganize-table')
+const frontEndConfig = require('front-end-config');
+const config = require('config');
+const letConfirmArticleCategoryDeletion = require('front-end-widgets/utils').alertOnClick;
+const reorganizeArticlesCategoires = require('front-end-widgets/reorganize-table')
 
-let {reorgTable, deleteArticleAlert} = config.bundles.articleCategoriesList;
-let {general} = config;
+let {reorgTable, deleteArticleAlert} = frontEndConfig.bundles.articleCategoriesList;
+let restEp = config.restEndpoints;
+let {general} = frontEndConfig;
 
 $(document).ready(() => {
     reorganizeArticlesCategoires({
@@ -11,7 +13,7 @@ $(document).ready(() => {
         REORG_TABLE_CONTAINMENT : reorgTable.containment,
         REORG_TABLE_PLACEHOLDERS__CLASS : reorgTable.placeholdersClass,
         FALLBACK_ERR_FLASH : general.fallbackErr,
-        ADMIN_ARTICLE_UPDATE_SORT__EP : config.endPoints.updateSort,
+        UPDATE_TABLE_SORT__EP : restEp.admin.articleCategory.updateSort,
         AJAX_CALL__CONTENT_TYPE : general.ajaxCallJsonContentType, 
         AJAX_CALL__METHOD : general.ajaxCallPostMethod
     });

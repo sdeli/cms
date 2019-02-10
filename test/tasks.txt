@@ -1,12 +1,11 @@
-error answer to last link -> redirect to page where it came from display flash err
-user auth
-flash on client config
-grow articles size
-modilize editor
+sql transactions clean up hotel crawler as well
+
+fit on html views
+user auth, register => flow for visitor, for content creatores
+normalize rest ep-s
+sql transaction rollbacks
+modilize editor => imgs text columns
 WYSIWYG HTML Editor => teaser
-categories
-custom err responses in catch blocks, on err redirect to prev page
-in promise errors are fine but out of promise errs are still not
 normalize querypromise
 
 err types:
@@ -18,3 +17,5 @@ err types:
     backend errs => redirect to last visited page flash general error
         after page request
         after user interaction post request
+        variable missing from template
+validation messages and settings

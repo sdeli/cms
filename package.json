@@ -3,10 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app/app.js",
-    "debug": "nodemon --inspect=9229 ./app.js",
-    "links": "npm link db-pool flash-messages admin-model article-categs-model categories-of-articles-model flash-on-client server-utils front-end-utils set-up-passport-auth error-handler reorganize-table config front-end-config upload-image display-browsed-image singleton",
-    "install": "npm install; npm run links"
+    "start": "node ./app/app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,6 +24,7 @@
     "gulp-rename": "^1.4.0",
     "multer": "^1.4.1",
     "mysql": "^2.13.0",
+    "mysql2": "^1.6.5",
     "nodemon": "^1.18.7",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",

@@ -14,7 +14,18 @@
         </div>
         
         <div class="row">
-            <div class="fr-view"><%- articleBody %></div>
+            <div class="fr-view col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+                <% include ../partials/_display-categories.ejs %>
+                <h2 class="mt-1"><%= articleData.articleName %></h2>
+            </div>
+            
+            <div class="fr-view col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+                <p class="font-weight-bold"><%- articleData.teasersHtml %></p>
+            </div>
+
+            <div class="fr-view mb-2 mt-2 col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+                <%- articleData.articleHtml %>
+            </div>
         </div>
     </section>
 

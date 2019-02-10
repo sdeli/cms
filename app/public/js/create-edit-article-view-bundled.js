@@ -42,7 +42,13 @@ module.exports=
                 "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
                 "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
             }
-        } 
+        },
+        "registerUser" : {
+            "imagePreviewElemSel" : ".user-avatar-image-preview",
+            "imageBrowseBtnSel" : ".image-browse-btn-sel",
+            "displayedImgesHeight" : "250px"
+            
+        }
     },
     "froala" : {
         "events" : {
@@ -68,7 +74,7 @@ module.exports = config;
 },{"./assets/front-end-config.json":1}],3:[function(require,module,exports){
 const config = require('front-end-config');
 const setUpFroalaEditor = require('./moduls/set-up-froala-editor/set-up-froala-editor.js');
-const displayBrowsedImage = require('display-browsed-image');
+const displayBrowsedImage = require('front-end-widgets/display-browsed-image');
 
 $(document).ready(() => {
     setUpFroalaEditor({
@@ -87,7 +93,7 @@ $(document).ready(() => {
         DISPLAYED_IMG__HEIGHT : config.bundles.createEditArticle.displayedImgaesHeight
     });
 });
-},{"./moduls/set-up-froala-editor/set-up-froala-editor.js":4,"display-browsed-image":5,"front-end-config":2}],4:[function(require,module,exports){
+},{"./moduls/set-up-froala-editor/set-up-froala-editor.js":4,"front-end-config":2,"front-end-widgets/display-browsed-image":5}],4:[function(require,module,exports){
 module.exports = ((config) => {
     const {
         ARTICLE_BODY_EDITOR_TEXT_AREA_ID,

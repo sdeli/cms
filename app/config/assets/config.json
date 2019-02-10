@@ -2,6 +2,7 @@
 {   
     "restEndpoints" : {
         "admin" : {
+            "index" : "/admin/",
             "article" : { 
                 "ListView" : "/admin/articles",
                 "createView" : "/admin/article/create-view",
@@ -25,29 +26,27 @@
                 "delete" : "/admin/article-category/delete/:articleCategoryName"
             }
         },
-        "registerUser" : {
-            "registerView" : "/register-user",
-            "create" : "/register-user/create"
-    
-        },
         "blog" : {
-            "index" : "/",
             "article" : "/blog/article/:articleFileName",
-            "articlesList" : "/blog/articles/"
+            "articlesList" : "/blog/articles/:articleCategory?"
         },
-        "login" : {
-            "view" : "/login"
-        },
-        "googleOAuth" : {
-            "login" : "/login/google-login",
-            "red" : "/login/google-login/redirect",
-            "succRed" : "/login/google-login/success",
-            "errRed" : "/login/google-login/failed"
-        },
-        "localOAuth" : {
-            "createUserEp" : "/login/post-login-data",
-            "succRedEp" : "/login/local/success",
-            "errRedEp" : "/login/local/failed"
+        "auth" : {
+            "loginView" : "/auth/login",
+            "oAuth" : {
+                "succRed" : "/auth/login/success",
+                "failureRed" : "/auth/login/failed",
+                "local" : {
+                    "login" : "/auth/login/local"
+                },
+                "google" : {
+                    "login" : "/auth/google-login/",
+                    "loginRed" : "/auth/google-login/red"
+                } 
+            },
+            "register" : {
+                "registerView" : "/auth/register",
+                "createUser" : "/auth/register/create"
+            }
         }
     },
     "errorMsgs" : {
@@ -78,10 +77,11 @@
         "blog" : {
             "index" : "blog/index.ejs",
             "article" : "blog/article.ejs",
-            "articlesList" : "blog/articles-list.ejs"
+            "articlesList" : "blog/articles-list.ejs",
+            "allArticlesList" : "blog/all-articles-list.ejs"
         },
-        "login" : "log-in/log-in.ejs",
-        "register" : "register/register.ejs",
+        "login" : "auth/log-in.ejs",
+        "register" : "auth/register.ejs",
         "fourOFour" : "404/404.ejs",
         "admin" : {
             "article" : {
@@ -142,13 +142,15 @@
                 "title" : "blog"
             }
         },
-        "login" : {
-            "title" : "Login",
-            "id" : "login"
-        },
-        "registe" : {
-            "title" : "Regsiter",
-            "id" : "register"
+        "auth" : {
+            "login" : {
+                "title" : "Login",
+                "id" : "login"
+            },
+            "register" : {
+                "title" : "Regsiter",
+                "id" : "register-user"
+            }
         },
         "fourOFour" : {
             "title" : "PageNotFound",
@@ -216,9 +218,7 @@
                 "charCount" : "The page title should be between 1 and 25 characters!"
             },
             "articleName" : {
-                "notEmpty" : "please enter a name for the article!"
-            },
-            "email" : {
+                "notEmpty" : "please enter a name for the article!",
                 "charCount" : "The length of your email should be between 5 and 100!"
             },
             "teaser" : {
@@ -231,13 +231,23 @@
                 "nameIsEmpty" : "Please enter a name for article category!",
                 "nameCharCount" : "Article Category should be between 1 and 25 characters!",
                 "notUnique" : "The new article category is already in the list, so it couldnt be created."
-            }
+            },
+            "email" : {
+                "notEmpty" : "please enter a name",
+                "charCount" : "The Name should be between 4 and 15 characters"
+            },
+            "password" : "Your password should be at least 9 characters long, contain at least one uppercase letter and at least one lowercase letter and one number, furthermore one from the following characters: !\"#$%&\\'()*+,-./:;<=>?@[\\]^_`{|}~"
         },
         "articlesBlogList" : {
             "noArtiles" : "There is an issue with the requested page, so you have been redirected"
         },
         "generalErr" : {
             "request" : "there has been an issue with your request please contact the siteadmin"
+        },
+        "auth" : {
+            "register" : {
+                "succ" : "You have succefully registered.. Now you can login with your new credentials"
+            }
         }
     },
     "absolutePathes" : {
@@ -247,13 +257,15 @@
         "modelsPath" : "/home/sandor/Documents/cms-tut/app/models"
     },
     "relativePathes" : {
-        "publicFolder" : "/public",
         "public" : {
             "self" : "./public/",
             "img" : {
                 "article" : {
-                    "body" : "./public/img/article/body",
-                    "profile" : "./public/img/article/profile"
+                    "body" : "./public/img/article/body/",
+                    "profile" : "./public/img/article/profile/"
+                },
+                "user" : {
+                    "avatar" : "./public/img/user/avatar/"
                 }
             }
         },
@@ -263,21 +275,18 @@
     "links" : {
         "article" : {
             "img" : {
-                "body" : "/img/article/body",
-                "profile" : "/img/article/profile"
+                "body" : "/img/article/body/",
+                "profile" : "/img/article/profile/"
             }
+        },
+        "user" : {
+            "avatar" : "/img/user/avatar/"
         }
     },
     "expressSession" : {
         "salt" : "whatareallygreatsaltysalt",
         "resave" : false,
         "saveUninitialized" : false
-    },
-    "googleLogin" : {
-        "Type" : "profile"
-    },
-    "localLogin" : {
-        "Type" : "local"
     },
     "validation" : {
         "articleCategory" : {
@@ -289,6 +298,7 @@
     },
     "general" : {
         "publicFoldersName" : "public",
-        "articleCategoryCheckboxGroupName" : "articleCategories"
+        "articleCategoryCheckboxGroupName" : "articleCategories",
+        "hostName" : "localhost:3500"
     }
 }

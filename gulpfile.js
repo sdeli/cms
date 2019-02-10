@@ -38,6 +38,11 @@ let jsFilesToBundle = [
         jsSrcFile : "./app/front-end/js/bundles/article-categories-list-view/article-categories-list-view-unbundled.js",
         bundledJsFileName : 'article-categories-list-view-bundled.js',
         bundledJsFileDest : './app/public/js/'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/register-user-view/regiter-user-view.js",
+        bundledJsFileName : 'regiter-user-view-bundled.js',
+        bundledJsFileDest : './app/public/js/'
     }
 ];
 

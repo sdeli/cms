@@ -2,7 +2,7 @@
   "name": "categories-of-articles-model",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "categories-of-articles-model.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "links" : "npm install singleton db-pool"

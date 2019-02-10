@@ -1,6 +1,6 @@
 const config = require('front-end-config');
 const setUpFroalaEditor = require('./moduls/set-up-froala-editor/set-up-froala-editor.js');
-const displayBrowsedImage = require('display-browsed-image');
+const displayBrowsedImage = require('front-end-widgets/display-browsed-image');
 
 $(document).ready(() => {
     setUpFroalaEditor({

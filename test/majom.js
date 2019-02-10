@@ -1,12 +1,5 @@
-const express = require('express');
-const majomRouter = express.Router();
+function ade() {
+        console.log(this);
+    }
 
-function majom() {
-    console.log(kocsag.majom);
-    let kocsag;
-    console.log(ide);
-}
-
-majomRouter.get('/a', majom);
-
-module.exports = majomRouter;
+module.exports = ade;

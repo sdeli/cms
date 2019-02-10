@@ -1,0 +1,9 @@
+<%if (typeof articlesByCategoryArr !== 'undefined') { %>
+    
+    <div class="articles-list mt-2">
+        <% articlesByCategoryArr.forEach(function(articleData) { %>
+            <% include partials/_single-article.ejs %>
+        <% }); %>
+    </div>
+
+<% } %>

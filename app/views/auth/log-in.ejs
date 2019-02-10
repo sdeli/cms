@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <% include ../partials/_head.ejs %>
+</head>
+<body>
+    <% include ../partials/_navbar.ejs %>
+    
+    <section class="container main">
+        <div class="row">
+            <div class="col-12 mt-1 col-lg-8 offset-lg-2">
+                <% include ../partials/_flash-messages.ejs %>
+            </div>
+            <div class="col-12 mt-2 col-lg-8 offset-lg-2">
+                <% include ../partials/_log-in-form.ejs %>
+            </div>
+        </div>
+    </section>
+
+    <% include ../partials/_footer.ejs %>
+    <% include ../partials/_scripts.ejs %>
+</body>
+</html>

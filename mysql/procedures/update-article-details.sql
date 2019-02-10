@@ -5,13 +5,13 @@ delimiter //
 
 create procedure updateArticleDetails(
 	in articleId char(18),
-	in newArticleName char(50),
-    in newPageTitle char(25),
-    in articleFileName char(69),
+	in newArticleName varchar(70),
+    in newPageTitle varchar(70),
+    in articleFileName varchar(100),
     in articleProfImgfileName char(43)
 )
 begin
-    declare oldArticleFileName char(69);
+    declare oldArticleFileName varchar(100);
     declare oldArticleProfImgfileName char(69);
     declare updatedRowsCount char(69);
     
