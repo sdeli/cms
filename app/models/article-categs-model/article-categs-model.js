@@ -8,12 +8,12 @@ const articleCategsModel = (() => {
         articleCategoryId = dbPool.escape(articleCategoryId);
         articleCategoryName = dbPool.escape(articleCategoryName);
 
-        let sql = `call insertArticleCategoryDataIfUnique(${articleCategoryId}, ${articleCategoryName})`;
+        let sql = `use cms; call insertArticleCategoryDataIfUnique(${articleCategoryId}, ${articleCategoryName})`;
         
         return new Promise((resolve, reject) => {
             return dbPool.queryProm(sql)
-            .then(({results}) => {
-                let isArticleCategoryUnique = Boolean(results[0][0].isArticleCateogryUnique);
+            .then((results) => {
+                let isArticleCategoryUnique = Boolean(results[0].isArticleCateogryUnique);
                 resolve(isArticleCategoryUnique);
             })
             .catch(e => {
@@ -23,9 +23,17 @@ const articleCategsModel = (() => {
     }
 
     function getAllArticleCategories() {
-        let sql = `SELECT article_category_id as articleCategoryId, article_category_name as articleCategoryName, sort, created_at as createdAt FROM article_categories order by sort desc, created_at;`;
+        let sql = ''
+            + 'use cms;\n'
+            + 'SELECT\n'
+                + 'article_category_id as articleCategoryId,\n'
+                + 'article_category_name as articleCategoryName,\n' 
+                + 'sort,\n'
+                + 'created_at as createdAt\n' 
+            + 'FROM article_categories\n'
+            + 'order by sort desc, created_at;';
         
-        return dbPool.queryPromise(sql);
+        return dbPool.queryProm(sql);
     }
 
     // function executeSqlInTransaction(sqlQueriesArr) {
@@ -41,7 +49,9 @@ const articleCategsModel = (() => {
     // }
 
     function updateArticlesCategoriesSort(articlesCategoriesNewSortArr) {
-        let sql = 'START TRANSACTION;\nset autocommit = 0;\n';
+        let sql = ''
+            + 'use cms;\n'
+            + 'START TRANSACTION;\nset autocommit = 0;\n';
         
         articlesCategoriesNewSortArr.forEach(currAticleCategoriesObj => {
             let sort = dbPool.escape(currAticleCategoriesObj.sort);
@@ -57,8 +67,12 @@ const articleCategsModel = (() => {
 
     function getArticleCategory(articleCategoryName) {
         articleCategoryName = dbPool.escape(articleCategoryName);
-        let sql = `select article_category_name as articleCategoryName from article_categories
-        where article_category_name = ${articleCategoryName};`;
+        let sql = ''
+            + 'use cms;\n'
+            + 'select\n'
+                + 'article_category_name as articleCategoryName\n'
+                + 'from article_categories\n'
+            + `where article_category_name = ${articleCategoryName};`;
         
         return dbPool.queryProm(sql);
     }
@@ -67,11 +81,13 @@ const articleCategsModel = (() => {
         currArticleCategoryName = dbPool.escape(articleCategoryData.currName);
         newArticleCategoryName = dbPool.escape(articleCategoryData.newName);
         
-        let sql = `update article_categories set article_category_name = ${newArticleCategoryName} where binary article_category_name = ${currArticleCategoryName};`;
+        let sql = ''
+        + 'use cms;\n'
+        + `update article_categories set article_category_name = ${newArticleCategoryName} where binary article_category_name = ${currArticleCategoryName};`;
         
         return new Promise((resolve, reject) => {
             dbPool.queryProm(sql)
-            .then(({results}) => {
+            .then((results) => {
                 let articleCategoryNameUpdated = results.affectedRows === 1;
                 
                 if (articleCategoryNameUpdated) {
@@ -89,11 +105,14 @@ const articleCategsModel = (() => {
     
     function deleteArticleCategory(articleCategoryName) {
         articleCategoryName = dbPool.escape(articleCategoryName);
-        let sql = `delete from article_categories where article_category_name = ${articleCategoryName};`;
+        let sql = ''
+            + 'use cms;\n'
+            + 'delete from article_categories\n'
+            + `where article_category_name = ${articleCategoryName};`;
 
         return new Promise((resolve, reject) => {
             dbPool.queryProm(sql)
-            .then(({results}) => {
+            .then((results) => {
                 let wasArticleCategoryNotFoundInDb = results.affectedRows < 1;
 
                 if (wasArticleCategoryNotFoundInDb) {
@@ -112,7 +131,7 @@ const articleCategsModel = (() => {
     function checkIfArticleCategExists(articleCategoryName) {
         return new Promise((resolve, reject) => {
             getArticleCategory(articleCategoryName)
-            .then(({results}) => {
+            .then((results) => {
                 let doestArticleCategoryExist = results.length > 0;
                 resolve(doestArticleCategoryExist)
             })

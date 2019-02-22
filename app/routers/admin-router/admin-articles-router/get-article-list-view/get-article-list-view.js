@@ -1,5 +1,6 @@
 const config = require('config');
 const articlesModel = require('models/articles-model');
+const authorize = require('widgets/authorize');
 
 const ARTICLE_LIST_VIEW__PATH = config.viewPathes.admin.article.list,
   ARTICLE_LIST_VIEW__TITLE = config.templateConf.admin.article.list.title,
@@ -10,20 +11,21 @@ module.exports = getArticleListView;
 
 function getArticleListView(req, res) {
     articlesModel.getAllArticles()
-    .then(({results}) => {
+    .then((results) => {
         let allArticles = results;
-        renderArticlesListView(res, allArticles);
+        renderArticlesListView(req, res, allArticles);
     })
     .catch(e => {
         console.log(e);
     });
 }
 
-function renderArticlesListView(res, allArticles) {
-    res.render(ARTICLE_LIST_VIEW__PATH, {
-        pageTitle : ARTICLE_LIST_VIEW__TITLE,
-        pageId : ARTICLE_LIST_VIEW__ID,
-        createArticleEp : ADMIN_ARTICLE_CREATE_VIEW__EP,
-        allArticles
-    });
+function renderArticlesListView(req, res, allArticles) {
+    res.locals.pageTitle = ARTICLE_LIST_VIEW__TITLE,
+    res.locals.pageId = ARTICLE_LIST_VIEW__ID,
+    res.locals.createArticleEp = ADMIN_ARTICLE_CREATE_VIEW__EP,
+    res.locals.securedNavLinks = authorize.getSecuredAdminNavLinks(req.user.privilage);
+    res.locals.allArticles = allArticles
+
+    res.render(ARTICLE_LIST_VIEW__PATH);
 }

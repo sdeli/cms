@@ -1,21 +1,56 @@
-sql transactions clean up hotel crawler as well
+about us => upload content
+communication circle until send
+order by for sorting
 
-fit on html views
-user auth, register => flow for visitor, for content creatores
-normalize rest ep-s
-sql transaction rollbacks
-modilize editor => imgs text columns
-WYSIWYG HTML Editor => teaser
-normalize querypromise
+scraper 
+    minus appartments
+    google link
 
-err types:
-    page not found by express router err => 404 handler
-        after page request
-    page not found in the db => throw 404
-    user caused errs => validation err => no err - json answer to curr page
-        after user interaction post req
-    backend errs => redirect to last visited page flash general error
-        after page request
-        after user interaction post request
-        variable missing from template
+objectify front end widgets
+footer extend links, featured tasks => important articles widget
+
+err handle
+validatation message clean up
+aritcle list page flat imgs
+formated date to creations date Mon Feb 18 2019 18:52:48 GMT+0000 (Greenwich Mean Time)
+refactor rest
+on question confirmation email send
+links clean up,
+sql transaction rollbacks/ignores
 validation messages and settings
+article view back to blog list by categ link
+sticky nav
+privilage fron tend backend terms
+arrow at gethotelpage 1 2 3 4 page
+err types:
+    Expected errs:
+        1. page not found
+            1. page not found by express router err => err-handler => 404 red
+                after page request
+            2. page not found in the db / err in page request route => curr module handle => 404 red
+        2. User interaction errs
+            1. ajax interaction errs caused by user => validation err => curr module handle => json answer to curr page -display err cause
+            2. after user interaction post req => curr module handle => redirect to post request source page, displau user data - err cause
+
+    Unexpected errs        
+        backend errs 
+            during get page request => err-handler => redirect to err 500 page
+            during ajax request => err-handler => redirect to err 500 page
+            during post request => err-handler => redirect to err 500 page
+
+if in module an expected (user interaction realted - wrong link/wrong data sent) err happens => err handled in module
+if in module unexpected (wrong logic/wrong code/service is down)  err happens => err handled by err-handler
+
+err handlers:
+        404 redirect on express router call
+        500 redirect on in-module unexpected err => even if ajax or form user interaction call
+
+There are expected errors which you want to log, but since you answered it in the route you can not use next so you need to silently log it
+
+linkek
+    main
+    blog
+    blog article categs
+    rolunk
+    jelentkezes
+    partners

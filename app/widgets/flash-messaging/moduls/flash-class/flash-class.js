@@ -22,7 +22,7 @@ module.exports = (() => {
 
         toNext(type, flasMsg) {
             let moduleIsNotUsedAsMiddleware = typeof req.session.flashMsgs === 'undefined';
-            if (moduleIsNotUsedAsMiddleware) return false;
+            if (moduleIsNotUsedAsMiddleware) return 'not used as middleware';
         
             req.session.flashMsgs.push({
                 'msg' : flasMsg,

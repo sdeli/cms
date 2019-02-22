@@ -1,0 +1,8 @@
+<% categs = articleData.articleCategories %>
+<% categs.forEach(function(categ) { %>
+    <% if (categ.checked === "checked") { %>
+        <a class="category category--orange" href="/blog/articles/<%= categ.articleCategoryId %>">
+            <span><%= categ.articleCategoryName %></span>
+        </a>
+    <% } %>
+<% }); %>

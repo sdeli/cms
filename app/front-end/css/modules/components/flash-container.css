@@ -1,0 +1,7 @@
+.flash-container > div:last-child {
+    margin-bottom: 0.5rem;
+}
+          
+.flash-container > div:first-child {
+    margin-top: 0.6rem
+}

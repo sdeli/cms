@@ -1,0 +1,48 @@
+.contact-details {
+    width: 100%;
+    margin-bottom: 0.4rem;
+    
+    &__header {
+        padding: 0 0.375rem 0;
+        margin-bottom: 0.2rem;
+        margin-top: 0.1rem;
+        
+        &__title {
+            font-family: 'Poppins', sans-serif;
+            color: #483b36;
+            margin: 0;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.33);
+        }    
+    }
+
+    &__data-cont {
+        padding: 0 0.375rem 0;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 0.1rem;
+    }
+}
+
+@media (min-width: 419px) {
+    .contact-details {
+        &__header {
+            &__title {
+                font-size: 1.4rem;
+            }   
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .contact-details {
+        &__header {
+            &__title {
+                font-size: 1.5rem;
+            }   
+        }
+        &__data-cont {
+            &__data {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

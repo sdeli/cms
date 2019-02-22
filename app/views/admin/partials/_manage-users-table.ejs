@@ -1,0 +1,24 @@
+<table class="users-list-table table" title="users-list-table">
+    <tbody class="users-list-table__body">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Privilage</th>
+            <th>status</th>
+            <th>Creations Date</th> 
+            <th>Delete</th>
+        </tr>
+        
+        <% templateData.allUsers.forEach(function(user) { %>
+            <tr class="users-list-table__body__row" id="<%= user.userId %>">
+                <td><%= user.name %></a></td>
+                <td><%= user.email %></a></td>
+                <td><%= user.privilage %></a></td>
+                <td><%= user.isActive %></a></td>
+                <td><%= user.createdAt %></td>
+                <td><a href="/admin/users/delete/<%= user.userId %>">delete</a></td>
+            </tr>
+        <% }); %>
+    </tbody>
+    
+</table>

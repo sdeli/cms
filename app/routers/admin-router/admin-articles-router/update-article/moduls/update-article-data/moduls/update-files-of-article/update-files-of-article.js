@@ -20,7 +20,8 @@ module.exports = ((config) => {
         ]
         
         let hasArticleNewProfImg = Boolean(req.file);
-        if (hasArticleNewProfImg) {
+        let hasArticleACurrProfileImg = Boolean(updatedArticleDataFromDb.oldArticleProfImgfileName);
+        if (hasArticleNewProfImg && hasArticleACurrProfileImg) {
             promisesToexecuteLast.push(deleteOldProfileImage(updatedArticleDataFromDb))    
         }
         

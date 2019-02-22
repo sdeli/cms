@@ -5,7 +5,10 @@ function getFilesContent(foldersPath, fileName) {
         let currArticlesPath = `${foldersPath}/${fileName}`;
 
         fs.readFile(currArticlesPath, (err, buffer) => {
-            if (err) reject(err)
+            if (err) {
+                reject(err);
+                return;
+            }
             let filesContent = buffer.toString();
             resolve(filesContent);
         });
@@ -19,7 +22,10 @@ function updateFile(filePath, fileBody) {
 function saveFile(filePath, fileBody) {
     return new Promise((resolve, reject) => {
         fs.writeFile(filePath, fileBody, (err) => {
-            if (err) reject(err);
+            if (err) {
+                reject(err);
+                return;
+            }
             resolve(true);
         });
     });
@@ -28,7 +34,10 @@ function saveFile(filePath, fileBody) {
 function renameFile(oldfilePath, newFilePath) {
     return new Promise((resolve, reject) => {
         fs.rename(oldfilePath, newFilePath, (err) => {
-            if (err) throw reject(err);
+            if (err) {
+                reject(err);
+                return;
+            }
             resolve(true);
         });
     });
@@ -40,7 +49,10 @@ function deleteFile(filePath) {
 
         if (doesFileExists) {
             fs.unlink(filePath, (err) => {
-                if (err) throw reject(err);
+                if (err) {
+                    reject(err);
+                    return;
+                }
                 resolve(true);
             });
         } else {

@@ -1,0 +1,23 @@
+<%if (typeof locals.hotelItems !== 'undefined') { %>
+    <% hotelItems.forEach(function(hotelData) { %>
+        <div class="post post--hotel-list">
+            <div class="post__container">
+                <div class="post__container__header">
+                    <h4 class="post__container__header__h4"><%= hotelData.hotelName %></h4>
+                </div>
+                    
+                <div class="post__container__body">
+                    <p class="post__container__body__hotel_details">
+                        <span class="post__container__body__hotel_details__span">Cím:</span>
+                        <%= hotelData.fullAddr %>
+                    </p>
+
+                    <p class="post__container__body__hotel_details">
+                        <span class="post__container__body__hotel_details__span">Website:</span>
+                        <a href="<%= hotelData.websiteUrl %>" target="_blank"><%= hotelData.websiteLinkView %></a>
+                    </p>
+                </div> <!-- post__container__body clearfix -->
+            </div> <!-- post__container -->
+        </div> <!-- post -->
+    <% }); %>
+<% } %>

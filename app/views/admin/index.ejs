@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/_head.ejs %>
+</head>
+<body>
+    <% include partials/_navbar.ejs %>
+
+    <section class="container-fluid main">
+        <div class="row" title="flash messages">
+            <div class="col-12 col-md-8 offset-md-2">
+                <% include partials/_flash-messages.ejs %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3 mt-2">
+                <h1 class="text-center">Welcome to the administrator area.</h1>
+
+                <h4 class="text-primary mb-3">Features Of The Admin Area</h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item active"><strong>Articles</strong></li>
+                    <li class="list-group-item list-group-item-info">Create/Publish</li>
+                    <li class="list-group-item list-group-item-info">update</li>
+                    <li class="list-group-item list-group-item-info">delete</li>
+                    <li class="list-group-item list-group-item-info">Change Sort</li>
+                </ul>
+
+                <ul class="list-group mb-3">
+                    <li class="list-group-item active">Article-Categories</li>
+                    <li class="list-group-item list-group-item-info">Create/Publish</li>
+                    <li class="list-group-item list-group-item-info">update</li>
+                    <li class="list-group-item list-group-item-info">delete</li>
+                    <li class="list-group-item list-group-item-info">Change Sort</li>
+                </ul>
+
+                <ul class="list-group mb-3">
+                    <li class="list-group-item active">Create Users</li>
+                    <li class="list-group-item list-group-item-secondary">If you are an admin</li>
+                </ul>
+
+                <ul class="list-group mb-3">
+                    <li class="list-group-item active">You can not do:</li>
+                    <li class="list-group-item list-group-item-info">Pages which are unique are created and managed by the technician of the site... I you have any request please contact him</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <% include partials/_footer.ejs %>
+    <% include partials/_scripts.ejs %>
+</body>
+</html>

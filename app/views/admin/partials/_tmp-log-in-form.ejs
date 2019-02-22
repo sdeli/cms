@@ -1,0 +1,22 @@
+<div title="log-in-form">
+    <div title="log-in-form__title">
+        <h3></h3>
+    </div>
+
+    <form method='post' action="<%= postUserDataTo %>" title="categories-list__title">
+        <input type="number" name="isTmpPwdLogin" value="1" hidden>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter" name="email" value="<%= loginData.email %>">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="<%= loginData.password %>">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

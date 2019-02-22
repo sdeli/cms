@@ -5,21 +5,18 @@ const updateTablesSort = require('./modules/update-tables-sort/update-tables-sor
 const {getUniqueStr} = require('front-end-widgets/utils');
 
 module.exports = ((config) => {
+    console.log('asd');
     const {
         SORTABLE_TABLES__CLASS, 
         REORG_TABLE_CONTAINMENT,
         REORG_TABLE_PLACEHOLDERS__CLASS,
         FALLBACK_ERR_FLASH,
-        UPDATE_TABLE_SORT__EP,
-        AJAX_CALL__CONTENT_TYPE, 
-        AJAX_CALL__METHOD
+        UPDATE_TABLE_SORT__EP
     } = config
 
     updateTablessSort = updateTablesSort({
         FALLBACK_ERR_FLASH, 
-        UPDATE_TABLE_SORT__EP,
-        AJAX_CALL__CONTENT_TYPE, 
-        AJAX_CALL__METHOD
+        UPDATE_TABLE_SORT__EP
     });
 
     reorganizeTable()

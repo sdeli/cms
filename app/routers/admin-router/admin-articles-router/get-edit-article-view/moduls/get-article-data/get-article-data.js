@@ -9,7 +9,7 @@ module.exports = ((config) => {
     return getArticleData;
 
     function getArticleData(req) {
-        isRequestFromPrevValidationErr = Boolean(Object.keys(req.body).length);
+        let isRequestFromPrevValidationErr = Boolean(Object.keys(req.body).length);
         if (isRequestFromPrevValidationErr) {
             return getArticleDataAfterValidationErr(req);
         } else {

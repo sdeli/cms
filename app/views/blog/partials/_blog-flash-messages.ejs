@@ -1,0 +1,10 @@
+<%if (typeof flashMsgs !== 'undefined') { %>
+    <% flashMsgs.forEach(function(flasMsg) { %>
+        <div class="flash flash--<%= flasMsg.type %>" role="alert">
+            <div class="flash__message"><span><%= flasMsg.msg %></span></div>
+            <div class="flash__close">
+                <button class="flash__close__btn" type="button" aria-label="Close">&times;</button>
+            </div>
+        </div>
+    <% }); %>
+<% } %>

@@ -23,21 +23,23 @@ const categoriesOfArticlesModel = (() => {
         articleId = dbPool.escape(articleId);
 
         let sql = ``
-            + `select\n`
-                + `article_category_name as articleCategoryName,\n` 
-                + `article_categories.article_category_id as articleCategoryId\n` 
-            + `from categories_of_articles\n` 
-            + `inner join article_categories\n`
+            + 'use cms;'
+            + 'select\n'
+                + 'article_category_name as articleCategoryName,\n'
+                + 'article_categories.article_category_id as articleCategoryId\n' 
+            + 'from categories_of_articles\n'
+            + 'inner join article_categories\n'
             + `on categories_of_articles.article_id = ${articleId}\n`
-            + `and categories_of_articles.article_category_id = article_categories.article_category_id;\n`
+            + 'and categories_of_articles.article_category_id = article_categories.article_category_id;\n'
         
-        return dbPool.queryPromise(sql);
+        return dbPool.queryProm(sql);
     }
 
     function updateCategoriesOfArticle(articleId, articleCategories = []) {
         articleId = dbPool.escape(articleId);
 
         let sql = ``
+                + 'use cms;'
                 + 'START TRANSACTION;\nset autocommit = 0;\n'
                 + `delete from categories_of_articles where article_id = ${articleId};\n`
 

@@ -1,0 +1,11 @@
+.widgets {
+    margin-top: 0.4375rem;
+    margin-bottom: 0.4rem;
+}
+
+@media (min-width: 768px) {
+    .widgets {
+         margin-top: 0.6375rem;
+        margin-bottom: 0.9375rem;
+    }
+}    

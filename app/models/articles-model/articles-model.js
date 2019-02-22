@@ -13,19 +13,29 @@ function insertArticleData(articleData) {
     teaserFileName = dbPool.escape(articleData.teaserFileName),
     articleProfImgfileName = dbPool.escape(articleData.articleProfImgfileName);
 
-    let sql = `insert into articles (article_id, article_name, page_title, article_file_name, teaser_file_name, article_prof_img_file_name) values (${id}, ${articleName}, ${pageTitle}, ${articleFileName}, ${teaserFileName}, ${articleProfImgfileName});`;
+    let sql = ''
+        + 'use cms;'
+        + 'insert into articles (article_id, article_name, page_title, article_file_name, teaser_file_name, article_prof_img_file_name)\n'
+        + `values (${id}, ${articleName}, ${pageTitle}, ${articleFileName}, ${teaserFileName}, ${articleProfImgfileName});`;
     
     return dbPool.queryProm(sql);
 }
 
 function getAllArticles() {
-    let sql = `SELECT article_id, article_name, created_at, article_file_name, sort FROM articles order by sort desc, created_at;`;
+    //use hotel_data_db;
+    let sql = ''
+    + 'use cms;\n'
+    + 'select article_id, article_name, created_at, article_file_name, sort\n'
+    + 'from articles\n'
+    + 'order by sort desc, created_at;';
     
     return dbPool.queryProm(sql);
 }
 
 function updateArticlesSort(articlesNewSortArr) {
-    let sql = 'START TRANSACTION;\nset autocommit = 0;';
+    let sql = '' 
+        + 'use cms;\n'
+        + 'START TRANSACTION;\nset autocommit = 0;';
     
     articlesNewSortArr.forEach(articleObj => {
         let sort = dbPool.escape(articleObj.sort);
@@ -43,9 +53,17 @@ function getArticleData(articleId) {
     articleId = dbPool.escape(articleId);
     let articleProfImgLink = dbPool.escape(ARTICLE_PROFILE_IMG__LINK);
 
-    let sql = `select article_name as articleName, page_title as pageTitle, article_file_name as articleFileName, teaser_file_name as teaserFileName, concat(${articleProfImgLink}, '/',article_prof_img_file_name) as articleProfImgLink from articles where article_id = ${articleId};`;
+    let sql = ''
+    + 'use cms;\n'
+    + 'select\n'
+        + 'article_name as articleName,\n'
+        + 'page_title as pageTitle,\n'
+        + 'article_file_name as articleFileName,\n'
+        + 'teaser_file_name as teaserFileName,\n'
+        + `concat(${articleProfImgLink}, '/',article_prof_img_file_name) as articleProfImgLink\n`
+    + `from articles where article_id = ${articleId};`;
     
-    return dbPool.queryPromise(sql);
+    return dbPool.queryProm(sql);
 }
 
 function getArticleDataByFileName(articleFileName) {
@@ -73,32 +91,33 @@ function deleteArticleData(articleId) {
     articleId = dbPool.escape(articleId);
     
     let sql = ''
-        + `START TRANSACTION;\n`
-        + `SET global autocommit = 0;\n`
+        + 'use cms;\n'
         + `select article_file_name as articleFileName, teaser_file_name as teaserFileName from articles where article_id = ${articleId};\n`
         + `delete from articles where article_id = ${articleId};\n`
-        + `SET global autocommit = 1;\n`;
-        + `COMMIT;\n`
     
     return new Promise((resolve, reject) => {
         dbPool.queryCb(sql, (err, results, fields) => {
-            if (err) {
+            try {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                
+                let articleRowFoundAndDeleted = results[2].affectedRows >= 1;
+                if (!articleRowFoundAndDeleted) {
+                    reject(false);
+                    return;
+                }
+    
+                let deletedArticle = {
+                    bodysCurrFile : results[1][0].articleFileName,
+                    teasersCurrFile : results[1][0].teaserFileName
+                }
+    
+                resolve(deletedArticle);
+            } catch (err) {
                 reject(err);
-                return;
             }
-            
-            let articlesRowFoundAndDeleted = results[3].affectedRows >= 1;
-            if (!articlesRowFoundAndDeleted) {
-                reject(false);
-                return;
-            }
-
-            let deletedArticle = {
-                bodysCurrFile : results[2][0].articleFileName,
-                teasersCurrFile : results[2][0].teaserFileName
-            }
-
-            resolve(deletedArticle);
         });
     }); 
 }
@@ -110,7 +129,9 @@ function updateArticleData(newArticleDetails) {
     articleFileName = dbPool.escape(newArticleDetails.articleFileName)
     articleProfImgfileName = dbPool.escape(newArticleDetails.articleProfImgfileName)
     
-    let sql = `call updateArticleDetails(${articleId}, ${articleName}, ${pageTitle}, ${articleFileName}, ${articleProfImgfileName});`;
+    let sql = ''
+        + 'use cms;'
+        + `call updateArticleDetails(${articleId}, ${articleName}, ${pageTitle}, ${articleFileName}, ${articleProfImgfileName});`;
     
     return new Promise((resolve, reject) => {
         dbPool.queryCb(sql, (err, results, fields) => {
@@ -119,10 +140,10 @@ function updateArticleData(newArticleDetails) {
                 return;
             }
             
-            let articleDataInDbFoundAndUpdated = results[0][0].updatedRowsCount > 0;
+            let articleDataInDbFoundAndUpdated = results[1][0].updatedRowsCount > 0;
             
             if (articleDataInDbFoundAndUpdated) {
-                let articleData = results[1][0];
+                let articleData = results[2][0];
                 resolve(articleData);
             } else {
                 reject(ARTICLE_DATA_NOT_FOUND_IN_DB__ERR_MSG);
@@ -132,38 +153,6 @@ function updateArticleData(newArticleDetails) {
 }
 
 function getArticlesDataByCategory(category) {
-    category = category === dbPool.escape(category);
-    articleProfileImgLink = dbPool.escape(ARTICLE_PROFILE_IMG__LINK);
-    articleLink = dbPool.escape(ARTICLE__LINK);
-
-    let sql = ''
-        + `select\n`
-            + `articles.article_id as articleId,\n` 
-            + `article_name as articleName,\n`
-            + `article_file_name as articleFileName,\n`
-            + `concat(${articleLink}, article_file_name) as articleLink,\n`
-            + `teaser_file_name as teaserFileName,\n`
-            + `article_category_name as articleCategoryName,\n`
-            + `concat(${articleProfileImgLink}, article_prof_img_file_name) as articleProfImgLink\n`
-        + `from articles inner join categories_of_articles inner join article_categories\n` 
-        + `on\n` 
-            + `articles.article_id = categories_of_articles.article_id\n`
-            + `and categories_of_articles.article_category_id = article_categories.article_category_id\n`
-            + `and article_categories.article_category_name = ${category};`
-
-    return new Promise((resolve, reject) => {
-        dbPool.queryCb(sql, (err, results) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            
-            resolve(results);
-        });
-    }); 
-}
-
-function getArticlesDataByCategoryB(category) {
     // If didnt specify category we server data about all articles.
     let didSpecifyCategory = Boolean(category);
     category = didSpecifyCategory ? dbPool.escape(category) : null;
@@ -171,6 +160,7 @@ function getArticlesDataByCategoryB(category) {
     articleLink = dbPool.escape(ARTICLE__LINK);
 
     let sql = ''
+        + 'use cms;\n'
         + `select\n`
             + `articles.article_id as articleId,\n` 
             + `article_name as articleName,\n`
@@ -190,16 +180,7 @@ function getArticlesDataByCategoryB(category) {
             sql += `;`
         }
 
-    return new Promise((resolve, reject) => {
-        dbPool.queryCb(sql, (err, results) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            
-            resolve(results);
-        });
-    }); 
+    return dbPool.queryProm(sql)
 }
 
 function checkAutocommit() {
@@ -221,6 +202,5 @@ module.exports = {
     deleteArticleData,
     getArticleDataByFileName,
     getArticlesDataByCategory,
-    getArticlesDataByCategoryB,
     checkAutocommit
 };

@@ -1,19 +1,20 @@
 const config = require('config');
 const fs = require('fs');
 
-const ERR_LOG_FILE__PATH = `${__dirname}/${config.errHandling.errLogRelativeFilePath}`,
+const ERR_LOG_FILE__PATH = `${process.cwd()}/${config.errHandling.errLogRelativeFilePath}`,
     NODE_ENV = process.env.NODE_ENV, 
     ERR_HANDLER__FLASH = config.flashMsgs.generalErr.request;
 
 module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
-    console.log('in error');
-    if (NODE_ENV === 'development' && res) {
+    let notErrWith404View = !Boolean(err.fourOfourErr);
+
+    if (NODE_ENV === 'development' && res && notErrWith404View) {
         console.log(err.name);
         console.log(err.stack);
-        res.send(err);
-    } else if (NODE_ENV === 'development' && !res) {
+        res.status(500).json(err);
+    } else if (NODE_ENV === 'development' && !res && notErrWith404View) {
         console.log(err.stack);
     } else {
         internalServerErrResponse(res);

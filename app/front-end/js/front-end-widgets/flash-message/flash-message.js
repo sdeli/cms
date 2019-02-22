@@ -1,26 +1,49 @@
-const config = require('config');
-const displayMessage = require('./moduls/display-message/display-message.js');
+module.exports = FlashMessage;
 
-const SUCCESS = config.flashMsgs.types.success,
-    INFO = config.flashMsgs.types.info,
-    WARNING = config.flashMsgs.types.warning;
-
-class Flash {
-    constructor (flasMsgsDivsCssSel) {
-        this.display = displayMessage(flasMsgsDivsCssSel);
-    }
+function FlashMessage(type, flasMsg, flashMsgsDivsCssSel) {
+    this.flashMsgsDivsCssSel = flashMsgsDivsCssSel;
+    this.flashElem = getFlashElem(type, flasMsg);
+}
     
-    get SUCCESS() {
-        return SUCCESS;
-    }
+Object.defineProperty(FlashMessage, 'SUCCESS', {
+    value: 'success',
+    writable: false
+});
 
-    get INFO() {
-        return INFO;
-    }
+Object.defineProperty(FlashMessage, 'ALERT', {
+    value: 'danger',
+    writable: false
+});
 
-    get WARNING() {
-        return WARNING;
-    }
+function getFlashElem(type, flasMsg) {
+    let flashElemInnerHtml = ''
+        + `<div class="flash flash--${type}" role="alert">`
+            + `<div class="flash__message"><span>${flasMsg}</span></div>`
+            + '<div class="flash__close">'
+                + '<button class="flash__close__btn" type="button" aria-label="Close">&times;</button>'
+            + '</div>'
+        + `</div>`;
+
+    flashElem = $(flashElemInnerHtml);
+    return flashElem;
 }
 
-module.exports = Flash;
+FlashMessage.activateCloseBtns = function(closeBtnElem) {
+    $(document).on('click', function(e) {
+        clickedItem = $(e.target);
+        let isFlashMsgCloseBtn = clickedItem.hasClass('flash__close__btn');
+
+        if (!isFlashMsgCloseBtn) return;
+        
+        let flashElem = clickedItem.parent().parent();
+        flashElem.fadeOut(400, () => {
+            flashElem.remove();
+        });
+    });
+}
+
+FlashMessage.prototype.displayMessage = function() {
+    let flashMsgsDiv = $(this.flashMsgsDivsCssSel);
+
+    flashMsgsDiv.prepend(this.flashElem);
+}

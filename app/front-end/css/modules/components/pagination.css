@@ -1,0 +1,39 @@
+.pagination {
+    &__left {
+        float: left;
+        width: 50%;
+
+        > a {
+            margin: 0 auto;
+            @mixin orangeGradientBackColor;
+            text-decoration: none;
+        }
+    }
+
+    &__right {
+        float: right;
+        width: 50%;
+
+        > a {
+            margin: 0 auto;
+            @mixin orangeGradientBackColorReverse;
+            text-decoration: none;
+        }
+    }
+
+    &__btn {
+        width: 70%;
+        font-size: 1.5rem;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.33);
+    }
+}
+
+@media (min-width: 419px) {
+    .pagination {
+        &__btn {
+            width: 90%;
+        }
+    }
+}

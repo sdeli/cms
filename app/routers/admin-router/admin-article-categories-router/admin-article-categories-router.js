@@ -1,6 +1,5 @@
 const express = require('express');
 const config = require('config');
-
 const adminArticleCategoriesRouter = express.Router();
 
 const {moveSessionBodyToReq} = require('widgets/middlewares');
@@ -15,11 +14,12 @@ let getEditArticleCategoryView = require('./get-edit-article-category-view/get-e
 let updateArticleCategory = require('./update-article-category/update-article-category.js')
 let updateArticleCategoriesSort = require('./update-article-categorie-sort/update-article-categories-sort.js')
 
+// adminArticleCategoriesRouter.use(requireBeAuthenticated);
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.createView, moveSessionBodyToReq, getAddArticleCategoryView);
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.listView, getArticleCategoriesListView);
 adminArticleCategoriesRouter.post(restEp.admin.articleCategory.create, createArticleCategory);
 adminArticleCategoriesRouter.get(restEp.admin.articleCategory.delete, deleteArticleCategory);
-adminArticleCategoriesRouter.get(restEp.admin.articleCategory.editView, getEditArticleCategoryView);
+adminArticleCategoriesRouter.get(restEp.admin.articleCategory.editView, moveSessionBodyToReq,getEditArticleCategoryView);
 adminArticleCategoriesRouter.post(restEp.admin.articleCategory.update, updateArticleCategory);
 adminArticleCategoriesRouter.post(restEp.admin.articleCategory.updateSort, updateArticleCategoriesSort);
 

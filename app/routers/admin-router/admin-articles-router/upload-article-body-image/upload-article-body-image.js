@@ -1,7 +1,7 @@
 const config = require('config');
 const FroalaEditor = require('wysiwyg-editor-node-sdk');
 
-const ARTICLE_BODY_IMG_FOLDER___PATH = config.relativePathes.public.img.article.body,
+const ARTICLE_BODY_IMG_FOLDER___PATH = config.relativePathes.public.img.article.body + '/',
     PUBLIC_FOLDERS__NAME = config.general.publicFoldersName;
 
 module.exports = uploadArticleImage;

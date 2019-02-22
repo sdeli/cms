@@ -1,0 +1,23 @@
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP|Poppins:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
+    <% if (pageId === 'home') { %>
+        <link rel="stylesheet" href="/css/home-view-unbundled.css">    
+    <% } else if (pageId === 'blog-articles-list') { %>
+        <link rel="stylesheet" href="/css/articles-list-view-bundled.css">
+    <% } else if (pageId === 'article') { %>
+        <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/css/article-view-bundled.css">
+    <% } else if (pageId === 'apply') { %>
+        <link rel="stylesheet" href="/css/apply-view-bundled.css">
+    <% } else if (pageId === '404') { %>
+        <link rel="stylesheet" href="/css/404-view-bundled.css">
+    <% } else if (pageId === 'main') { %>
+        <link rel="stylesheet" href="/css/home-view-bundled.css">
+    <% } else if (pageId === 'hotel-list') { %>
+        <link rel="stylesheet" href="/css/hotel-list-view-bundled.css">
+    <% } %>
+</head>

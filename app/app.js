@@ -22,11 +22,11 @@ const dotenv = require('dotenv');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
 
 // ==== Set Up Environment ====
 const config = require('config');
 let err = dotenv.config({ path: './.env.default' });
-let env = process.env;
 
 // ==== Local Npm Modules ====
 const validatior = require('express-validator');
@@ -37,17 +37,29 @@ let errorHandler = require('widgets/error-handler/error-handler')
 
 // ==== Routers ====
 const blogRouter = require('./routers/blog-router/blog-router.js');
-const authRouter = require('./routers/auth-router/auth-router.js');
 const adminRouter = require('./routers/admin-router/admin-router.js');
-const fourOfourPg = require('./routers/404-pg/404-pg.js');
+const errorRouter = require('./routers/error-router/error-router.js');
 
 // ==== App Setup ====
 let app = express();
 app.use(validatior());
 
+var options = {
+    host: process.env.DB_HOST,
+    port: 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    clearExpired: true,
+};
+
+var sessionStore = new MySQLStore(options);
+
 app.use(session({
     secret: config.expressSession.salt,
     resave: config.expressSession.resave,
+    cookie: { path: '/', httpOnly: true, secure: false, maxAge: null },
+    store: sessionStore,
     saveUninitialized: config.expressSession.saveUninitialized
 }));
 
@@ -67,14 +79,16 @@ app.set('view engine', 'ejs');
 app.use(middlewares.keepTrackOfPrevUrl);
 
 app.use(blogRouter);
-app.use(authRouter);
 app.use(adminRouter);
-app.use(fourOfourPg);
+app.use(errorRouter);
+app.use((req, res) => {
+    console.log(req.url);
+    res.redirect(config.restEndpoints.error.fourOfour);
+});
 
 // ==== Err Handling ====
 app.use(errorHandler);
 
-// ==== ====
 app.listen(3500);
 
 function correctCwdWhenDeubug() {

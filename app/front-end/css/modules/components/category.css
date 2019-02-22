@@ -1,0 +1,15 @@
+.category {
+    display: inline-block;
+    background: white;
+    color: $textOrange;
+    font-size: 1.2rem;
+    padding: 0.2rem 0.6rem;
+    font-family: 'Poppins', sans-serif;
+    margin-right: 0.2rem;
+    border-radius: 0.2rem 0.2rem 0 0; 
+    text-decoration: none;
+}
+
+.category:nth-child(1) {
+    margin-left: 0.6rem;
+}

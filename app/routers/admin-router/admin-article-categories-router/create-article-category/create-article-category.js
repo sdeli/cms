@@ -1,5 +1,6 @@
 const config = require('config');
 const articleCategsModel = require('models/article-categs-model');
+const uniqueId = require('uniqid');
 
 const ARTICLE_CATEGORY_NAME_NOT_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.articleCategory.nameIsEmpty, 
     ARTICLE_CATEGORY_NAME_CHAR_COUNT__ERR_FLASH = config.flashMsgs.validationErr.articleCategory.nameCharCount,
@@ -50,7 +51,7 @@ function validateCreateArticleCategoryForm(req) {
 }
 
 function insertArticleCategIntoDb(articleCategory) {
-    let articleCategoryId = encodeURIComponent(articleCategory);
+    let articleCategoryId = uniqueId();
     let articleCategoryName = articleCategory;
     
     return articleCategsModel.insertArticleCategoryDataIfUnique(articleCategoryId, articleCategoryName)

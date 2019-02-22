@@ -10,7 +10,8 @@ module.exports = deleteArticleCategory;
     
 function deleteArticleCategory(req, res) {
     let {articleCategoryName} = req.params;
-
+        articleCategoryName = decodeURIComponent(articleCategoryName);
+        
     articleCategsModel.deleteArticleCategory(articleCategoryName)
     .then(() => {
         redirect('success', res);

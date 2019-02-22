@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <% include ../partials/_head.ejs %>
+</head>
+<body>
+    <section class="container main">
+        <div class="row">
+            <div class="col-12 mt-1 col-lg-8 offset-lg-2">
+                <% include ../partials/_flash-messages.ejs %>
+            </div>
+
+            <div class="col-12 mt-2 col-lg-8 offset-lg-2 mt-4">
+                <% if (loginData.isTmpPwdLogin) { %>
+                    <h2 class="mb-4">Admin Area Temporary Password Login</h2>
+                    <% include ../partials/_tmp-log-in-form %>
+                <% } else { %>
+                    <h2 class="mb-4">Admin Area Login</h2>
+                    <% include ../partials/_log-in-form.ejs %>
+                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <section style="position: absolute; left: 0; bottom:0; width:100%;">
+        <% include ../partials/_footer.ejs %>
+    </section>
+
+    <% include ../partials/_scripts.ejs %>
+</body>
+</html>

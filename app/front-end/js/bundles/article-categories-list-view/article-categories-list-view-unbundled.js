@@ -1,10 +1,10 @@
-const frontEndConfig = require('front-end-config');
-const config = require('config');
 const letConfirmArticleCategoryDeletion = require('front-end-widgets/utils').alertOnClick;
 const reorganizeArticlesCategoires = require('front-end-widgets/reorganize-table')
 
+const frontEndConfig = require('front-end-config');
+console.log('');
 let {reorgTable, deleteArticleAlert} = frontEndConfig.bundles.articleCategoriesList;
-let restEp = config.restEndpoints;
+let restEp = frontEndConfig.restEndPoints;
 let {general} = frontEndConfig;
 
 $(document).ready(() => {
@@ -14,8 +14,6 @@ $(document).ready(() => {
         REORG_TABLE_PLACEHOLDERS__CLASS : reorgTable.placeholdersClass,
         FALLBACK_ERR_FLASH : general.fallbackErr,
         UPDATE_TABLE_SORT__EP : restEp.admin.articleCategory.updateSort,
-        AJAX_CALL__CONTENT_TYPE : general.ajaxCallJsonContentType, 
-        AJAX_CALL__METHOD : general.ajaxCallPostMethod
     });
     
     letConfirmArticleCategoryDeletion({

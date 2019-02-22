@@ -2,88 +2,85 @@
 {   
     "restEndpoints" : {
         "admin" : {
-            "index" : "/admin/",
+            "index" : "/admin",
             "article" : { 
                 "ListView" : "/admin/articles",
-                "createView" : "/admin/article/create-view",
-                "editView" : "/admin/article/edit-view/:articleId",
-                "create" : "/admin/article/create",
-                "updateSort" : "/admin/article/update-sort",
-                "update" : "/admin/article/update",
-                "delete" : "/admin/article/delete/:articleId",
+                "createView" : "/admin/articles/create-view",
+                "editView" : "/admin/articles/edit-view/:articleId",
+                "create" : "/admin/articles/create",
+                "updateSort" : "/admin/articles/update-sort",
+                "update" : "/admin/articles/update",
+                "delete" : "/admin/articles/delete/:articleId",
                 "image" : {
-                    "upload" : "/admin/article-image/upload",
-                    "remove" : "/admin/article-image/remove"
+                    "upload" : "/admin/articles/image/upload",
+                    "remove" : "/admin/articles/image/remove"
                 }
             },
             "articleCategory" : {
                 "listView" : "/admin/article-categories",
-                "createView" : "/admin/article-category/create-view",
-                "editView" : "/admin/article-category/edit-view/:articleCategoryName",
-                "create" : "/admin/article-category/create",
-                "updateSort" : "/admin/article-category/update-sort",
-                "update" : "/admin/article-category/update",
-                "delete" : "/admin/article-category/delete/:articleCategoryName"
+                "createView" : "/admin/article-categories/create-view",
+                "editView" : "/admin/article-categories/edit-view/:articleCategoryName",
+                "create" : "/admin/article-categories/create",
+                "updateSort" : "/admin/article-categories/update-sort",
+                "update" : "/admin/article-categories/update",
+                "delete" : "/admin/article-categories/delete/:articleCategoryName"
+            },
+            "users" : {
+                "listView" : "/admin/users",
+                "delete" : "/admin/users/delete/:userId"
+            },
+            "auth" : {
+                "logInView" : "/admin/auth/log-in-view/:isTmpLogin?",
+                "logOut" : "/admin/auth/log-out",
+                "oAuth" : {
+                    "succRed" : "/admin/auth/log-in/success",
+                    "failureRed" : "/admin/auth/log-in/failed",
+                    "local" : {
+                        "login" : "/admin/auth/log-in/local"
+                    }
+                },
+                "tmpOAuth" : {
+                    "succRed" : "/admin/auth/log-in/tmp/success",
+                    "failureRed" : "/admin/auth/log-in/tmp/failed",
+                    "local" : {
+                        "login" : "/admin/auth/log-in/tmp/local"
+                    }
+                },
+                "changeTmpPwdView" : "/admin/auth/change-pwd-view",
+                "changeTmpPwd" : "/admin/auth/pwd",
+                "register" : {
+                    "registerView" : "/admin/auth/register",
+                    "createUser" : "/admin/auth/register"
+                }
             }
         },
         "blog" : {
             "article" : "/blog/article/:articleFileName",
-            "articlesList" : "/blog/articles/:articleCategory?"
+            "articlesList" : "/blog/articles/:articleCategory?",
+            "aboutUs" : "/blog/about-us",
+            "furtherVisitorQuestion" : "/blog/question",
+            "furtherApplicationData" : "/blog/application-data",
+            "apply" : "/blog/apply-view",
+            "main" : "/blog",
+            "hotelList" : "/blog/partners/:pageNumber"
         },
-        "auth" : {
-            "loginView" : "/auth/login",
-            "oAuth" : {
-                "succRed" : "/auth/login/success",
-                "failureRed" : "/auth/login/failed",
-                "local" : {
-                    "login" : "/auth/login/local"
-                },
-                "google" : {
-                    "login" : "/auth/google-login/",
-                    "loginRed" : "/auth/google-login/red"
-                } 
-            },
-            "register" : {
-                "registerView" : "/auth/register",
-                "createUser" : "/auth/register/create"
-            }
+        "error" : {
+            "fourOfour" : "/error/404"
         }
-    },
-    "errorMsgs" : {
-        "admin" : {
-            "articleCategory" : {
-                "notFoundInDb" : "this cateogry isnt found in db:"
-
-            }
-        },
-        "general" : {
-            "fallbackErr" : "An error has occured. Please contact the stie admin.",
-            "dataNotFoundInDb" : "requested data not found in db",
-            "articleCategoryNotFoundInDb" : "article category not found in db",
-            "fileDoesntExist" : "the file trying to read doesnt exist",
-            "articleNotFound" : "requested article not found in the system"
-        }
-    },
-    "errHandling" : {
-        "errLogRelativeFilePath" : "logs/err-log.txt",
-        "errEvents" : {
-            "warningWithReq" : "warningWithReq"
-        }
-    },
-    "routesConfig" : {
-        "adminDeleteArticleEpPathVar" : "articleId"
     },
     "viewPathes" : {
         "blog" : {
-            "index" : "blog/index.ejs",
-            "article" : "blog/article.ejs",
-            "articlesList" : "blog/articles-list.ejs",
-            "allArticlesList" : "blog/all-articles-list.ejs"
+            "article" : "blog/article/article.ejs",
+            "articlesList" : "blog/article/articles-list.ejs",
+            "apply" : "blog/apply.ejs",
+            "main" : "blog/main.ejs",
+            "hotelList" : "blog/hotel-list.ejs"
         },
-        "login" : "auth/log-in.ejs",
-        "register" : "auth/register.ejs",
-        "fourOFour" : "404/404.ejs",
+        "fourOFour" : "blog/error/404.ejs",
         "admin" : {
+            "index" : "admin/index.ejs",
+            "register" : "admin/auth/register.ejs",
+            "login" : "admin/auth/log-in.ejs",
             "article" : {
                 "createEdit" : "admin/article/create-edit-article.ejs",
                 "list" : "admin/article/articles-list.ejs"
@@ -91,13 +88,21 @@
             "articleCategory" : {
                 "createEdit" : "admin/article-category/create-edit-article-category.ejs",
                 "list" : "admin/article-category/article-categories-list.ejs"
+            },
+            "users" : {
+                "list" : "admin/manage-users.ejs"
+            },
+            "auth" : {
+                "register" : "admin/auth/register.ejs",
+                "login" : "admin/auth/log-in.ejs",
+                "changePwdView" : "admin/auth/change-tmp-password.ejs"
             }
         }
     },
     "templateConf" : {
         "admin" : {
             "index" : {
-                "title" : "AdminArea",
+                "title" : "Admin-Area",
                 "id" : "admin-area"
             },
             "article" : {
@@ -127,6 +132,26 @@
                     "title" : "Edit:",
                     "id" : "edit-article-category"
                 }
+            },
+            "users" : {
+                "list" : {
+                    "title" : "Manage Users",
+                    "id" : "manage-users"
+                }
+            },
+            "auth" : {
+                "login" : {
+                    "title" : "Login",
+                    "id" : "login"
+                },
+                "register" : {
+                    "title" : "Regsiter",
+                    "id" : "register-user"
+                },
+                "changePwdView" : {
+                    "title" : "change Temporary Password",
+                    "id" : "change-tmp-pwd"
+                }
             }
         },
         "blog" : {
@@ -140,22 +165,57 @@
             "articlesList" : {
                 "id" : "blog-articles-list",
                 "title" : "blog"
-            }
-        },
-        "auth" : {
-            "login" : {
-                "title" : "Login",
-                "id" : "login"
             },
-            "register" : {
-                "title" : "Regsiter",
-                "id" : "register-user"
+            "fourOfour" : {
+                "id" : "404",
+                "title" : "Weboldalt nem található"
+            },
+            "apply" : {
+                "id" : "apply",
+                "title" : "jelentkezés"
+            },
+            "main" : {
+                "id" : "main",
+                "title" : "Ausztriai Állás"
+            },
+            "hotelList" : {
+                "id" : "hotel-list",
+                "title" : "Partnereink"
             }
         },
         "fourOFour" : {
             "title" : "PageNotFound",
             "id" : "404"
         }
+    },
+    "errorMsgs" : {
+        "admin" : {
+            "articleCategory" : {
+                "notFoundInDb" : "this cateogry isnt found in db:"
+
+            }
+        },
+        "general" : {
+            "fallbackErr" : "An error has occured. Please contact the stie admin.",
+            "dataNotFoundInDb" : "requested data not found in db",
+            "articleCategoryNotFoundInDb" : "article category not found in db",
+            "fileDoesntExist" : "the file trying to read doesnt exist",
+            "articleNotFound" : "requested article not found in the system"
+        }
+    },
+    "errHandling" : {
+        "errLogRelativeFilePath" : "logs/err-log.txt",
+        "errEvents" : {
+            "warningWithReq" : "warningWithReq",
+            "fourOfourErrEvent" : "fourOfourErrEvent"
+        }
+    },
+    "routesConfig" : {
+        "adminDeleteArticleEpPathVar" : "articleId",
+        "maxHotelPgNum" : 30,
+        "maxHotelListItemsCountOnPg" : 10,
+        "autoGenPswLength" : 10,
+        "tmpPwdExpiryMilSecs" : 172800000
     },
     "flashMsgs" : {
         "types" : {
@@ -203,6 +263,18 @@
                 "saved" : {
                     "succ" : "article saved"
                 }
+            },
+            "users" : {
+                "delete" : {
+                    "succ" : "The user has been succefully deleted",
+                    "err" : {
+                        "noUser" : "The user you wanted to delete, doesnt exists",
+                        "notAuth" : "You are not authorize to delete this user"
+                    }
+                },
+                "changedTmpPwd" : {
+                    "succ" : "you temporary passowrd has been usccesfully changed. Now you can log is with the new one."
+                }
             }
         },
         "googleLogin" : {
@@ -210,9 +282,20 @@
         },
         "localLogin" : {
             "succ" : "you are now succefully logged in",
-            "err" : "failed local login"
+            "err" : "You couldnt be logged in, because eather your username or password was not correct. Please try it again."
+        },
+        "tmpLocalLogin" : {
+            "succ" : "Thank you for logging in with you temporary password, now you need to change it to activate your account",
+            "err" : "You couldnt be logged in, because eather your username or temporary password was not correct, or the termporary password has expired. Please try it again or if the temporary password has expires please requesta new account. Thank you."
+        },
+        "furthereUserQuestion" : {
+            "succ" : "Nagyon koszonjuk, hogy elkuldte nekunk a kerdeset, Amilyen gyorsan csak tudunk jelentkezunk onnel a valsszal."
+        },
+        "furtherApplication" : {
+            "succ" : "Nagyon koszonjuk, hogy elkuldte nekunk a kerdeset, Amilyen gyorsan csak tudunk jelentkezunk onnel a valsszal."
         },
         "validationErr" : {
+            "userAlreadyExists" : "With this email there is a user already, please choose an other email.",
             "viewTitle" : {
                 "notEmpty" : "The page title shouldnt be empty!",
                 "charCount" : "The page title should be between 1 and 25 characters!"
@@ -236,32 +319,35 @@
                 "notEmpty" : "please enter a name",
                 "charCount" : "The Name should be between 4 and 15 characters"
             },
-            "password" : "Your password should be at least 9 characters long, contain at least one uppercase letter and at least one lowercase letter and one number, furthermore one from the following characters: !\"#$%&\\'()*+,-./:;<=>?@[\\]^_`{|}~"
+            "password" : "Your password should be at least 9 characters long, contain at least one uppercase letter and at least one lowercase letter and one number, furthermore one from the following characters: !\"#$%&\\'()*+,-./:;<=>?@[\\]^_`{|}~",
+            "passwordConf" : "The confirmation of the passowrd doesnt match the passowrd."
         },
         "articlesBlogList" : {
             "noArtiles" : "There is an issue with the requested page, so you have been redirected"
         },
         "generalErr" : {
-            "request" : "there has been an issue with your request please contact the siteadmin"
+            "request" : "there has been an issue with your request please contact the siteadmin",
+            "lowAuthLevel" : "You Are not authorized to access the requested feature."
         },
         "auth" : {
             "register" : {
-                "succ" : "You have succefully registered.. Now you can login with your new credentials"
-            }
+                "succ" : "The new User has been succesfully registered now he/she can login with the new credentials, which have benn sent to the registered email"
+            },
+            "requireLogin" : "For the action you wanted to do, you need to be logged in, so you are redirected to login. Thanks."
         }
     },
     "absolutePathes" : {
-        "wwwPath" : "/home/sandor/Documents/cms-tut/app/www",
-        "articlesPath" : "/home/sandor/Documents/cms-tut/app/www/articles",
-        "teasersPath" : "/home/sandor/Documents/cms-tut/app/www/teasers",
-        "modelsPath" : "/home/sandor/Documents/cms-tut/app/models"
+        "wwwPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www",
+        "articlesPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www/articles",
+        "teasersPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www/teasers",
+        "modelsPath" : "/home/sandor/Documents/austria-recruitment-cms/app/models"
     },
     "relativePathes" : {
         "public" : {
-            "self" : "./public/",
+            "self" : "./public",
             "img" : {
                 "article" : {
-                    "body" : "./public/img/article/body/",
+                    "body" : "./public/img/article/body",
                     "profile" : "./public/img/article/profile/"
                 },
                 "user" : {
@@ -293,12 +379,68 @@
             "term" : "articleCategory",
             "maxLength" : "25",
             "minLength" : "1"
-
+        }
+    },
+    "sendEmail" : {
+        "visitorQuestion" : {
+            "from" : {
+                "addr" : "bgfkszmsdeli@gmail.com",
+                "pwd" : "dalias19"
+            },
+            "to" : "bgfkszmsdeli@gmail.com",
+            "host" : "smtp.gmail.com"
+        }
+    },
+    "blogNavStaticEndPoints" : {
+        "getMainView" : {
+            "ep" : "/blog",
+            "text" : "Fooldal"
+        },
+        "getAboutUsView" : {
+            "ep" : "/blog/about-us",
+            "text" : "rolunk"
+        },
+        "getApplyView" : {
+            "ep" : "/blog/apply-view",
+            "text" : "jelentkezes"
+        },
+        "getHotelListView" : {
+            "ep" : "/blog/partners/1",
+            "text" : "Partner Hotelek"
+        },
+        "articlesList" : {
+            "text" : "Blog",
+            "ep" : "/blog/articles"
+        }
+    },
+    "securedAdminNavStaticEndPoints" : {
+        "level2" : [{
+            "ep" : "/admin/users",
+            "text" : "Users"
+        },
+        {
+            "ep" : "/admin/auth/register",
+            "text" : "Register User"
+        }]
+    },
+    "users" : {
+        "privilages" : {
+            "admin" : {
+                "frontEnd" : "administrator",
+                "backEnd" : "admin"
+            },
+            "user" : {
+                "frontEnd" : "content creator",
+                "backEnd" : "user"
+            },
+            "superAdmin" : {
+                "backEnd" : "super-admin"
+            }
         }
     },
     "general" : {
         "publicFoldersName" : "public",
         "articleCategoryCheckboxGroupName" : "articleCategories",
-        "hostName" : "localhost:3500"
+        "hostName" : "http://www.localhost:3500"
     }
 }

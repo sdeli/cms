@@ -1,0 +1,52 @@
+.flash {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    @mixin fontPoppins;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.33);
+
+    &--danger {
+        color: $flashDangerColor;
+        background-color: $flashDangerBackground;
+        border-color: $flashDangerBorderColor;
+    }
+
+    &--success {
+        color: $flashSuccColor;
+        background-color: $flashSuccBackground;
+        border-color: $flashSuccBorderColor;
+    }
+    
+    &__message {
+        display: inline-block;
+        width: 90%;
+    }
+
+    &__close {
+        width: 8%;
+        box-sizing: border-box;
+        display: inline-block;
+
+        &__btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: inherit;
+            background-color: transparent;
+            border: 0;
+            font-size: 2rem;
+            font-weight: 100;
+            text-shadow: 1px 1px 1px #fff;
+        }
+
+        &__btn:hover {
+            color: #000;
+            text-decoration: none;
+            opacity: .75;
+        }
+    }
+    
+}

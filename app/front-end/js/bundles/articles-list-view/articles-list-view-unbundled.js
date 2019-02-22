@@ -1,19 +1,21 @@
+const frontEndConfig = require('front-end-config');
 const reorganizeArticles = require('front-end-widgets/reorganize-table')
 const letConfirmArticleDeletion = require('front-end-widgets/utils').alertOnClick;
+const blogNavbar = require('front-end-widgets/blog-navbar');
 
 $(document).ready(() => {
     reorganizeArticles({
-        SORTABLE_TABLES__CLASS : process.env.ARTICLES_TABLES__CLASS, 
-        REORG_TABLE_CONTAINMENT : process.env.REORG_TABLE_CONTAINMENT,
-        REORG_TABLE_PLACEHOLDERS__CLASS : process.env.REORG_TABLE_PLACEHOLDERS__CLASS,
-        FALLBACK_ERR_FLASH : process.env.FALLBACK_ERR_FLASH,
-        UPDATE_TABLE_SORT__EP : process.env.UPDATE_TABLE_SORT__EP,
-        AJAX_CALL__CONTENT_TYPE : process.env.AJAX_CALL__JSON_CONTENT_TYPE, 
-        AJAX_CALL__METHOD : process.env.AJAX_CALL__POST_METHOD
+        SORTABLE_TABLES__CLASS : frontEndConfig.bundles.articleList.articlesTablesClass, 
+        REORG_TABLE_CONTAINMENT : frontEndConfig.bundles.articleList.reorgTableContainment,
+        REORG_TABLE_PLACEHOLDERS__CLASS : frontEndConfig.bundles.articleList.reorgTablePlaceholdersClass,
+        FALLBACK_ERR_FLASH : frontEndConfig.general.fallbackErr,
+        UPDATE_TABLE_SORT__EP : frontEndConfig.restEndPoints.admin.article.updateSort,
     });
     
     letConfirmArticleDeletion({
-        alertTriggerElemClass : process.env.DELETE_ARTICLE_LINKS__SEL, 
-        alertMsg : process.env.DELETE_ARTICLE_CONFIRMATION_WARNING__ALERT
+        alertTriggerElemClass : frontEndConfig.bundles.articleList.deleteArticleLinksSel, 
+        alertMsg : frontEndConfig.bundles.articleList.deleteArticleConfirmationWarningAlert
     });
 });
+
+blogNavbar();

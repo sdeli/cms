@@ -1,5 +1,20 @@
-function ide() {
-        console.log(this);
-    }
+module.exports = ((config) => {
+    const {
+        MUTTER
+    } = config;
+    
+    
+    return function CanDo() {
+        const that = this;
+        console.log(MUTTER);
+        this.arr.push('mitter');
 
-module.exports = ide;
+        CanDo.prototype.do = function() {
+            private();
+        }
+        
+        function private() {
+            console.log(that.arr);
+        }
+    }
+});

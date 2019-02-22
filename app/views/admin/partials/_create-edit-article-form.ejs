@@ -1,0 +1,56 @@
+<div>
+    <form class='add-article-form' action="<%= postDataToRoute %>" method="post" enctype="multipart/form-data">
+        <% if (pageId === 'edit-article') { %>
+            <input type="text" name="articleId" value='<%= articleData.articleId %>' hidden>
+        <% } %>
+
+        <div class="row">    
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <label for="#page-title">Page Title</label>
+                    <input type="text" class="form-control" id="page-title" name='pageTitle' value='<%= articleData.pageTitle %>'>
+                </div>
+                
+                <div class="form-group">
+                    <label for="#article-name">Article Name</label>
+                    <input type="text" class="form-control" id="article-name" name="articleName" value='<%= articleData.articleName %>'>
+                </div>
+
+                <% include _choose-article-cateogires.ejs %>
+                
+                <div class="form-group">
+                    <label for="#teaser">Teaser</label>
+                    <textarea type='text' class="form-control" id="teaser" name='teasersHtml' rows="5" ><%= articleData.teasersHtml %></textarea>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input class="form-control-file image-browse-btn-sel" id="article-profile-img" name="articleProfileImg" type='file'>
+                </div>
+                
+                <div class="article-image-preview">
+                    <% if (pageId === 'edit-article') { %>
+                        <img src="<%= articleData.articleProfImgLink %>" alt="" height="292px">
+                        <input type="text" name="articleProfImgLink" value='<%= articleData.articleProfImgLink %>' hidden>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="#article-body">Example textarea</label>
+                    <textarea type='text' class="form-control" id="article-body-editor" name='articleHtml' rows="30c"><%= articleData.articleHtml %></textarea>
+                </div>
+                <% if (pageId === 'publish-article') { %>
+                    <button type="submit" class="btn btn-primary">Publish Article</button>
+                <% } else if (pageId === 'edit-article') { %>
+                    <button type="submit" class="btn btn-primary">Update Article</button>
+                <% } %>
+            </div>
+        </div>
+        
+    </form>
+</div>

@@ -1,0 +1,49 @@
+<% 
+    name = registerUserData.name
+    email = registerUserData.email
+    password = registerUserData.password
+    passwordConf = registerUserData.passwordConf
+%>
+
+<div title="register-form row">
+    <div title="register-form__title col-12">
+        <h3>Register</h3>
+    </div>
+    
+    <form class="row" action="<%= postDataToRoute %>" title="register-form__form" method="post" enctype="multipart/form-data">
+        <div class="col-12 col-lg-8">
+            <div class="form-group">
+                <label for="user-name">Name</label>
+                <input type="text" class="form-control" id="user-name" name='name' aria-describedby="enter your name" placeholder="enter your name" value="<%= name %>">
+            </div>
+    
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter email" value="<%= email %>">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            
+            <div class="form-group">
+                <label class="mr-sm-2" for="#user-privilage">Choose privilage for the user!</label>
+                <select class="custom-select mr-sm-2" id="user-privilage" name='privilage'>
+                    <option selected value="<%= registerUserData.user %>"><%= registerUserData.user %></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Registration</button>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="form-group">
+                <input class="form-control-file image-browse-btn-sel" id="user-avatar-img" name="userAvatarImg" type='file'>
+            </div>
+            
+            <div class="user-avatar-image-preview">
+                <% if (typeof userRegisterData !== 'undefined') { %>
+                    <img src="<%= articleProfImgLink %>" alt="" height="292px">
+                    <input type="text" name="userAvatarImgLink" value='<%= userAvatarImgLink %>' hidden>
+                <% } %>
+            </div>
+        </div>
+    </form>
+</div>

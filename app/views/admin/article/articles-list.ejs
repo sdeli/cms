@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include ../../partials/_head.ejs %>
+    <% include ../partials/_head.ejs %>
 </head>
 <body>
-    <% include ../../partials/_navbar.ejs %>
+    <% include ../partials/_navbar.ejs %>
 
     <section class="container-fluid main">
         <div class="row" title="flash messages">
             <div class="col-12 col-md-8 offset-md-2">
-                <% include ../../partials/_flash-messages.ejs %>
+                <% include ../partials/_flash-messages.ejs %>
             </div>
         </div>
 
@@ -17,12 +17,12 @@
             <div class="col-12 col-md-8 offset-md-2">
                 <h1>All Articles</h1>
                 <a href="<%= createArticleEp %>" class="btn btn-success mb-3">Create Article</a>
-                <% include ../../partials/_articles-table.ejs %>
+                <% include ../partials/_articles-table.ejs %>
             </div>
         </div>
     </section>
 
-    <% include ../../partials/_footer.ejs %>
-    <% include ../../partials/_scripts.ejs %>
+    <% include ../partials/_footer.ejs %>
+    <% include ../partials/_scripts.ejs %>
 </body>
 </html>

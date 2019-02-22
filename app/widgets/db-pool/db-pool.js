@@ -25,23 +25,16 @@ const db = (function(){
     function queryProm(sql) {
         return new Promise((resolve, reject) => {
             connPool.query(sql, (err, results, fields) => {
-                if (err) {
+                try {
+                    if (err) {
+                        reject(err);
+                    } else if (!err && Array.isArray(results)) {
+                        resolve(results[1]);
+                    } else {
+                        throw new Error('unexpected behaviour in query promise');
+                    }
+                } catch (err) {
                     reject(err);
-                    return;
-                }
-                
-                resolve({results, fields});
-            });
-        });
-    }
-
-    function queryPromise(sql) {
-        return new Promise((resolve, reject) => {
-            connPool.query(sql, (err, results, fields) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(results);
                 }
             });
         });
@@ -50,7 +43,6 @@ const db = (function(){
     return {
         escape : mysql.escape,
         queryProm,
-        queryPromise,
         queryCb : (sql, cb) => connPool.query(sql, cb)
     }
 }());

@@ -1,0 +1,7 @@
+.four-o-four-message-area {
+    margin-top: 0.4375rem;
+}
+
+@media (min-width: 419px) {
+    margin-top: 0.6375rem;
+}

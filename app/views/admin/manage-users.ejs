@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/_head.ejs %>
+</head>
+<body>
+    <% include partials/_navbar.ejs %>
+
+    <section class="container-fluid main">
+        <div class="row" title="flash messages">
+            <div class="col-12 col-md-8 offset-md-2">
+                <% include partials/_flash-messages.ejs %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-10 offset-md-1 mt-2">
+                <h1 class="mb-2">Users</h1>
+                <% include partials/_manage-users-table.ejs %>
+            </div>
+        </div>
+    </section>
+
+    <% include partials/_footer.ejs %>
+    <% include partials/_scripts.ejs %>
+</body>
+</html>

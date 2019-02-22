@@ -1,5 +1,3 @@
-use cms;
-
 drop procedure if exists insertArticleCategoryDataIfUnique;
 delimiter //
 

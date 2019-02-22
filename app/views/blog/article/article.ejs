@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include ../partials/_blog-head.ejs %>
+<body>
+    <section>
+        <% include ../partials/_blog-navbar.ejs %>
+    </section>
+
+    <section class="container">
+        <div class="row">
+            <% include ../partials/_logo-stripe.ejs %>  
+        </div>
+    </section>
+
+    <% include ../partials/_jumbotron.ejs %>
+    
+    <section class="container main-info-area">
+        <div class="row">
+            <div class="info-feed col-btm-12 col-gutter-z-btm-both col-gutter-n-sm-both col-md-8">
+                <div>
+                    <% include ../partials/_display-categories.ejs %>
+                </div>
+
+                <div class="article fr-view">
+                    <div class="article__header">
+                        <h1 class="article__header__h3 article__header__h3--centered">
+                            <%= articleData.articleName %>
+                        </h1>
+                    </div>
+                    <div class="article__body">
+                        <div class="article__body__teaser">
+                            <p><%- articleData.teasersHtml %></p>
+                        </div>
+    
+                        <div>
+                            <%- articleData.articleHtml %>
+                        </div>
+                    </div>
+                </div> <!-- article end -->
+            </div> <!-- info-feed end -->
+
+            <aside class="widgets col-btm-12 col-gutter-z-btm-both col-gutter-n-sm-both col-md-4 col-gutter-n-md-right col-gutter-z-md-left">
+                <% include ../partials/_communication.ejs %>
+            </aside>
+
+        </div> <!-- row -->
+    </section> <!-- main-info-area end -->
+
+    <% include ../partials/_blog-footer.ejs %>
+    <% include ../partials/_blog-scripts.ejs %>
+    <% include ../partials/_modal.ejs %>
+</body>
+</html>

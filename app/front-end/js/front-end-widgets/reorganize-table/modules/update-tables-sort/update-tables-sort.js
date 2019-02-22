@@ -5,8 +5,6 @@ module.exports = ((config) => {
     const {
         FALLBACK_ERR_FLASH, 
         UPDATE_TABLE_SORT__EP, 
-        AJAX_CALL__CONTENT_TYPE, 
-        AJAX_CALL__METHOD
     } = config;
 
     return updateArticlesSort;
@@ -18,8 +16,8 @@ module.exports = ((config) => {
         
         $.ajax(UPDATE_TABLE_SORT__EP, {
             data : JSON.stringify(articlesSortArr),
-            contentType : AJAX_CALL__CONTENT_TYPE,
-            type : AJAX_CALL__METHOD
+            contentType : "application/json",
+            type : "POST"
         }).done(res => {
             displayFlashNotification(res);
         }).fail(error => {

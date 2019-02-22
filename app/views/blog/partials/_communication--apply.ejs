@@ -1,0 +1,26 @@
+<% 
+    fullName = contactFormData.fullName
+    email = contactFormData.email
+    phoneNumb = contactFormData.phoneNumb
+    languageSkills = contactFormData.languageSkills
+    question = contactFormData.question
+%>
+
+<div class="communication">
+    <div class="communication__header">
+        <h3 class="communication__header__h3 communication__header__h3--centered">Jelentkezz, hogy mielőbb kapcsolatba léphessünk veled</h3>
+        <p class="communication__header__p communication__header__p--centered">24 oran belul valaszolunk</p>
+    </div>
+    
+    <form class="communication__form" action="<%= postApplicationDataEp %>" method="POST">
+        <input class="communication__form__input" value='<%= fullName %>' type="text" name="fullName" placeholder="teljes neved">
+        <input class="communication__form__input" value='<%= email %>' type="email" name="email" placeholder="e-mail címed">
+        <input class="communication__form__input" value='<%= phoneNumb %>' type="tel" name="phoneNumb" placeholder="telefonszamod">
+
+        <textarea class="communication__form__text-area" name="languageSkills" cols="30" rows="5" placeholder="Kerlek ird meg nekunk nyelvtudasod szintjet (alap | kozep | felso), valamint a motivaciodat"><%= languageSkills %></textarea>
+
+        <textarea class="communication__form__text-area" name="question" cols="30" rows="5" placeholder="Bármi egyéb kérdésedet itt megírhatod nekünk, majd nyomd meg eggyel lejjebb a 'Jelentkezés Küldése' gombot"><%= question %></textarea>
+
+        <button type="submit" class="btn btn--block communication__form__btn">Jelentkezés Küldése</button>
+    </form>
+</div>

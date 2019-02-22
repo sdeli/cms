@@ -10,15 +10,42 @@ const gulpPostcss = require("gulp-postcss"),
       source = require('vinyl-source-stream'),
       browserify = require('browserify'),
       envify = require('envify/custom'),
-	  gulp = require('gulp'),
-      dotenv = require('dotenv');
-
-let err = dotenv.config({ path: './app/.env.default' });
+	  gulp = require('gulp');
 
 let cssFilesToBundleArr = [
     {
-        cssSrcFile : "./app/front-end-tmp/css/login-page.css",
-        bundledCssFileName : 'log-in-page-bundled.css',
+        cssSrcFile : "./app/front-end/css/home-view-unbundled.css",
+        bundledCssFileName : 'home-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/articles-list-view-unbundled.css",
+        bundledCssFileName : 'articles-list-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/article-view-unbundled.css",
+        bundledCssFileName : 'article-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/contact-page-unbundled.css",
+        bundledCssFileName : 'contact-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/404-view-unbundled.css",
+        bundledCssFileName : '404-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/apply-view-unbundled.css",
+        bundledCssFileName : 'apply-view-bundled.css',
+        bundledCssFileDest : './app/public/css/'
+    },
+    {
+        cssSrcFile : "./app/front-end/css/hotel-list-view-unbundled.css",
+        bundledCssFileName : 'hotel-list-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     }
 ]
@@ -42,6 +69,16 @@ let jsFilesToBundle = [
     {
         jsSrcFile : "./app/front-end/js/bundles/register-user-view/regiter-user-view.js",
         bundledJsFileName : 'regiter-user-view-bundled.js',
+        bundledJsFileDest : './app/public/js/'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/home-view/home-view-unbundled.js",
+        bundledJsFileName : 'home-view-bundled.js',
+        bundledJsFileDest : './app/public/js/'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/apply-view/apply-view-unbundled.js",
+        bundledJsFileName : 'apply-view-bundled.js',
         bundledJsFileDest : './app/public/js/'
     }
 ];
@@ -69,7 +106,7 @@ gulp.task('default', () => {
 
     gulp.watch('./app/front-end/js/**/**/**/*.js', function() {
         bundleJsI++;
-        console.log('bundle-js cycles: ' + bundleCssI);
+        console.log('bundle-js cycles: ' + bundleJsI);
         
         jsFilesToBundle.forEach((fileForPageObj, i) => {
             bundleJs(fileForPageObj); 
@@ -80,6 +117,7 @@ gulp.task('default', () => {
 
 function bundleCss(fileForPageObj){
     let {cssSrcFile, bundledCssFileName, bundledCssFileDest} = fileForPageObj;
+    console.log(bundledCssFileName);
 
     return gulp.src(cssSrcFile)
     .pipe(gulpPostcss([

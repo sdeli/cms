@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/_blog-head.ejs %>  
+
+<body>
+    <% include partials/_blog-navbar.ejs %>  
+
+    <section class="container">
+        <div class="row">
+            <% include partials/_logo-stripe.ejs %>  
+        </div>
+    </section>
+
+    <% include partials/_jumbotron.ejs %>
+
+    <section class="container">
+        <div class="row">
+            <div class="flash-container">
+                <% include partials/_blog-flash-messages.ejs %>
+            </div>
+        </div>
+    </section>
+
+    <section class="container main-info-area">
+        <div class="row">
+            <div class="info-feed col-btm-12 col-gutter-s-btm-both col-md-8 col-gutter-n-md-both">
+                <% include partials/_communication--apply.ejs %>
+            </div>
+
+            <aside class="widgets col-btm-12 col-gutter-s-btm-both col-md-4 col-gutter-z-md-left col-gutter-n-md-right col-gutter-n-lg-both">
+                <% include partials/_contact-details.ejs %>
+            </aside>
+        </div> <!-- row -->
+    </section> <!-- main-info-area end -->
+
+    <% include partials/_blog-footer.ejs %>
+    <% include partials/_blog-scripts.ejs %>
+</body>
+</html>

@@ -4,12 +4,25 @@ module.exports=
     "general" : {
         "ajaxCallJsonContentType" : "application/json",
         "ajaxCallPostMethod" : "POST",
-        "fallbackErr" : "An error has occured. Please contact the site admin."
+        "fallbackErr" : "An error has occured. Please contact the site admin.",
+        "windowMediumSize" : "768"
     },
-    "endPoints" : {
-        "uploadArticleImage" : "/admin/article-image/upload",
-        "removeArticleImage" : "/admin/article-image/remove",
-        "updateSort" : "/admin/article-category/update-sort"
+    "restEndPoints" : {
+        "admin" : {
+            "article" : {
+                "image" : {
+                    "upload" : "/admin/article-image/upload",
+                    "remove" : "/admin/article-image/remove"
+                },
+                "updateSort" : "/admin/article/update-sort"
+            },
+            "articleCategory" : {
+                "updateSort" : "/admin/article-category/update-sort"
+            }
+        },
+        "blog" : {
+            "furtherUserQuestion" : "/blog/question"
+        }
     },
     "bundles" : {
         "articleList" : {
@@ -23,6 +36,7 @@ module.exports=
         },
         "createEditArticle" : {
             "articleBodyTextAreaId" : "#article-body-editor",
+            "teaserTextAreaId" : "#teaser",
             "imageDataParamName" : "imageFileInfo",
             "imageAllowedTypes" : ["jpeg", "jpg", "png"],
             "articleBodyEditorHeight" : 300,
@@ -62,15 +76,15 @@ module.exports=
         },
         "general" : {
             "imgRemovedMsg" : "Image was deleted",
-            "imageCouldntBeDeletedErrMsg" : "Image delete problem: "
+            "imageCouldntBeDeletedErrMsg" : "Image delete problem: ",
         }
         
     }
 }
 },{}],2:[function(require,module,exports){
-const config = require('./assets/front-end-config.json');
+const frontEndConfig = require('./assets/front-end-config.json');
 
-module.exports = config;
+module.exports = frontEndConfig;
 },{"./assets/front-end-config.json":1}],3:[function(require,module,exports){
 const config = require('front-end-config');
 const displayBrowsedImage = require('front-end-widgets/display-browsed-image');
