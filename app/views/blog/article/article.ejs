@@ -17,23 +17,25 @@
     <section class="container main-info-area">
         <div class="row">
             <div class="info-feed col-btm-12 col-gutter-z-btm-both col-gutter-n-sm-both col-md-8">
-                <div>
-                    <% include ../partials/_display-categories.ejs %>
-                </div>
-
+                
                 <div class="article fr-view">
-                    <div class="article__header">
-                        <h1 class="article__header__h3 article__header__h3--centered">
-                            <%= articleData.articleName %>
-                        </h1>
+                    <div class="article__categs">
+                        <% include ../partials/_display-categories.ejs %>
                     </div>
-                    <div class="article__body">
-                        <div class="article__body__teaser">
-                            <p><%- articleData.teasersHtml %></p>
+                    <div class="article__content">
+                        <div class="article__content__header">
+                            <h1 class="article__content__header__h3 article__content__header__h3--centered">
+                                <%= articleData.articleName %>
+                            </h1>
                         </div>
-    
-                        <div>
-                            <%- articleData.articleHtml %>
+                        <div class="article__content__body">
+                            <div class="article__content__body__teaser">
+                                <p><%- articleData.teasersHtml %></p>
+                            </div>
+        
+                            <div>
+                                <%- articleData.articleHtml %>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- article end -->

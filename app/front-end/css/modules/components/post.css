@@ -1,7 +1,36 @@
 .post {
-    /*width: 100%;*/
-    margin-bottom: 0.4rem;
+    &__text--emphasize {
+        color: #de4646;
+        font-weight: 600;
+        text-shadow: 2px 2px #d2c5c5;
+    }
+    
+    &__text--strong {
+        font-style: italic;
+        font-weight: bold;
+        color: #353535;
+        text-shadow: 1px 1px 0px #cacaca;
+    }
 
+    & .fas {
+        margin-right: 0.2rem;
+        font-size: 1.2rem;
+        color: $glyphiconGreen;   
+    }
+
+    & .fa-smile {
+        margin-right: 0.2rem;
+        font-size: 1.2rem;
+        margin-left: 0.2rem;
+        color: #ffcc33;   
+    }
+
+    & .fa-arrow-circle-down {
+        margin-right: 0rem;
+        font-size: 1.4rem;
+        vertical-align: middle;
+    }
+    
     &__container {
         background-color: $mainWhite;
         overflow: hidden;
@@ -15,6 +44,7 @@
                 margin: 0;
                 padding-left: 0.1rem;
                 color: $textOrange;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.33);
 
                 &--centered {
                     text-align: center;
@@ -53,8 +83,26 @@
                 text-decoration:none;
             }
             
+            &__p {
+                font-size: 1rem;
+                margin: 0.5rem;
+                text-align: justify; 
+            }
+
             &__p:last-child {
                 margin-bottom: 0;    
+            }
+
+            &__li {
+                font-size: 1rem;
+                margin: 0.5rem;
+                list-style-type: none;
+                margin-bottom: 0;
+                text-align: justify;
+            }
+
+            &__li:last-child {
+                margin-bottom: 0;
             }
 
             &__img {
@@ -119,16 +167,20 @@
             }
 
             &__body {
-                padding:  0.625rem;
+                padding: 0 0.625rem 0.625rem;
             }
         }
     }    
 }
 
+@media (min-width: 576px) {
+    .post__container__body__li .fas {
+        margin-right: 0.4rem;
+    }
+}
 @media (min-width: 768px) {
     .post {
         border-radius: 0.2rem;
-        margin-bottom: 0.5375rem;
         
         &--hotel-list {
             margin-bottom: 0.7rem;

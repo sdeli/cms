@@ -22,6 +22,7 @@ article view back to blog list by categ link
 sticky nav
 privilage fron tend backend terms
 arrow at gethotelpage 1 2 3 4 page
+
 err types:
     Expected errs:
         1. page not found

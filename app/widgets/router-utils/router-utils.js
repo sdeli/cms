@@ -9,7 +9,7 @@ getArticleData = getArticleData({
     ARTICLE_CATEGORY_CHECKBOX_GROUP__NAME : config.general.articleCategoryCheckboxGroupName,
     TEASERS__PATH : config.absolutePathes.teasersPath,
     ARTICLES__PATH : config.absolutePathes.articlesPath
-})
+});
 
 getArticlesDataByCategory = getArticlesDataByCategory({
     TEASERS_FOLDERS___PATH : config.relativePathes.teasersPath,
@@ -35,8 +35,6 @@ function getFormattedDate(createdAt) {
     sec = (sec < 10 ? "0" : "") + sec;
 
     var str = date.getFullYear() + "-" + month + "-" + day + " " +  hour + ":" + min + ":" + sec;
-
-    /*alert(str);*/
 
     return str;
 }

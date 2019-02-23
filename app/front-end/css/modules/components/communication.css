@@ -1,7 +1,12 @@
 .communication {
     width: 100%;
-    margin-bottom: 0.4rem;
     transition: all ease;
+    box-sizing: border-box;
+
+    &--gutter-s-btm-both {
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+    }
     
     &__header {
         padding: 0 0.375rem 0;
@@ -92,10 +97,17 @@
     }    
 }
 
+@media (min-width: 576px) {
+    .communication--gutter-z-sm-both {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
 @media (min-width: 768px) {
     .communication {
         border-radius: 0.2rem;
-        margin-bottom: 0.9375rem;
+        margin-bottom: 0.5375rem;
 
         &__header {
             margin-bottom: -0.4rem;

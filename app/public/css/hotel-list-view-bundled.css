@@ -1118,31 +1118,65 @@ body {
     }
 }
 .info-feed {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0.6375rem;
+    margin-bottom: 0.6375rem;
 }
+.info-feed > div {
+        margin-bottom: 0.6375rem;
+    }
+.info-feed > div:last-child {
+        margin-bottom: 0; 
+    }
 @media (min-width: 768px) {
     .info-feed {
-        margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
+
     }
+
+        .info-feed > div {
+            margin-bottom: 0.9375rem;
+        }
+
+        .info-feed--gutter-s-md-all > div {
+            margin-bottom: 0.6375rem;
+        }
+        .info-feed--gutter-s-md-all {
+            margin-top: 0.6375rem;
+            margin-bottom: 0.6375rem;
+        }
 }
 .widgets {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0;
+    margin-bottom: 0.6375rem;
 }
+.widgets > div {
+        margin-bottom: 0.6375rem;
+    }
+.widgets > div:last-child {
+        margin-bottom: 0; 
+    }
 @media (min-width: 768px) {
     .widgets {
-         margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
     }
+
+        .widgets > div {
+            margin-bottom: 0.9375rem;
+        }
 }
 .communication {
     width: 100%;
-    margin-bottom: 0.4rem;
     -webkit-transition: all ease;
     transition: all ease;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
+.communication--gutter-s-btm-both {
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+    }
 .communication__header {
         padding: 0 0.375rem 0;
         font-family: 'Poppins', sans-serif;
@@ -1229,10 +1263,16 @@ body {
                 font-size: 1.2rem;
             }    
 }
+@media (min-width: 576px) {
+    .communication--gutter-z-sm-both {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
 @media (min-width: 768px) {
     .communication {
         border-radius: 0.2rem;
-        margin-bottom: 0.9375rem;    
+        margin-bottom: 0.5375rem;    
     }
 
         .communication__header {
@@ -1255,10 +1295,33 @@ body {
                 margin-bottom: 0.7rem;
             }
 }
-.post {
-    /*width: 100%;*/
-    margin-bottom: 0.4rem;
-}
+.post__text--emphasize {
+        color: #de4646;
+        font-weight: 600;
+        text-shadow: 2px 2px #d2c5c5;
+    }
+.post__text--strong {
+        font-style: italic;
+        font-weight: bold;
+        color: #353535;
+        text-shadow: 1px 1px 0px #cacaca;
+    }
+.post .fas {
+        margin-right: 0.2rem;
+        font-size: 1.2rem;
+        color: #03ff03;   
+    }
+.post .fa-smile {
+        margin-right: 0.2rem;
+        font-size: 1.2rem;
+        margin-left: 0.2rem;
+        color: #ffcc33;   
+    }
+.post .fa-arrow-circle-down {
+        margin-right: 0rem;
+        font-size: 1.4rem;
+        vertical-align: middle;
+    }
 .post__container {
         background-color: #ffffff;
         overflow: hidden;
@@ -1272,6 +1335,7 @@ body {
                 margin: 0;
                 padding-left: 0.1rem;
                 color: #f14036;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.33);
             }
 .post__container__header__h3--centered {
                     text-align: center;
@@ -1304,8 +1368,23 @@ body {
                 height: 0;
                 text-decoration:none;
             }
+.post__container__body__p {
+                font-size: 1rem;
+                margin: 0.5rem;
+                text-align: justify; 
+            }
 .post__container__body__p:last-child {
                 margin-bottom: 0;    
+            }
+.post__container__body__li {
+                font-size: 1rem;
+                margin: 0.5rem;
+                list-style-type: none;
+                margin-bottom: 0;
+                text-align: justify;
+            }
+.post__container__body__li:last-child {
+                margin-bottom: 0;
             }
 .post__container__body__img {
                 display: inline-block;
@@ -1356,13 +1435,17 @@ body {
                 }
 
             .post__container__body {
-                padding:  0.625rem;
+                padding: 0 0.625rem 0.625rem;
             }    
+}
+@media (min-width: 576px) {
+    .post__container__body__li .fas {
+        margin-right: 0.4rem;
+    }
 }
 @media (min-width: 768px) {
     .post {
         border-radius: 0.2rem;
-        margin-bottom: 0.5375rem;
     }
         
         .post--hotel-list {

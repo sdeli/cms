@@ -466,14 +466,14 @@ const CanSendVisitorQuestion = canSendVisitorQuestion({
 
 
 function Communication() {
-    let submiteQuestionBtn = $('.communication__form__btn');
+    let submiteQuestionBtn = $('.ask-us .communication__form__btn');
 
-    this.COMMUNICATION_MAIN_ELEM__CLASS = 'communication';
-    this.FLASH_MSGS_CONTAINER__SEL = '.communication__flash-msgs';
-    this.INPUT_NAME__SEL = '.communication__form__input[name=\'name\']';
-    this.INPUT_EMAIL__SEL = '.communication__form__input[name=\'email\']';
-    this.INPUT_PHONE_NUM__SEL = '.communication__form__input[name=\'phoneNumber\']';
-    this.INPUT_USER_QUESTION__SEL = '.communication__form__text-area[name=\'question\']';
+    this.COMMUNICATION_MAIN_ELEM__CLASS = 'ask-us';
+    this.FLASH_MSGS_CONTAINER__SEL = '.ask-us .communication__flash-msgs';
+    this.INPUT_NAME__SEL = '.ask-us .communication__form__input[name=\'name\']';
+    this.INPUT_EMAIL__SEL = '.ask-us .communication__form__input[name=\'email\']';
+    this.INPUT_PHONE_NUM__SEL = '.ask-us .communication__form__input[name=\'phoneNumber\']';
+    this.INPUT_USER_QUESTION__SEL = '.ask-us .communication__form__text-area[name=\'question\']';
     
     CanFollowWindow.call(this);
     CanSendVisitorQuestion.call(this);

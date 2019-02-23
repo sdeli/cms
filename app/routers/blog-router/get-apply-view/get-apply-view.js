@@ -3,8 +3,8 @@ const {getBlogNavLinks} = require('widgets/router-utils');
 
 const APPLY_VIEW__PATH = config.viewPathes.blog.apply, 
     APPLY_VIEW__ID = config.templateConf.blog.apply.id,
-    APPLY_VIEW__TITLE = config.templateConf.blog.apply.title;
-    POST_APPLICATION_DATA__EP = config.restEndpoints.blog.furtherApplicationData
+    APPLY_VIEW__TITLE = config.templateConf.blog.apply.title,
+    POST_APPLICATION_DATA__EP = config.restEndpoints.blog.furtherApplicationData;
 
 module.exports = getApplyView;
 

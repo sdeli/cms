@@ -1118,31 +1118,65 @@ body {
     }
 }
 .info-feed {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0.6375rem;
+    margin-bottom: 0.6375rem;
 }
+.info-feed > div {
+        margin-bottom: 0.6375rem;
+    }
+.info-feed > div:last-child {
+        margin-bottom: 0; 
+    }
 @media (min-width: 768px) {
     .info-feed {
-        margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
+
     }
+
+        .info-feed > div {
+            margin-bottom: 0.9375rem;
+        }
+
+        .info-feed--gutter-s-md-all > div {
+            margin-bottom: 0.6375rem;
+        }
+        .info-feed--gutter-s-md-all {
+            margin-top: 0.6375rem;
+            margin-bottom: 0.6375rem;
+        }
 }
 .widgets {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0;
+    margin-bottom: 0.6375rem;
 }
+.widgets > div {
+        margin-bottom: 0.6375rem;
+    }
+.widgets > div:last-child {
+        margin-bottom: 0; 
+    }
 @media (min-width: 768px) {
     .widgets {
-         margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
     }
+
+        .widgets > div {
+            margin-bottom: 0.9375rem;
+        }
 }
 .communication {
     width: 100%;
-    margin-bottom: 0.4rem;
     -webkit-transition: all ease;
     transition: all ease;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
+.communication--gutter-s-btm-both {
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+    }
 .communication__header {
         padding: 0 0.375rem 0;
         font-family: 'Poppins', sans-serif;
@@ -1229,10 +1263,16 @@ body {
                 font-size: 1.2rem;
             }    
 }
+@media (min-width: 576px) {
+    .communication--gutter-z-sm-both {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
 @media (min-width: 768px) {
     .communication {
         border-radius: 0.2rem;
-        margin-bottom: 0.9375rem;    
+        margin-bottom: 0.5375rem;    
     }
 
         .communication__header {

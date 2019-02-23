@@ -1,11 +1,32 @@
 .info-feed {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0.6375rem;
+    margin-bottom: 0.6375rem;
+
+    > div {
+        margin-bottom: 0.6375rem;
+    }
+    
+    > div:last-child {
+        margin-bottom: 0; 
+    }
 }
 
 @media (min-width: 768px) {
     .info-feed {
-        margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
+
+        > div {
+            margin-bottom: 0.9375rem;
+        }
+
+        &--gutter-s-md-all > div {
+            margin-bottom: 0.6375rem;
+        }
+        &--gutter-s-md-all {
+            margin-top: 0.6375rem;
+            margin-bottom: 0.6375rem;
+        }
+
     }
 }

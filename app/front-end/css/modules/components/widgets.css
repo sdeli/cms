@@ -1,11 +1,23 @@
 .widgets {
-    margin-top: 0.4375rem;
-    margin-bottom: 0.4rem;
+    margin-top: 0;
+    margin-bottom: 0.6375rem;
+
+    > div {
+        margin-bottom: 0.6375rem;
+    }
+    
+    > div:last-child {
+        margin-bottom: 0; 
+    }
 }
 
 @media (min-width: 768px) {
     .widgets {
-         margin-top: 0.6375rem;
+        margin-top: 0.9375rem;
         margin-bottom: 0.9375rem;
+
+        > div {
+            margin-bottom: 0.9375rem;
+        }
     }
-}    
+}
