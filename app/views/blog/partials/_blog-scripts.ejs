@@ -3,18 +3,8 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
-<% if (pageId === 'home') { %>
-  <script src="/js/home-view-bundled.js"></script>
-<% } else if (pageId === 'blog-articles-list') { %>
-  <script src="/js/home-view-bundled.js"></script>
-<% } else if (pageId === 'article') { %>
-  <script src="/js/home-view-bundled.js"></script>
-<% } else if (pageId === 'apply') { %>
-  <script src="/js/apply-view-bundled.js"></script>
-<% } else if (pageId === '404') { %>
-  <script src="/js/home-view-bundled.js"></script>
-<% } else if (pageId === 'main') { %>
-  <script src="/js/home-view-bundled.js"></script>
-<% } else if (pageId === 'hotel-list') { %>
-  <script src="/js/home-view-bundled.js"></script>
+<% if (pageId === 'apply') { %>
+  <script src="/js/blog/apply-view-bundled.js"></script>
+<% } else { %>
+  <script src="/js/blog/main-view-bundled.js"></script>
 <% } %>

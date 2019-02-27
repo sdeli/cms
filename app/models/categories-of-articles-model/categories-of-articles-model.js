@@ -47,11 +47,11 @@ const categoriesOfArticlesModel = (() => {
             idOfArticleCateg = dbPool.escape(idOfArticleCateg);
 
             sql += ``
-                + `insert into categories_of_articles (article_category_id, article_id)`
+                + `insert into categories_of_articles (article_category_id, article_id)\n`
                 + `values (${idOfArticleCateg}, ${articleId});\n`    
         });
 
-        sql += 'set autocommit = 1;\nCOMMIT;';
+        sql += 'set autocommit = 1;\n';
 
         return dbPool.queryProm(sql);
     }

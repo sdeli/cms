@@ -4,7 +4,7 @@
         <div class="post">
             <div>
                 <% articleData.ownCategs.forEach(function(categObj){ %>
-                    <a class="category category--orange" href="/blog/articles/<%= categObj.articleCategoryId %>" target="_blank">
+                    <a class="category category--orange" href="/blog/articles/<%= categObj.articleCategoryNameInUrl %>" target="_blank">
                         <span><%= categObj.articleCategoryName %></span>
                     </a>
                 <% }); %>
@@ -12,13 +12,20 @@
         
             <div class="post__container">
                 <div class="post__container__header">
-                    <h3 class="post__container__header__h3 post__container__header__h3--centered"><%= articleData.articleName %></h3>
+                    <h3 class="post__container__header__h3 post__container__header__h3--centered">
+                        <a href="<%= articleData.articleLink %>" target="_blank">
+                            <%= articleData.articleName %>
+                        </a>
+                    </h3>
                 </div>
                     
                 <div class="post__container__body">
-                    <a href="<%= articleData.articleLink %>" target="_blank">
+                    <a class="clearfix" href="<%= articleData.articleLink %>" target="_blank">
                         <div class="post__container__body__img">
-                            <img src="<%= articleData.articleProfImgLink %>"></img>
+                            <picture>
+                                <source srcset="<%= articleData.squareArticleProfileImgLink %>" media="(min-width: 900px)">
+                                <img srcset="<%= articleData.flatArticleProfileImgLink %>">
+                            </picture>
                         </div>
         
                         <div class="fr-view post__container__body__teaser">

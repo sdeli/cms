@@ -14,23 +14,18 @@ const gulpPostcss = require("gulp-postcss"),
 
 let cssFilesToBundleArr = [
     {
-        cssSrcFile : "./app/front-end/css/home-view-unbundled.css",
-        bundledCssFileName : 'home-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/blog-apply-view-unbundled.css",
+        bundledCssFileName : 'blog-apply-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     },
     {
-        cssSrcFile : "./app/front-end/css/articles-list-view-unbundled.css",
-        bundledCssFileName : 'articles-list-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/blog-articles-list-view-unbundled.css",
+        bundledCssFileName : 'blog-articles-list-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     },
     {
-        cssSrcFile : "./app/front-end/css/article-view-unbundled.css",
-        bundledCssFileName : 'article-view-bundled.css',
-        bundledCssFileDest : './app/public/css/'
-    },
-    {
-        cssSrcFile : "./app/front-end/css/contact-page-unbundled.css",
-        bundledCssFileName : 'contact-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/blog-article-view-unbundled.css",
+        bundledCssFileName : 'blog-article-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     },
     {
@@ -39,47 +34,62 @@ let cssFilesToBundleArr = [
         bundledCssFileDest : './app/public/css/'
     },
     {
-        cssSrcFile : "./app/front-end/css/apply-view-unbundled.css",
-        bundledCssFileName : 'apply-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/blog-hotel-list-view-unbundled.css",
+        bundledCssFileName : 'blog-hotel-list-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     },
     {
-        cssSrcFile : "./app/front-end/css/hotel-list-view-unbundled.css",
-        bundledCssFileName : 'hotel-list-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/blog-main-view-unbundled.css",
+        bundledCssFileName : 'blog-main-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     }
 ]
 
 let jsFilesToBundle = [
     {
-        jsSrcFile : "./app/front-end/js/bundles/articles-list-view/articles-list-view-unbundled.js",
+        jsSrcFile : "./app/front-end/js/bundles/admin/articles-list-view/articles-list-view-unbundled.js",
         bundledJsFileName : 'articles-list-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        bundledJsFileDest : './app/public/js/admin'
     },
     {
-        jsSrcFile : "./app/front-end/js/bundles/create-edit-article-view/create-edit-article-view-unbundled.js",
-        bundledJsFileName : 'create-edit-article-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        jsSrcFile : "./app/front-end/js/bundles/admin/edit-article-category-view/edit-article-category-view-unbundled.js",
+        bundledJsFileName : 'edit-article-category-view-bundled.js',
+        bundledJsFileDest : './app/public/js/admin'
     },
     {
-        jsSrcFile : "./app/front-end/js/bundles/article-categories-list-view/article-categories-list-view-unbundled.js",
+        jsSrcFile : "./app/front-end/js/bundles/admin/create-article-view/create-article-view-unbundled.js",
+        bundledJsFileName : 'create-article-view-bundled.js',
+        bundledJsFileDest : './app/public/js/admin'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/admin/edit-article-view/edit-article-view-unbundled.js",
+        bundledJsFileName : 'edit-article-view-bundled.js',
+        bundledJsFileDest : './app/public/js/admin'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/admin/article-categories-list-view/article-categories-list-view-unbundled.js",
         bundledJsFileName : 'article-categories-list-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        bundledJsFileDest : './app/public/js/admin'
     },
     {
-        jsSrcFile : "./app/front-end/js/bundles/register-user-view/regiter-user-view.js",
+        jsSrcFile : "./app/front-end/js/bundles/admin/register-user-view/regiter-user-view.js",
         bundledJsFileName : 'regiter-user-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        bundledJsFileDest : './app/public/js/admin'
     },
     {
-        jsSrcFile : "./app/front-end/js/bundles/home-view/home-view-unbundled.js",
-        bundledJsFileName : 'home-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        jsSrcFile : "./app/front-end/js/bundles/admin/manage-users-view/manage-users-view.js",
+        bundledJsFileName : 'manage-users-view-bundled.js',
+        bundledJsFileDest : './app/public/js/admin'
     },
     {
-        jsSrcFile : "./app/front-end/js/bundles/apply-view/apply-view-unbundled.js",
+        jsSrcFile : "./app/front-end/js/bundles/blog/main-view/main-view-unbundled.js",
+        bundledJsFileName : 'main-view-bundled.js',
+        bundledJsFileDest : './app/public/js/blog'
+    },
+    {
+        jsSrcFile : "./app/front-end/js/bundles/blog/apply-view/apply-view-unbundled.js",
         bundledJsFileName : 'apply-view-bundled.js',
-        bundledJsFileDest : './app/public/js/'
+        bundledJsFileDest : './app/public/js/blog'
     }
 ];
 

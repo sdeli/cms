@@ -19,8 +19,12 @@ getBlogNavLinks = getBlogNavLinks({
     blogNavStaticEndPoints : config.blogNavStaticEndPoints,
 });
 
-function getFormattedDate(createdAt) {
-    var date = new Date(createdAt);
+function getFormattedDate(createdAt = null) {
+    if (createdAt) {
+        var date = new Date(createdAt);
+    } else {
+        var date = new Date();
+    }
 
     var month = date.getMonth() + 1;
     var day = date.getDate();

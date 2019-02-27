@@ -1,38 +1,32 @@
-drop database if exists cms;
-create database cms
-CHARACTER SET latin2 COLLATE latin2_hungarian_ci;
-
+drop DATABASE if exists cms;
+CREATE DATABASE cms DEFAULT CHARACTER SET latin2 COLLATE latin2_hungarian_ci;
 use cms;
 
-drop table if exists articles;
-create table articles (
-	article_id char(18) not null unique,
-	article_name varchar(70) not null,
-    page_title varchar(70) not null,
-    article_file_name char(100) not null unique,
-    teaser_file_name char(25) not null unique,
-    article_prof_img_file_name char(43) default null unique,
-    sort tinyint default 0,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    primary key (article_id)
+CREATE TABLE article_categories (
+  article_category_id int(11) AUTO_INCREMENT,
+  article_category_name varchar(25) unique not null,
+  sort tinyint(4) DEFAULT '0',
+  created_at char(19) not null,
+  PRIMARY KEY (article_category_id)
 );
 
-CREATE TABLE users (
-  user_id char(18) not null unique,
-  name char(50) NOT NULL,
-  email char(50) NOT NULL,
-  password_hash char(255) NOT NULL,
-  avatar_img_file_name char(43) default null unique,
-  is_activated tinyint(4) NOT NULL default 0,
-  activation_token_hash char(64) DEFAULT NULL,
-  user_created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (user_id),
-  UNIQUE KEY email (email)
+CREATE TABLE articles (
+  article_id char(18) not null,
+  article_name varchar(70) not null,
+  page_title varchar(70) not null,
+  article_file_name char(100) not null unique,
+  teaser_file_name char(25) not null unique,
+  square_article_prof_img_file_name char(49) unique default null,
+  flat_article_prof_img_file_name char(47) unique default null,
+  sort tinyint(4) DEFAULT 0,
+  created_at char(19) not null,
+  PRIMARY KEY (article_id)
 );
 
-# ==== articles table changes ====
-alter table articles 
-add index article_file_name_index (article_file_name);
+CREATE TABLE categories_of_articles (
+  article_category_id int(11),
+  article_id char(18)
+);
 
 # ==== categories_of_articles table changes ====
 alter table categories_of_articles

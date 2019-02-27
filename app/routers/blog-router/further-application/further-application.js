@@ -1,12 +1,12 @@
 const config = require('config');
 const mailer = require('widgets/mailer');
 
-const APPLICATION_SUCCESFULLY_FURTHERED__SUCC_FLASH = config.flashMsgs.furtherApplication.succ;
+const APPLICATION_SUCCESFULLY_FURTHERED__SUCC_FLASH = config.flashMsgs.furtherApplication.succ,
     GET_APPLY_VIEW__EP = config.restEndpoints.blog.apply;
 
 module.exports = furtherApplication;
 
-function furtherApplication(req, res) {
+function furtherApplication(req, res, next) {
     let validationErrs = validateFormData(req);
     let isApplicationDataCorrect = validationErrs.length === 0;
     
@@ -17,6 +17,7 @@ function furtherApplication(req, res) {
 
     mailer.sendMail(req.body)
     .then(() => {
+        sendApplicationConfirmationEmail(req);
         notifyAboutSuccApplication(res);
     }).catch(e => {
         next(e);
@@ -61,18 +62,25 @@ function validateFormData(req) {
     return validationErrs;
 }
 
-function notifyAboutSuccApplication(res) {
-    let successMsg = APPLICATION_SUCCESFULLY_FURTHERED__SUCC_FLASH;
-    res.flash.toNext(res.flash.SUCCESS, successMsg);
-
-    res.redirect(GET_APPLY_VIEW__EP);
-}
-
 function denyFurtherOfApplication(req, res, validationErrs) {
     validationErrs.forEach(validationErr => {
         res.flash.toNext(res.flash.WARNING, validationErr.msg);
     });
     
     req.session.body = req.body;
+    res.redirect(GET_APPLY_VIEW__EP);
+}
+
+function sendApplicationConfirmationEmail(req) {
+    mailer.sendApplConfMail({
+        RecipientName : req.body.fullName,
+        to : req.body.email,
+    });
+}
+
+function notifyAboutSuccApplication(res) {
+    let successMsg = APPLICATION_SUCCESFULLY_FURTHERED__SUCC_FLASH;
+    res.flash.toNext(res.flash.SUCCESS, successMsg);
+
     res.redirect(GET_APPLY_VIEW__EP);
 }

@@ -16,6 +16,7 @@ function furtherVisitorQuestion(req, res, next) {
 
     mailer.sendMail(req.body)
     .then(() => {
+        sendQuestionConfirmationEmail(req)
         notifAboutFurtheredQuestion(res);
     }).catch(e => {
         next(e);
@@ -42,7 +43,7 @@ function validateFormData(req) {
     let hasUserGivenPhoneNumb = req.body.phoneNumb.length > 0;
     if (hasUserGivenPhoneNumb) {
         req.checkBody('phoneNumb')
-        .matches(/^[1-9-\s]+$/).withMessage('A telefonszam mezobe kerjuk csak szamokat irj be, kotojellel vagy szokozzel elvalasztva');
+        .matches(/^[\d-\s]+$/).withMessage('A telefonszam mezobe kerjuk csak szamokat irj be, kotojellel vagy szokozzel elvalasztva');
     }
 
     req.checkBody('question')
@@ -57,14 +58,21 @@ function validateFormData(req) {
     return validationErrs;
 }
 
-function notifAboutFurtheredQuestion(res) {
-    let successMsg = QUESTION_SUCCESFULLY_FURTHERED__SUCC_FLASH;
-
-    res.send(successMsg)
-}
-
 function denyFurtheredQuestion(req, res, validationErrs) {
     let validationErrMsgs = validationErrs.map(validationErr => validationErr.msg);
 
     res.status(400).json({validationErrMsgs})
+}
+
+function sendQuestionConfirmationEmail(req) {
+    mailer.sendQuestionConfMail({
+        RecipientName : req.body.fullName,
+        to : req.body.email,
+    });
+}
+
+function notifAboutFurtheredQuestion(res) {
+    let successMsg = QUESTION_SUCCESFULLY_FURTHERED__SUCC_FLASH;
+
+    res.send(successMsg)
 }

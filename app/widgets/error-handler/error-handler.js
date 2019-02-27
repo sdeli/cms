@@ -2,31 +2,29 @@ const config = require('config');
 const fs = require('fs');
 
 const ERR_LOG_FILE__PATH = `${process.cwd()}/${config.errHandling.errLogRelativeFilePath}`,
-    NODE_ENV = process.env.NODE_ENV, 
-    ERR_HANDLER__FLASH = config.flashMsgs.generalErr.request;
+    NODE_ENV = process.env.NODE_ENV;
 
 module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
     let notErrWith404View = !Boolean(err.fourOfourErr);
 
-    if (NODE_ENV === 'development' && res && notErrWith404View) {
+    if (NODE_ENV === 'development' && req && res && notErrWith404View) {
         console.log(err.name);
         console.log(err.stack);
         res.status(500).json(err);
-    } else if (NODE_ENV === 'development' && !res && notErrWith404View) {
+    } else if (NODE_ENV === 'development' && req  && !res && notErrWith404View) {
         console.log(err.stack);
-    } else {
-        internalServerErrResponse(res);
+    } else if (NODE_ENV === 'production' && req  && !res && notErrWith404View) {
         let errText = getErrorText(req, err);
         logErr(errText);
+    } else if (NODE_ENV === 'production' && req  && res && notErrWith404View) {
+        let errText = getErrorText(req, err);
+        logErr(errText);
+    } else {
+        let errText = JSON.stringify(err);
+        logErr(errText);
     }
-}
-
-function internalServerErrResponse(res) {
-    res.status(500).json({
-        errMsg : ERR_HANDLER__FLASH
-    });
 }
 
 function getErrorText(req, err) {

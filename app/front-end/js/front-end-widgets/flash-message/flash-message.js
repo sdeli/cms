@@ -1,8 +1,8 @@
 module.exports = FlashMessage;
 
-function FlashMessage(type, flasMsg, flashMsgsDivsCssSel) {
+function FlashMessage(type, flashMsg, flashMsgsDivsCssSel) {
     this.flashMsgsDivsCssSel = flashMsgsDivsCssSel;
-    this.flashElem = getFlashElem(type, flasMsg);
+    this.flashElem = getFlashElem(type, flashMsg);
 }
     
 Object.defineProperty(FlashMessage, 'SUCCESS', {
@@ -15,10 +15,10 @@ Object.defineProperty(FlashMessage, 'ALERT', {
     writable: false
 });
 
-function getFlashElem(type, flasMsg) {
+function getFlashElem(type, flashMsg) {
     let flashElemInnerHtml = ''
         + `<div class="flash flash--${type}" role="alert">`
-            + `<div class="flash__message"><span>${flasMsg}</span></div>`
+            + `<div class="flash__message"><span>${flashMsg}</span></div>`
             + '<div class="flash__close">'
                 + '<button class="flash__close__btn" type="button" aria-label="Close">&times;</button>'
             + '</div>'
@@ -28,7 +28,7 @@ function getFlashElem(type, flasMsg) {
     return flashElem;
 }
 
-FlashMessage.activateCloseBtns = function(closeBtnElem) {
+FlashMessage.activateCloseBtns = function() {
     $(document).on('click', function(e) {
         clickedItem = $(e.target);
         let isFlashMsgCloseBtn = clickedItem.hasClass('flash__close__btn');

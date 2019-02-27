@@ -49,4 +49,11 @@ begin
 end //
 delimiter ;
 
-#call updateArticleDetails('18nt1wxjql9lolq', 'asdasdasd1', 'asdas123', 'asdasdasd1-18nt1wxjql9lolq', 'articleprofileimg-1546852401562');
+use cms;call updateArticleDetails(
+'18nt88sjsjb16xo', 
+'asdasdasdsadas', 
+'sdadsadsadad', 
+'asdasdasdsadas-18nt88sjsjb16xo', 
+'squarearticleprofileimg-1551038797885', 
+'flatarticleprofileimg-1551038797890'
+);

@@ -11,6 +11,11 @@ function getAdminIndexView(req, res){
     res.locals.securedNavLinks = authorize.getSecuredAdminNavLinks(req.user.privilage),
     res.locals.pageTitle = INDEX_VIEW__TITLE,
     res.locals.pageId = INDEX_VIEW__ID,
+    res.locals.userName = req.user.name;
 
-    res.render(INDEX_VIEW__PATH);
+    try {
+        res.render(INDEX_VIEW__PATH);
+    } catch (err) {
+        next(err);
+    }
 }

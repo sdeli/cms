@@ -1,57 +1,70 @@
 <nav class="blog-navbar">
-    <div class="blog-navbar__hamburger">
-        <div class="blog-navbar__hamburger__relative-cont">
-            <div class="blog-navbar__hamburger__relative-cont__background"></div>
-            <div class="blog-navbar__hamburger__relative-cont__icon">
-                <div class="blog-navbar__hamburger__relative-cont__icon__bar-middle"></div>
+        <div class="blog-navbar__hamburger">
+            <div class="blog-navbar__hamburger__relative-cont">
+                <div class="blog-navbar__hamburger__relative-cont__background"></div>
+                <div class="blog-navbar__hamburger__relative-cont__icon">
+                    <div class="blog-navbar__hamburger__relative-cont__icon__bar-middle"></div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="blog-navbar__position">
-        <div class="blog-navbar__position__menu">
-            <div class="blog-navbar__position__menu__background"></div>
-            <div class="blog-navbar__position__menu__close-btn">
-                <div class="blog-navbar__position__menu__close-btn__icon"></div>
-            </div>
-            <ul>
-                <li class="blog-navbar__position__menu__item">
-                    <a href="<%= navLinks.getMainView.ep %>">
-                        <%= navLinks.getMainView.text %>
-                    </a>
-                </li>
-
-                <li class="blog-navbar__position__menu__item">
-                    <a href="<%= navLinks.getApplyView.ep %>">
-                        <%= navLinks.getApplyView.text %>
-                    </a>
-                </li>
-                
-                <li class="blog-navbar__position__menu__item">
-                    <a href="<%= navLinks.getAboutUsView.ep %>">
-                        <%= navLinks.getAboutUsView.text %>
-                    </a>
-                </li>
-
-                <li class="blog-navbar__position__menu__item">
-                    <a href="<%= navLinks.getHotelListView.ep %>">
-                        <%= navLinks.getHotelListView.text %>
-                    </a>
-                </li>
-
-                <li class="blog-navbar__position__menu__item">
-                    <a href="<%= navLinks.articlesList.ep %>">
-                        <%= navLinks.articlesList.text %>
-                    </a>
-                </li>
-
-                <li class="blog-navbar__position__menu__item-separator"></li>
-                <% navLinks.articleCategs.forEach(function(articleCategObj) { %>
-                    <li class="blog-navbar__position__menu__item">
-                        <a href="<%= articleCategObj.articleCategEp %>"><%= articleCategObj.text %></a>
+    
+        <div class="blog-navbar__position">
+            <div class="blog-navbar__position__menu">
+                <div class="blog-navbar__position__menu__background"></div>
+                <div class="blog-navbar__position__menu__close-btn">
+                    <div class="blog-navbar__position__menu__close-btn__icon"></div>
+                </div>
+                <ul data-nav-li-conatiner>
+                    <li data-nav-li class="blog-navbar__position__menu__item">
+                        <a href="<%= navLinks.getMainView.ep %>">
+                            <%= navLinks.getMainView.text %>
+                        </a>
                     </li>
-                <% }); %>
-            </ul>
+    
+                    <li data-nav-li class="blog-navbar__position__menu__item">
+                        <a href="<%= navLinks.getApplyView.ep %>">
+                            <%= navLinks.getApplyView.text %>
+                        </a>
+                    </li>
+                    
+                    <li data-nav-li class="blog-navbar__position__menu__item">
+                        <a href="<%= navLinks.getAboutUsView.ep %>">
+                            <%= navLinks.getAboutUsView.text %>
+                        </a>
+                    </li>
+
+                    <li data-nav-li class="blog-navbar__position__menu__item">
+                        <a href="<%= navLinks.getHotelListView.ep %>">
+                            <%= navLinks.getHotelListView.text %>
+                        </a>
+                    </li>
+                    <li data-nav-li class="blog-navbar__position__menu__item">
+                        <a href="<%= navLinks.articlesList.ep %>">
+                            <%= navLinks.articlesList.text %>
+                        </a>
+                    </li>
+
+                    <li data-nav-li class="blog-navbar__position__menu__item-separator"></li>
+
+                    <% navLinks.articleCategs.forEach(function(articleCategObj) { %>
+                        <li data-nav-li class="blog-navbar__position__menu__item">
+                            <a href="<%= articleCategObj.articleCategEp %>"><%= articleCategObj.text %></a>
+                        </li>
+                    <% }); %>
+
+                    <li data-nav-li class="nav__drop-down">
+                        <i class="nav__drop-down__icon fas fa-sort-down"></i>
+
+                        <div class="nav__drop-down__position">
+                            <div class="nav__drop-down__position__container">
+                                <div class="nav__drop-down__position__container__background"></div>
+
+                                <ul class="nav__drop-down__position__container__ul"></ul>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>

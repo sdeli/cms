@@ -11,12 +11,15 @@ module.exports = ((config) => {
         REORG_TABLE_CONTAINMENT,
         REORG_TABLE_PLACEHOLDERS__CLASS,
         FALLBACK_ERR_FLASH,
-        UPDATE_TABLE_SORT__EP
+        UPDATE_TABLE_SORT__EP,
+        FLASH_MSGS_DIV__SEL,
+        HEAD_ROW__SEL
     } = config
 
     updateTablessSort = updateTablesSort({
         FALLBACK_ERR_FLASH, 
-        UPDATE_TABLE_SORT__EP
+        UPDATE_TABLE_SORT__EP,
+        FLASH_MSGS_DIV__SEL
     });
 
     reorganizeTable()
@@ -29,6 +32,7 @@ module.exports = ((config) => {
         $(sortableTablesClass).sortable({
             containment : REORG_TABLE_CONTAINMENT,
             placeholder : REORG_TABLE_PLACEHOLDERS__CLASS,
+            cancel : HEAD_ROW__SEL,
             start : (e, ui) => {
                 preservItemWidthWhileDragged(ui, classDefinesRowWidth, styleTagId);
             },

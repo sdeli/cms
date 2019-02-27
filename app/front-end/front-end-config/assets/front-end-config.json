@@ -4,19 +4,22 @@
         "ajaxCallJsonContentType" : "application/json",
         "ajaxCallPostMethod" : "POST",
         "fallbackErr" : "An error has occured. Please contact the site admin.",
-        "windowMediumSize" : "768"
+        "windowMediumSize" : "768",
+        "windowSmallSize" : "576"
     },
     "restEndPoints" : {
         "admin" : {
             "article" : {
                 "image" : {
-                    "upload" : "/admin/article-image/upload",
-                    "remove" : "/admin/article-image/remove"
+                    "upload" : "/admin/article/image",
+                    "remove" : "/admin/article/image"
                 },
-                "updateSort" : "/admin/article/update-sort"
+                "update" : "/admin/article",
+                "updateSort" : "/admin/articles/sort"
             },
             "articleCategory" : {
-                "updateSort" : "/admin/article-category/update-sort"
+                "update" : "/admin/article-categorie",
+                "updateSort" : "/admin/article-categorie/sort"
             }
         },
         "blog" : {
@@ -26,7 +29,9 @@
     "bundles" : {
         "articleList" : {
             "reorgTableRowWidthClass" : "draggedRowsWidth",
+            "flashMsgsDivSel" : ".flash-messages",
             "reorgTableStyleTagId" : "for-sortable-articles-table",
+            "reorgTableHeadSel" : ".article-list-table__body tr:first-child",
             "articlesTablesClass" : ".article-list-table__body",
             "reorgTableContainment" : "parent",
             "reorgTablePlaceholdersClass" : "border border-success",
@@ -39,12 +44,15 @@
             "imageDataParamName" : "imageFileInfo",
             "imageAllowedTypes" : ["jpeg", "jpg", "png"],
             "articleBodyEditorHeight" : 300,
-            "imagePreviewElemSel" : ".article-image-preview",
-            "imageBrowseBtnSel" : ".image-browse-btn-sel",
-            "displayedImgaesHeight" : "292px"
+            "squareImagePreviewElemSel" : "#square-article-image-preview",
+            "squareImageBrowseBtnSel" : "#square-image-browse-btn",
+            "flatImagePreviewElemSel" : "#flat-article-image-preview",
+            "flatImageBrowseBtnSel" : "#flat-image-browse-btn",
+            "displayedImgesHeight" : "292px"
         },
         "articleCategoriesList" : {
             "reorgTable" : {
+                "tableHeadSel" : ".article-categories-list-table__body tr:first-child",
                 "rowWidthClass" : "draggedRowsWidth",
                 "styleTagId" : "for-sortable-articles-categories-table",
                 "tablesClass" : ".article-categories-list-table__body",

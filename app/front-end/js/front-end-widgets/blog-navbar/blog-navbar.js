@@ -1,12 +1,18 @@
-const resizeNavbar = require('./moduls/resize-navbar/resize-navbar.js');
-const dropDownNavOnMobile = require('./moduls/drop-down-nav-on-mobile/drop-down-nav-on-mobile.js');
+const navDropDown = require('front-end-widgets/nav-drop-down');
+const resizeNavbar = require('./modules/resize-navbar/resize-navbar.js');
+const dropDownNavOnMobile = require('./modules/drop-down-nav-on-mobile/drop-down-nav-on-mobile.js');
 
 module.exports = blogNavbar;
 
-function blogNavbar() {
+function blogNavbar(config) {
+    const {WINDOW_MOBILE_WIDTH} = config;
+
+    makeCurrNavLiActive();
+    navDropDown({
+        WINDOW_MOBILE_WIDTH,    
+    });
 	dropDownNavOnMobile();
 	resizeNavbar();
-	makeCurrNavLiActive();
 }
 
 function makeCurrNavLiActive() {

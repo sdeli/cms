@@ -1,34 +1,86 @@
-<footer class="footer">
-    <div class="container">
-        <div class="row">
+<footer class="footer container">
+    <div class="row">
+        
+        <div class="col-btm-12 col-xs-10 col-xs-offset-1">
+            <div class="row">
 
-            <div class="col-btm-12 col-xs-4 col-md-offset-1 col-gutter-md-right">
-                <div class="footer__info-item">
-                    <img class="footer__info-item__img" src="/img/logo/logo.png" alt="logo">  
+                <div class="col-btm-12 col-xs-display-none col-md-display-block col-md-3 col-gutter-md-right">
+                    <div class="footer__info-item footer__info-item--max-width">
+                        <img class="footer__info-item__img" src="/img/logo/logo.png" alt="logo">  
+                    </div>
+                </div>
+                
+                <div class="col-btm-10 col-btm-offset-1 col-xs-4 col-xs-offset-0 col-md-3 col-gutter-md-left">
+                    <div class="footer__info-item">
+                        <h4 class="footer__info-item__title">Elérhetőség</h4>
+                        <ul class="footer__info-item__ul">
+                            <li class="footer__text--strong">Email: bgfkszmsdeli@gmail.com</li>
+                            <li class="footer__text--strong">tel: 0630 58399 44</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-btm-10 col-btm-offset-1 col-xs-4 col-xs-offset-0 col-md-3">
+                    <div class="footer__info-item">
+                        <h4 class="footer__info-item__title">Linkek</h4>
+                        
+                        <ul class="footer__info-item__ul">
+                            <li>
+                                <a class="footer__info-item__ul__a" href="<%= navLinks.getMainView.ep %>">
+                                    <%= navLinks.getMainView.text %>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a class="footer__info-item__ul__a" href="<%= navLinks.getApplyView.ep %>">
+                                    <%= navLinks.getApplyView.text %>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a class="footer__info-item__ul__a" href="<%= navLinks.getAboutUsView.ep %>">
+                                    <%= navLinks.getAboutUsView.text %>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a class="footer__info-item__ul__a" href="<%= navLinks.getHotelListView.ep %>">
+                                    <%= navLinks.getHotelListView.text %>
+                                </a>
+                            </li>
+                        </ul>
+                    </div><!--footer__info-item -->
+                </div><!-- col-btm-12 col-xs-3 -->
+                
+                <div class="col-btm-10 col-btm-offset-1 col-xs-4 col-xs-offset-0 col-md-3">
+                    <div class="footer__info-item">
+                        <h4 class="footer__info-item__title">
+                            <a class="footer__info-item__ul__a" href="<%= navLinks.articlesList.ep %>">
+                                <%= navLinks.articlesList.text %>
+                            </a>
+                        </h4>
+                        
+                        <ul class="footer__info-item__ul">
+                            <% navLinks.articleCategs.forEach(function(articleCategObj) { %>
+                                <li>
+                                    <a class="footer__info-item__ul__a" href="<%= articleCategObj.articleCategEp %>"><%= articleCategObj.text %></a>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div><!--footer__info-item -->
+                </div><!-- col-btm-12 col-xs-3 -->
+                    
+            </div> <!-- row -->
+            
+            <div class="row">
+                <div class="col-btm-12 col-btm-display-none col-xs-6 col-xs-offset-3 col-xs-display-block col-sm-4 col-xs-offset-4 col-gutter-md-right col-md-display-none">
+                    <div class="footer__info-item footer__info-item--max-width">
+                        <img class="footer__info-item__img" src="/img/logo/logo.png" alt="logo">  
+                    </div>
                 </div>
             </div>
-
-            <div class="col-btm-12 col-xs-4 col-gutter-md-left">
-                <div class="footer__info-item">
-                    <h4 class="footer__info-item__title">Elérhetőség</h4>
-                    <ul class="footer__info-item__ul">
-                        <li><strong>Email:</strong> bgfkszmsdeli@gmail.com</li>
-                        <li><strong>tel:</strong> 0630 58399 44</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-btm-12 col-xs-3">
-                <div class="footer__info-item">
-                    <h4 class="footer__info-item__title">Linkek</h4>
-                    <ul class="footer__info-item__ul">
-                        <li><a class="footer__info-item__ul__a" href="#">About Us</a></li>
-                        <li><a class="footer__info-item__ul__a" href="#">Blog</a></li>
-                        <li><a class="footer__info-item__ul__a" href="#">Impressum</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div> <!-- row end -->
-    </div> <!-- contianer end -->
-</footer>
+                
+        </div><!-- col-btm-12 col-xs-10 col-xs-offset-1 -->
+        
+    </div><!-- row -->
+</footer><!-- container -->

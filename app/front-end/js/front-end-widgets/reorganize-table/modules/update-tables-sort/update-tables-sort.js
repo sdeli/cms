@@ -1,10 +1,10 @@
-const Flash = require('front-end-widgets/flash-message');
-const flash = new Flash('.flash-messages');
+const Flash = require('front-end-widgets/bootstrap-flash-message');
 
 module.exports = ((config) => {
     const {
         FALLBACK_ERR_FLASH, 
-        UPDATE_TABLE_SORT__EP, 
+        UPDATE_TABLE_SORT__EP,
+        FLASH_MSGS_DIV__SEL
     } = config;
 
     return updateArticlesSort;
@@ -17,12 +17,12 @@ module.exports = ((config) => {
         $.ajax(UPDATE_TABLE_SORT__EP, {
             data : JSON.stringify(articlesSortArr),
             contentType : "application/json",
-            type : "POST"
+            type : "PUT"
         }).done(res => {
             displayFlashNotification(res);
-        }).fail(error => {
-            flash.display(flash.WARNING , FALLBACK_ERR_FLASH);
-            return;
+        }).fail(() => {
+            let flash = new Flash(Flash.ALERT, FALLBACK_ERR_FLASH)
+            flash.display(FLASH_MSGS_DIV__SEL);
         });
     }
 
@@ -42,19 +42,22 @@ module.exports = ((config) => {
     function displayFlashNotification(res) {
         let updateWasSuccesful = typeof res.errMsg === 'undefined' && typeof res.msg !== 'undefined'; 
         if (updateWasSuccesful) {
-            flash.display(flash.SUCCESS, res.msg);
+            let flash = new Flash(Flash.SUCCESS, res.msg)
+            flash.display(FLASH_MSGS_DIV__SEL);
             return;
         } 
         
         let updateWasntSuccesful = typeof res.errMsg !== 'undefined' && typeof res.msg === 'undefined'; 
         if (updateWasntSuccesful) {
-            flash.display(flash.WARNING, res.errMsg);
+            let flash = new Flash(Flash.ALERT, res.errMsg)
+            flash.display(FLASH_MSGS_DIV__SEL);
             return;
         } 
         
         let unexpectedErrorHappened = typeof res.errMsg === 'undefined' && typeof res.msg === 'undefined';
         if (unexpectedErrorHappened) {
-            flash.display(flash.WARNING , FALLBACK_ERR_FLASH);
+            let flash = new Flash(Flash.ALERT, FALLBACK_ERR_FLASH)
+            flash.display(FLASH_MSGS_DIV__SEL);
             return;
         }
     }

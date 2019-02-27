@@ -8,7 +8,7 @@ const APPLY_VIEW__PATH = config.viewPathes.blog.apply,
 
 module.exports = getApplyView;
 
-function getApplyView(req, res){
+function getApplyView(req, res, next){
     let isRequestFromPrevValidationErr = Boolean(Object.keys(req.body).length);
     if (isRequestFromPrevValidationErr) {
         var contactFormData = req.body;

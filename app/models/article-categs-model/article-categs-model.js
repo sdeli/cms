@@ -4,11 +4,11 @@ const dbPool = require('widgets/db-pool');
 const ARTICLE_CATOGERIE_IS_NOT_FOUND_IN_DB__ERR = config.errorMsgs.admin.articleCategory.notFoundInDb;
 
 const articleCategsModel = (() => {
-    function insertArticleCategoryDataIfUnique(articleCategoryId, articleCategoryName) {
-        articleCategoryId = dbPool.escape(articleCategoryId);
+    function insertArticleCategoryDataIfUnique(articleCategoryName, createdAt) {
         articleCategoryName = dbPool.escape(articleCategoryName);
+        createdAt = dbPool.escape(createdAt);
 
-        let sql = `use cms; call insertArticleCategoryDataIfUnique(${articleCategoryId}, ${articleCategoryName})`;
+        let sql = `use cms; call insertArticleCategoryDataIfUnique(${articleCategoryName}, ${createdAt})`;
         
         return new Promise((resolve, reject) => {
             return dbPool.queryProm(sql)
@@ -113,14 +113,8 @@ const articleCategsModel = (() => {
         return new Promise((resolve, reject) => {
             dbPool.queryProm(sql)
             .then((results) => {
-                let wasArticleCategoryNotFoundInDb = results.affectedRows < 1;
-
-                if (wasArticleCategoryNotFoundInDb) {
-                    let warningMsg = `${ARTICLE_CATOGERIE_IS_NOT_FOUND_IN_DB__ERR} ${articleCategoryName}`;
-                    reject(warningMsg);
-                } else {
-                    resolve(results.affectedRows);
-                }
+                let wasArticleCategoryInDb = results.affectedRows > 0;
+                resolve(wasArticleCategoryInDb);
             })
             .catch((e) => {
                 reject(e);

@@ -9,7 +9,7 @@ CREATE TABLE users (
     password_hash char(255) default null,
     is_active tinyint default 0,
     privilage enum ('user', 'admin', 'super-admin'),
-    user_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_created_at char(19) not null,
     primary key (user_id),
     UNIQUE KEY email (email)
 );

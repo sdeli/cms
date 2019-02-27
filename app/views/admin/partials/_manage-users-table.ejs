@@ -9,14 +9,18 @@
             <th>Delete</th>
         </tr>
         
-        <% templateData.allUsers.forEach(function(user) { %>
+        <% allUsers.forEach(function(user) { %>
             <tr class="users-list-table__body__row" id="<%= user.userId %>">
                 <td><%= user.name %></a></td>
                 <td><%= user.email %></a></td>
                 <td><%= user.privilage %></a></td>
                 <td><%= user.isActive %></a></td>
                 <td><%= user.createdAt %></td>
-                <td><a href="/admin/users/delete/<%= user.userId %>">delete</a></td>
+                <td>
+                    <a href="#" data-href="/admin/user/<%= user.userId %>" onclick="deleteUser(event);">
+                        delete
+                    </a>
+                </td>
             </tr>
         <% }); %>
     </tbody>

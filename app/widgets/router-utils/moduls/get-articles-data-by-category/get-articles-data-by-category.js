@@ -38,6 +38,7 @@ module.exports = ((config) => {
 
                 categsOfArticlesModel.getCategoriesOfArticle(currArticleDataObj.articleId)
                 .then(currArticlesCategsArr => {
+                    attachCategNameInUrl(currArticlesCategsArr);
                     articlesDataByCateg[i].ownCategs = [...currArticlesCategsArr];
                     resolve();
                 })
@@ -48,5 +49,11 @@ module.exports = ((config) => {
         });
     
         return Promise.all(allPromises)
+    }
+
+    function attachCategNameInUrl(articleCategories) {
+        articleCategories.forEach(articleCateg => {
+            articleCateg.articleCategoryNameInUrl = encodeURIComponent(articleCateg.articleCategoryName);
+        });
     }
 });

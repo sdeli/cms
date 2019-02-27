@@ -1,20 +1,15 @@
-about us => upload content
-communication circle until send
-order by for sorting
-
+exclude empty categs
+nav
+validatation message clean up
 scraper 
     minus appartments
     google link
+    transaction rollbacks ignores
 
+=====================================================
+
+important articles widget
 objectify front end widgets
-footer extend links, featured tasks => important articles widget
-
-err handle
-validatation message clean up
-aritcle list page flat imgs
-formated date to creations date Mon Feb 18 2019 18:52:48 GMT+0000 (Greenwich Mean Time)
-refactor rest
-on question confirmation email send
 links clean up,
 sql transaction rollbacks/ignores
 validation messages and settings
@@ -23,6 +18,7 @@ sticky nav
 privilage fron tend backend terms
 arrow at gethotelpage 1 2 3 4 page
 
+Err handlin ===================
 err types:
     Expected errs:
         1. page not found
@@ -48,10 +44,24 @@ err handlers:
 
 There are expected errors which you want to log, but since you answered it in the route you can not use next so you need to silently log it
 
-linkek
-    main
-    blog
-    blog article categs
-    rolunk
-    jelentkezes
-    partners
+REST Representational state transfer ======================
+
+resource based => uri-s are referring on the resource with the http verbs are happening
+    stateless => 
+        no clinet state on the server
+        if there is state that is reserved on the client
+        each request has enough context for the server to process request
+
+    Representational 
+        mean that the resource in what type gets represented to the client => csv, json, xml
+
+    Unifor Interface
+        uri-s are resource names
+        http verbs are expressing what happens
+
+    client-server disconnected system
+        client shoudlnt know whom is it talking. Just uri and method
+        Layered system
+            between client and server can be more layers => middleware, router
+
+    Cachable

@@ -6,6 +6,7 @@ let userModel = (() => {
         let userId = dbPool.escape(userSignupData.userId);
         let name = dbPool.escape(userSignupData.name);
         let email = dbPool.escape(userSignupData.email);
+        let userCreatedAt = dbPool.escape(userSignupData.userCreatedAt);
         let salt = bcrypt.genSaltSync(10);
         let tmpPasswordHash = dbPool.escape(bcrypt.hashSync(userSignupData.tmpPwd, salt));
         let privilage = dbPool.escape(userSignupData.privilage);
@@ -14,8 +15,8 @@ let userModel = (() => {
 
         sql = ''
             + 'use users;\n'
-            + 'insert into users (user_id, name, email, privilage)\n'
-            + `values (${userId}, ${name}, ${email}, ${privilage});\n`
+            + 'insert into users (user_id, name, email, privilage, user_created_at)\n'
+            + `values (${userId}, ${name}, ${email}, ${privilage}, ${userCreatedAt});\n`
 
             + 'insert into temporary_passwords (user_id, tmp_password_hash, tmp_password_expiry)\n'
             + `values (${userId}, ${tmpPasswordHash}, ${tmpPasswordExpiry});`

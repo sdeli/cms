@@ -11,10 +11,13 @@
         
         <% allArticles.forEach(function(article) { %>
             <tr class="article-list-table__body__row" id="<%= article.article_id %>">
-                <td><a class="article-list-table__body__row__article-name" href="/admin/articles/edit-view/<%= article.article_id %>"><%= article.article_name %></a></td>
+                <td><a class="article-list-table__body__row__article-name" href="/admin/article/<%= article.article_id %>"><%= article.article_name %></a></td>
+
                 <td><%= article.created_at %></td>
-                <td><a href="/admin/articles/edit-view/<%= article.article_id %>">edit</a></td>
-                <td><a class="article-list-table__body__row__delete-link" href="/admin/articles/delete/<%= article.article_id %>">delete</a></td>
+
+                <td><a href="/admin/article/<%= article.article_id %>">edit</a></td>
+                
+                <td><a class="article-list-table__body__row__delete-link" href="#" data-href="/admin/articles/<%= article.article_id %>" onclick="deleteArticle(event);">delete</a></td>
             </tr>
         <% }); %>
 

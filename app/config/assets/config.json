@@ -5,29 +5,29 @@
             "index" : "/admin",
             "article" : { 
                 "ListView" : "/admin/articles",
-                "createView" : "/admin/articles/create-view",
-                "editView" : "/admin/articles/edit-view/:articleId",
-                "create" : "/admin/articles/create",
-                "updateSort" : "/admin/articles/update-sort",
-                "update" : "/admin/articles/update",
-                "delete" : "/admin/articles/delete/:articleId",
+                "createView" : "/admin/article/publish",
+                "editView" : "/admin/article/:articleId",
+                "create" : "/admin/article/publish",
+                "updateSort" : "/admin/articles/sort",
+                "update" : "/admin/article",
+                "delete" : "/admin/articles/:articleId",
                 "image" : {
-                    "upload" : "/admin/articles/image/upload",
-                    "remove" : "/admin/articles/image/remove"
+                    "upload" : "/admin/article/image",
+                    "remove" : "/admin/article/image"
                 }
             },
             "articleCategory" : {
                 "listView" : "/admin/article-categories",
-                "createView" : "/admin/article-categories/create-view",
-                "editView" : "/admin/article-categories/edit-view/:articleCategoryName",
-                "create" : "/admin/article-categories/create",
-                "updateSort" : "/admin/article-categories/update-sort",
-                "update" : "/admin/article-categories/update",
-                "delete" : "/admin/article-categories/delete/:articleCategoryName"
+                "createView" : "/admin/article-categorie",
+                "editView" : "/admin/article-categorie/:articleCategoryName",
+                "create" : "/admin/article-categorie",
+                "updateSort" : "/admin/article-categorie/sort",
+                "update" : "/admin/article-categorie",
+                "delete" : "/admin/article-categorie/:articleCategoryName"
             },
             "users" : {
                 "listView" : "/admin/users",
-                "delete" : "/admin/users/delete/:userId"
+                "delete" : "/admin/user/:userId"
             },
             "auth" : {
                 "logInView" : "/admin/auth/log-in-view/:isTmpLogin?",
@@ -46,8 +46,8 @@
                         "login" : "/admin/auth/log-in/tmp/local"
                     }
                 },
-                "changeTmpPwdView" : "/admin/auth/change-pwd-view",
-                "changeTmpPwd" : "/admin/auth/pwd",
+                "changeTmpPwdView" : "/admin/auth/tmp-pwd",
+                "changeTmpPwd" : "/admin/auth/tmp-pwd",
                 "register" : {
                     "registerView" : "/admin/auth/register",
                     "createUser" : "/admin/auth/register"
@@ -59,8 +59,8 @@
             "articlesList" : "/blog/articles/:articleCategory?",
             "aboutUs" : "/blog/about-us",
             "furtherVisitorQuestion" : "/blog/question",
-            "furtherApplicationData" : "/blog/application-data",
-            "apply" : "/blog/apply-view",
+            "furtherApplicationData" : "/blog/apply",
+            "apply" : "/blog/apply",
             "main" : "/blog",
             "hotelList" : "/blog/partners/:pageNumber"
         },
@@ -74,6 +74,7 @@
             "articlesList" : "blog/article/articles-list.ejs",
             "apply" : "blog/apply.ejs",
             "main" : "blog/main.ejs",
+            "aboutUs" : "blog/about-us.ejs",
             "hotelList" : "blog/hotel-list.ejs"
         },
         "fourOFour" : "blog/error/404.ejs",
@@ -155,10 +156,6 @@
             }
         },
         "blog" : {
-            "index" : {
-                "title" : "HomePage",
-                "id" : "home"
-            },
             "article" : {
                 "id" : "article"
             },
@@ -177,6 +174,10 @@
             "main" : {
                 "id" : "main",
                 "title" : "Ausztriai Állás"
+            },
+            "aboutUs" : {
+                "id" : "about-us",
+                "title" : "Rólunk"
             },
             "hotelList" : {
                 "id" : "hotel-list",
@@ -292,7 +293,7 @@
             "succ" : "Nagyon koszonjuk, hogy elkuldte nekunk a kerdeset, Amilyen gyorsan csak tudunk jelentkezunk onnel a valsszal."
         },
         "furtherApplication" : {
-            "succ" : "Nagyon koszonjuk, hogy elkuldte nekunk a kerdeset, Amilyen gyorsan csak tudunk jelentkezunk onnel a valsszal."
+            "succ" : "Nagyon koszonjuk, hogy Megitsztelt minket jelentkezesevel, Amilyen gyorsan csak tudunk tudatjuk onnel a kovetkezo lepeseket."
         },
         "validationErr" : {
             "userAlreadyExists" : "With this email there is a user already, please choose an other email.",
@@ -348,7 +349,7 @@
             "img" : {
                 "article" : {
                     "body" : "./public/img/article/body",
-                    "profile" : "./public/img/article/profile/"
+                    "profile" : "./public/img/article/profile"
                 },
                 "user" : {
                     "avatar" : "./public/img/user/avatar/"
@@ -362,7 +363,7 @@
         "article" : {
             "img" : {
                 "body" : "/img/article/body/",
-                "profile" : "/img/article/profile/"
+                "profile" : "/img/article/profile"
             }
         },
         "user" : {
@@ -381,14 +382,22 @@
             "minLength" : "1"
         }
     },
-    "sendEmail" : {
-        "visitorQuestion" : {
+    "mailer" : {
+        "visitorMsg" : {
             "from" : {
                 "addr" : "bgfkszmsdeli@gmail.com",
                 "pwd" : "dalias19"
             },
             "to" : "bgfkszmsdeli@gmail.com",
             "host" : "smtp.gmail.com"
+        },
+        "application" : {
+            "confMsg" : "Nagyon koszonjuk jelentkezesed, amilyen gyorsan csak tudjuk feldolgozzuk es jelentkezunk nalad, addig is minden jot kivanunk.",
+            "confSubj" : "Jelentkezes megerositese"
+        },
+        "question" : {
+            "confMsg" : "Nagyon koszonjuk hogy elkuldted nekunk a kerdesed, amilyen gyorsan csak tudjuk feldolgozzuk es jelentkezunk nalad, addig is minden jot kivanunk.",
+            "confSubj" : "elkuldott kerdes megerositese"
         }
     },
     "blogNavStaticEndPoints" : {
@@ -401,7 +410,7 @@
             "text" : "rolunk"
         },
         "getApplyView" : {
-            "ep" : "/blog/apply-view",
+            "ep" : "/blog/apply",
             "text" : "jelentkezes"
         },
         "getHotelListView" : {

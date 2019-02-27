@@ -1,5 +1,5 @@
 <%if (typeof flashMsgs !== 'undefined') { %>
-    <div class="flash messages">
+    <div class="flash-messages">
         <% flashMsgs.forEach(function(flashMsg) { %>
             <div class="mt-2 alert alert-<%= flashMsg.type %> alert-dismissible fade show mb-2" role="alert">
                 <%= flashMsg.msg %>

@@ -3,11 +3,11 @@ const express = require('express');
 const adminRouter = express.Router();
 let {requireBeAuthenticated} = require('widgets/middlewares');
 
-const adminArticlesRouter = require('./admin-articles-router/admin-articles-router.js');
-const adminArticleCategoriesRouter = require('./admin-article-categories-router/admin-article-categories-router.js');
-const getAdminIndexView = require('./get-admin-index-view/get-admin-index-view.js');
-const adminUsersRouter = require('./admin-users-router/admin-users-router.js');
-const adminAuthRouter = require('./admin-auth-router/admin-auth-router.js');
+const articlesRouter = require('./articles-router/articles-router');
+const articleCategoriesRouter = require('./article-categories-router/article-categories-router');
+const adminIndexView = require('./get-admin-index-view/get-admin-index-view.js');
+const usersRouter = require('./users-router/users-router.js');
+const authRouter = require('./auth-router/auth-router');
 
 const MOUNT_TO_ADMIN__EP = config.restEndpoints.admin.index;
 
@@ -16,10 +16,10 @@ requireBeAuthenticated = requireBeAuthenticated('');
 
 adminRouter.use("/admin/articles", requireBeAuthenticatedMount);
 adminRouter.use("/admin/article-categories", requireBeAuthenticatedMount);
-adminRouter.use(adminArticlesRouter);
-adminRouter.use(adminArticleCategoriesRouter);
-adminRouter.use(adminUsersRouter);
-adminRouter.use(adminAuthRouter);
-adminRouter.get(config.restEndpoints.admin.index, requireBeAuthenticated, getAdminIndexView);
+adminRouter.use(articlesRouter);
+adminRouter.use(articleCategoriesRouter);
+adminRouter.use(usersRouter);
+adminRouter.use(authRouter);
+adminRouter.get(config.restEndpoints.admin.index, requireBeAuthenticated, adminIndexView);
 
 module.exports = adminRouter;

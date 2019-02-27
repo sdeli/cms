@@ -2,7 +2,6 @@ const frontEndConfig = require('front-end-config');
 
 let canFollowWindow = require('./modules/can-follow-window/can-follow-window.js');
 let canSendVisitorQuestion = require('./modules/can-send-visitor-question/can-send-visitor-question.js');
-
 const CanFollowWindow = canFollowWindow({
     WINDOW_MEDIUM_SIZE : parseInt(frontEndConfig.general.windowMediumSize)
 });

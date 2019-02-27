@@ -1,5 +1,5 @@
 <div>
-    <form class='add-article-form' action="<%= postDataToRoute %>" method="post" enctype="multipart/form-data">
+    <form class='add-article-form' action="<%= postDataToRoute %>" method="POST" enctype="multipart/form-data">
         <% if (pageId === 'edit-article') { %>
             <input type="text" name="articleId" value='<%= articleData.articleId %>' hidden>
         <% } %>
@@ -25,16 +25,30 @@
             </div>
             
             <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <input class="form-control-file image-browse-btn-sel" id="article-profile-img" name="articleProfileImg" type='file'>
+                <div class="form-group mb-4">
+                    <label for="#square-image-browse-btn">Choose a 400 * 400 Profile Image.</label>
+                    <input class="form-control-file" id="square-image-browse-btn" name="squareArticleProfileImg" type='file'>
+                    
+                    <div id="square-article-image-preview" class="mt-2">
+                        <% if (pageId === 'edit-article') { %>
+                            <img src="<%= articleData.squareArticleProfileImgLink %>" alt="" height="292px">
+                            <input type="text" name="currSquareArticleProfileImg" value='<%= articleData.squareArticleProfileImgFileName %>' hidden>
+                        <% } %>
+                    </div>
                 </div>
                 
-                <div class="article-image-preview">
-                    <% if (pageId === 'edit-article') { %>
-                        <img src="<%= articleData.articleProfImgLink %>" alt="" height="292px">
-                        <input type="text" name="articleProfImgLink" value='<%= articleData.articleProfImgLink %>' hidden>
-                    <% } %>
+                <div class="form-group mt-2">
+                    <label for="#flat-image-browse-btn">Choose a 300 * 600 Profile Image.</label>
+                    <input class="form-control-file image-browse-btn" id="flat-image-browse-btn" name="flatArticleProfileImg" type='file'>
+
+                    <div id="flat-article-image-preview" class="mt-2">
+                        <% if (pageId === 'edit-article') { %>
+                            <img src="<%= articleData.flatArticleProfileImgLink %>" alt="" height="292px">
+                            <input type="text" name="currflatArticleProfileImg" value='<%= articleData.flatArticleProfileImgFileName %>' hidden>
+                        <% } %>
+                    </div>
                 </div>
+                
             </div>
         </div>
 

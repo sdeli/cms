@@ -1,12 +1,16 @@
 const config = require('config');
 const nodemailer = require('nodemailer');
 
-const SEND_FROM_EMAIL = config.sendEmail.visitorQuestion.from.addr,
-    SEND_FROM_EMAIL_PWD = config.sendEmail.visitorQuestion.from.pwd,
-    SEND_TO_EMAIL = config.sendEmail.visitorQuestion.to,
-    HOST = config.sendEmail.visitorQuestion.host,
+const SEND_FROM_EMAIL = config.mailer.visitorMsg.from.addr,
+    SEND_FROM_EMAIL_PWD = config.mailer.visitorMsg.from.pwd,
+    SEND_TO_EMAIL = config.mailer.visitorMsg.to,
+    HOST = config.mailer.visitorMsg.host,
     APPS_HOST_NAME = config.general.hostName,
-    TEMP_PWD_LOGIN__EP = config.restEndpoints.admin.auth.logInView.replace(/(.*\/)(:\w+\?)/, '$1tmp');
+    TEMP_PWD_LOGIN__EP = config.restEndpoints.admin.auth.logInView.replace(/(.*\/)(:\w+\?)/, '$1tmp'),
+    APPL_CONF_EMAIL_MSG = config.mailer.application.confMsg,
+    APPL_CONF_EMAIL_SUBJECT = config.mailer.application.confSubj;
+    QUESTION_CONF_EMAIL_MSG = config.mailer.question.confMsg,
+    QUESTION_CONF_EMAIL_SUBJECT = config.mailer.question.confSubj;
 
 const mailer = (() => {
     const transporter = nodemailer.createTransport({
@@ -73,10 +77,42 @@ const mailer = (() => {
         
         return emailsText;
     }
+
+    async function sendApplConfMail(params) {
+        let {RecipientName, to} = params;
+
+        let mailOptions = {
+            from: SEND_FROM_EMAIL,
+            to,
+            subject: APPL_CONF_EMAIL_SUBJECT,
+            text: ''
+                + `Kedves ${RecipientName},\n\n`
+                + APPL_CONF_EMAIL_MSG + '\n\n'
+        };
+
+        await send(mailOptions);
+    }
+
+    async function sendQuestionConfMail(params) {
+        let {RecipientName, to} = params;
+
+        let mailOptions = {
+            from: SEND_FROM_EMAIL,
+            to,
+            subject: QUESTION_CONF_EMAIL_SUBJECT,
+            text: ''
+                + `Kedves ${RecipientName},\n\n`
+                + QUESTION_CONF_EMAIL_MSG + '\n\n'
+        };
+
+        await send(mailOptions);
+    }
     
     return {
         sendMail,
-        sendCredetnialsMail
+        sendCredetnialsMail,
+        sendApplConfMail,
+        sendQuestionConfMail
     }
 })();
 
