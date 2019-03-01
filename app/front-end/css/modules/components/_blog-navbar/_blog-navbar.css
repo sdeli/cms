@@ -138,11 +138,12 @@
 				&__item-separator {
 					display: inline-block;
 					width: 0;
-					border: 2px solid;
+					border: 0.09375rem solid white;
 					color: white;
 					height: 1rem;
 					margin-bottom: -0.2rem;
 					border-radius: 0.1rem;
+					    background: white;
 				}
 				
 				&__drop-down {

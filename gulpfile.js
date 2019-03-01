@@ -29,8 +29,8 @@ let cssFilesToBundleArr = [
         bundledCssFileDest : './app/public/css/'
     },
     {
-        cssSrcFile : "./app/front-end/css/404-view-unbundled.css",
-        bundledCssFileName : '404-view-bundled.css',
+        cssSrcFile : "./app/front-end/css/error-view-unbundled.css",
+        bundledCssFileName : 'error-view-bundled.css',
         bundledCssFileDest : './app/public/css/'
     },
     {

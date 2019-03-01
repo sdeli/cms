@@ -2,7 +2,7 @@ let {sendPUTFormRequest} = require('front-end-widgets/utils');
 
 module.exports = ((config) => {
     const {
-        UPDATE_ARTICLE__EP,
+        UPDATE_ARTICLE_CATED__EP,
         FLASH_MSGS_DIV__SEL
     } = config;
     
@@ -11,7 +11,7 @@ module.exports = ((config) => {
     const articleCategInput = document.querySelector(`[name="articleCategory"]`);
 
     sendPUTFormRequest = sendPUTFormRequest({
-        UPDATE_ARTICLE__EP,
+        UPDATE__EP : UPDATE_ARTICLE_CATED__EP,
         FLASH_MSGS_DIV__SEL,
         CONTENT_TYPE : 'application/json'
     })

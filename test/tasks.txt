@@ -1,9 +1,4 @@
-exclude empty categs
-nav
-validatation message clean up
 scraper 
-    minus appartments
-    google link
     transaction rollbacks ignores
 
 =====================================================
@@ -11,6 +6,7 @@ scraper
 important articles widget
 objectify front end widgets
 links clean up,
+exclude empty categs
 sql transaction rollbacks/ignores
 validation messages and settings
 article view back to blog list by categ link

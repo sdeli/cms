@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<% include ../partials/_blog-head.ejs %>
+<% include blog/partials/_blog-head.ejs %>
 <body>
     <section>
-        <% include ../partials/_blog-navbar.ejs %>
+        <% include blog/partials/_blog-navbar.ejs %>
     </section>
     
     <section class="container">
         <div class="row">
-            <% include ../partials/_logo-stripe.ejs %>  
+            <% include blog/partials/_logo-stripe.ejs %>  
         </div>
     </section>
 
     <section>
-        <% include ../partials/_jumbotron.ejs %>
+        <% include blog/partials/_jumbotron.ejs %>
     </section>
     
     <section class="container four-o-four-message-area">
         <div class="row">
             <div class="col-btm-12 col-gutter-z-btm-both col-gutter-n-sm-both col-md-8 col-md-offset-2">
-
+                
                 <div class="post">
                     <div class="post__container">
                         <div class="post__container__header">
-                            <h3 class="post__container__header__h3 post__container__header__h3--centered post__container__header__h3--main-msg">Bocsánat, nem találtuk meg az ön által keresett weboldalt... Kérjük nézzen körül fönt a navigációs bárban vagy cikkeink között</h3>
+                            <h3 class="post__container__header__h3 post__container__header__h3--centered post__container__header__h3--main-msg"><%= errorMsg %></h3>
                         </div>
                     </div> <!-- post__container -->
                 </div>  
@@ -36,16 +36,16 @@
         <div class="row">
 
             <div class="info-feed col-btm-12 col-gutter-z-btm-both col-gutter-n-sm-both col-md-8">
-                <% include ../partials/_article-items.ejs %>
+                <% include blog/partials/_article-items.ejs %>
             </div>
 
             <aside class="widgets col-btm-12 col-gutter-s-btm-both col-gutter-n-sm-both col-md-4 col-gutter-n-md-right col-gutter-z-md-left">
-                <% include ../partials/_communication.ejs %>
+                <% include blog/partials/_communication.ejs %>
             </aside>
         </div>
     </section>
 
-    <% include ../partials/_blog-footer.ejs %>
-    <% include ../partials/_blog-scripts.ejs %>
+    <% include blog/partials/_blog-footer.ejs %>
+    <% include blog/partials/_blog-scripts.ejs %>
 </body>
 </html>

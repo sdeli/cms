@@ -14,16 +14,16 @@ async function deleteUser(req, res) {
     
     try {
         var targetUserObj = await usersModel.getUserById(targetUserId);
+        let userDoesntExists = !targetUserObj;
+        if (userDoesntExists) return denyUserDeletion(res, USER_DOESNT_EXISTS__ERR_FLASH)
+    
+        if (!isUserAuthorizedToDeleteTargetUserCheck(req, targetUserObj)) {
+            return denyUserDeletion(res, NOT_AUTHORIZED_TO_DELETE__ERR_FLASH);
+        }
     } catch (err) {
         next(err);
     }
-
-    let userDoesntExists = !targetUserObj;
-    if (userDoesntExists) return denyUserDeletion(res, USER_DOESNT_EXISTS__ERR_FLASH)
-
-    if (!isUserAuthorizedToDeleteTargetUserCheck(req, targetUserObj)) {
-        return denyUserDeletion(res, NOT_AUTHORIZED_TO_DELETE__ERR_FLASH);
-    }
+    
 
     usersModel.deleteUserFromDb(targetUserId)
     .then((isUserDeleted) => {

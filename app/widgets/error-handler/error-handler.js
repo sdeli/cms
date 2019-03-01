@@ -2,13 +2,15 @@ const config = require('config');
 const fs = require('fs');
 
 const ERR_LOG_FILE__PATH = `${process.cwd()}/${config.errHandling.errLogRelativeFilePath}`,
-    NODE_ENV = process.env.NODE_ENV;
+    NODE_ENV = process.env.NODE_ENV,
+    FIVE_O_ONE__ID = config.templateConf.fiveOOne.id;
+    FIVE_O_ONE__EP = config.restEndpoints.error.replace(/(.*\/)(:\w+)/, `$1${FIVE_O_ONE__ID}`);
 
 module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
     let notErrWith404View = !Boolean(err.fourOfourErr);
-
+    
     if (NODE_ENV === 'development' && req && res && notErrWith404View) {
         console.log(err.name);
         console.log(err.stack);
@@ -21,6 +23,7 @@ function errorHandler(err, req, res, next) {
     } else if (NODE_ENV === 'production' && req  && res && notErrWith404View) {
         let errText = getErrorText(req, err);
         logErr(errText);
+        redirectTo501(req, res);
     } else {
         let errText = JSON.stringify(err);
         logErr(errText);
@@ -68,6 +71,15 @@ function getTimestamp() {
 
     var timestamp = `${date.getFullYear()}-${month}-${day} ${hour}:${min}:${sec}`;
     return timestamp;
+}
+
+function redirectTo501(req, res) {
+    if (req.method === "GET" || req.method === "POST") {
+        res.redirect(FIVE_O_ONE__EP);
+    } else {
+        // node.js redirect doesnt change the method from DELETE and from PUT to GET. thatswhy if the initial request was put or delete and it gets redirected, then the redirect request will be the same DELTE or PUT and so express wont find the route where it has been redirected. Here I would redirect to /error/501 but due to that is a GET route, it wont be found and the request would loop into /error/401 again and again. So I decided to use DELETE OR PUT requests just in ajax and just send the error redirects ep where on the frontend will be redirected to the sent ep.
+        res.send(FIVE_O_ONE__EP);
+    }
 }
 
 function logErr(errText) {

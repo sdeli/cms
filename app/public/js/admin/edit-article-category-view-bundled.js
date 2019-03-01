@@ -98,7 +98,7 @@ const frontEndConfig = require('front-end-config');
 let editArticleCategForm = require('front-end-widgets/edit-article-category-form/');
 
 editArticleCategForm({
-    UPDATE_ARTICLE__EP : frontEndConfig.restEndPoints.admin.articleCategory.update,
+    UPDATE_ARTICLE_CATED__EP : frontEndConfig.restEndPoints.admin.articleCategory.update,
     FLASH_MSGS_DIV__SEL : frontEndConfig.bundles.articleList.flashMsgsDivSel
 })
 
@@ -142,7 +142,7 @@ let {sendPUTFormRequest} = require('front-end-widgets/utils');
 
 module.exports = ((config) => {
     const {
-        UPDATE_ARTICLE__EP,
+        UPDATE_ARTICLE_CATED__EP,
         FLASH_MSGS_DIV__SEL
     } = config;
     
@@ -151,7 +151,7 @@ module.exports = ((config) => {
     const articleCategInput = document.querySelector(`[name="articleCategory"]`);
 
     sendPUTFormRequest = sendPUTFormRequest({
-        UPDATE_ARTICLE__EP,
+        UPDATE__EP : UPDATE_ARTICLE_CATED__EP,
         FLASH_MSGS_DIV__SEL,
         CONTENT_TYPE : 'application/json'
     })
@@ -227,13 +227,13 @@ function sendDeleteRequestOnEvent(config) {
 
 function sendPUTFormRequest(config) {
 	const {
-		UPDATE_ARTICLE__EP,
+		UPDATE__EP,
 		FLASH_MSGS_DIV__SEL,
 		CONTENT_TYPE
 	} = config;
 
 	return (formdata) => {
-		$.ajax(UPDATE_ARTICLE__EP, {
+		$.ajax(UPDATE__EP, {
 			type : "PUT",
 			data: formdata,
 			contentType: CONTENT_TYPE || false,

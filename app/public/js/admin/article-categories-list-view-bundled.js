@@ -383,13 +383,13 @@ function sendDeleteRequestOnEvent(config) {
 
 function sendPUTFormRequest(config) {
 	const {
-		UPDATE_ARTICLE__EP,
+		UPDATE__EP,
 		FLASH_MSGS_DIV__SEL,
 		CONTENT_TYPE
 	} = config;
 
 	return (formdata) => {
-		$.ajax(UPDATE_ARTICLE__EP, {
+		$.ajax(UPDATE__EP, {
 			type : "PUT",
 			data: formdata,
 			contentType: CONTENT_TYPE || false,

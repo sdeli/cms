@@ -1,13 +1,8 @@
 const config = require('config');
+const {validateArticleFormData} = require('widgets/router-utils');
 let updateArticleData = require('./moduls/update-article-data/update-article-data.js'); 
 
-const VIEW_TITLE_NOT_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.viewTitle.notEmpty,
-    VIEW_TITLE_CHAR_COUNT__ERR_FLASH = config.flashMsgs.validationErr.viewTitle.charCount, 
-    ARTICLE_NAME_NOT_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.articleName.notEmpty, 
-    ARTICLE_NAME_CHAR_COUNT__ERR_FLASH = config.flashMsgs.validationErr.articleName.charCount, 
-    ARTICLE_NOT_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.article.notEmpty, 
-    TEASER_NOT_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.teaser.notEmpty,
-    TEASERS__PATH = config.absolutePathes.teasersPath,
+const TEASERS__PATH = config.absolutePathes.teasersPath,
     ARTICLES__PATH = config.absolutePathes.articlesPath,
     ARTICLE_PROFILE_IMG__PATH = config.relativePathes.public.img.article.profile,
     ARTICLE_PROFILE_IMG__LINK = config.links.article.img.profile,
@@ -25,7 +20,7 @@ updateArticleData = updateArticleData({
 module.exports = updateArticle;
     
 function updateArticle(req, res, next) {
-    let validationErrs = validateRegisterFormData(req);
+    let validationErrs = validateArticleFormData(req);
 
     let articleFormDataCorrect = validationErrs.length === 0;
     if (!articleFormDataCorrect) {
@@ -41,31 +36,6 @@ function updateArticle(req, res, next) {
         failureRedirect(req, res, UPDATE_ARTICLE__ERR_FLASH);
         next(e);
     });
-}
-
-function validateRegisterFormData(req) {
-    req.checkBody('pageTitle')
-    .notEmpty().withMessage(VIEW_TITLE_NOT_EMPTY__ERR_FLASH)
-    .len(4, 70)
-    .withMessage(VIEW_TITLE_CHAR_COUNT__ERR_FLASH)
-    .trim();
-
-    req.checkBody('articleName')
-    .notEmpty().withMessage(ARTICLE_NAME_NOT_EMPTY__ERR_FLASH)
-    .len(4, 70).withMessage(ARTICLE_NAME_CHAR_COUNT__ERR_FLASH);
-
-    req.checkBody('teasersHtml')
-    .notEmpty().withMessage(TEASER_NOT_EMPTY__ERR_FLASH);
-
-    req.checkBody('articleHtml')
-    .notEmpty().withMessage(ARTICLE_NOT_EMPTY__ERR_FLASH);
-
-    validationErrs = req.validationErrors({
-        onlyFirstError: true
-    });
-
-    var validationErrs = Object.values(validationErrs);
-    return validationErrs;
 }
 
 function failureRedirect(req, res, errs) {

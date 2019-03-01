@@ -12,11 +12,16 @@ const USER_EXISTS__ERR_FLASH = config.flashMsgs.validationErr.userAlreadyExists,
     REGISTER_VIEW__EP = config.restEndpoints.admin.auth.register.registerView,
     USER_REGISTERED__SUCC_FLASH = config.flashMsgs.auth.register.succ,
     SUCC_REDIRECT__EP = config.restEndpoints.admin.index,
-    USER_PRIVILAGE_FRONT_END__NAME = config.users.privilages.user.frontEnd,
     USER_PRIVILAGE_BACK_END__NAME = config.users.privilages.user.backEnd,
     AUTO_GENERATED_PASSWD__LENGTH = config.routesConfig.autoGenPswLength,
     TMP_PWD_EXPIRY__MIL_SECS = config.routesConfig.tmpPwdExpiryMilSecs,
-    USER_TERM_ON_FRONT_END = config.users.privilages.user.frontEnd;
+    NAME_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.userName.notEmpty,
+    NAME_CHAR_COUNT__ERR_FLASH = config.flashMsgs.validationErr.userName.charCount,
+    EMAIL_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.email.notEmpty,
+    EMAIL_CHAR_COUNT__ERR_FLASH = config.flashMsgs.validationErr.email.charCount,
+    EMAIL_INVALID__ERR_FLASH = config.flashMsgs.validationErr.email.notEmail,
+    PRIVILAGE_EMPTY__ERR_FLASH = config.flashMsgs.validationErr.privilage.notEmpty,
+    PRIVILAGE_INVALID__ERR_FLASH = config.flashMsgs.validationErr.privilage.unKnown;
 
 module.exports = registerUser;
 
@@ -50,28 +55,25 @@ async function validateRegisterFormData(req) {
     if (isEmailTaken) return [{msg : USER_EXISTS__ERR_FLASH}];
 
     req.checkBody('name')
-    .notEmpty().withMessage('please enter a name')
-    .len(4, 15).withMessage('The Name should be between 4 and 15 characters.')
+    .notEmpty().withMessage(NAME_EMPTY__ERR_FLASH)
+    .len(4, 30).withMessage(NAME_CHAR_COUNT__ERR_FLASH)
     .trim().escape();
 
     req.checkBody('email')
-    .notEmpty().withMessage('please enter an email.')
-    .len(5,100).withMessage('The length of your email should be between 5 and 100.')
-    .isEmail().withMessage('The email you entered is invalid, please try it again.');
+    .notEmpty().withMessage(EMAIL_EMPTY__ERR_FLASH)
+    .len(5,100).withMessage(EMAIL_CHAR_COUNT__ERR_FLASH)
+    .isEmail().withMessage(EMAIL_INVALID__ERR_FLASH);
     
     req.checkBody('privilage')
-    .notEmpty().withMessage('Please specify the privilage for the new user.')
+    .notEmpty().withMessage(PRIVILAGE_EMPTY__ERR_FLASH)
     .isIn([ADMIN_PRIVILAGE_FRONT_END__NAME, USER_PRIVILAGE_FRONT_END__NAME])
-    .withMessage('Please specify a correct privilage.')
-    
-    req.checkBody('privilage')
-    .equals(USER_TERM_ON_FRONT_END);
-    
-    validationErrs = req.validationErrors({
+    .withMessage(PRIVILAGE_INVALID__ERR_FLASH);
+
+    let validationErrs = req.validationErrors({
         onlyFirstError: true
     });
     
-    var validationErrs = Object.values(validationErrs);
+    validationErrs = Object.values(validationErrs);
 
     return validationErrs;
 }

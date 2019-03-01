@@ -2,8 +2,7 @@ const config = require('config');
 const articleCategsModel = require('models/article-categs-model');
 const authorize = require('widgets/authorize');
 
-const  ARTICLE_CATEGORY_NOT_FOUND_IN_DB__ERR_MSG = config.errorMsgs.general.articleCategoryNotFoundInDb, 
-    UNEXPECTED_ERR_EVENT__ERR_FLASH = config.errorMsgs.general.fallbackErr,
+const UNEXPECTED_ERR_EVENT__ERR_FLASH = config.errorMsgs.general.fallbackErr,
     EDIT_ARTICLE_CATEGORY_VIEW__PATH = config.viewPathes.admin.articleCategory.createEdit,
     EDIT_ARTICLE_CATEGORY_VIEW__TITLE = config.templateConf.admin.articleCategory.edit.title, 
     EDIT_ARTICLE_CATEGORY_VIEW__ID = config.templateConf.admin.articleCategory.edit.id, 

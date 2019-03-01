@@ -1,10 +1,108 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+module.exports=
+{   
+    "general" : {
+        "ajaxCallJsonContentType" : "application/json",
+        "ajaxCallPostMethod" : "POST",
+        "fallbackErr" : "An error has occured. Please contact the site admin.",
+        "windowMediumSize" : "768",
+        "windowSmallSize" : "576"
+    },
+    "restEndPoints" : {
+        "admin" : {
+            "article" : {
+                "image" : {
+                    "upload" : "/admin/article/image",
+                    "remove" : "/admin/article/image"
+                },
+                "update" : "/admin/article",
+                "updateSort" : "/admin/articles/sort"
+            },
+            "articleCategory" : {
+                "update" : "/admin/article-categorie",
+                "updateSort" : "/admin/article-categorie/sort"
+            }
+        },
+        "blog" : {
+            "furtherUserQuestion" : "/blog/question"
+        }
+    },
+    "bundles" : {
+        "articleList" : {
+            "reorgTableRowWidthClass" : "draggedRowsWidth",
+            "flashMsgsDivSel" : ".flash-messages",
+            "reorgTableStyleTagId" : "for-sortable-articles-table",
+            "reorgTableHeadSel" : ".article-list-table__body tr:first-child",
+            "articlesTablesClass" : ".article-list-table__body",
+            "reorgTableContainment" : "parent",
+            "reorgTablePlaceholdersClass" : "border border-success",
+            "deleteArticleLinksSel" : ".article-list-table__body__row__delete-link",
+            "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article?"
+        },
+        "createEditArticle" : {
+            "articleBodyTextAreaId" : "#article-body-editor",
+            "teaserTextAreaId" : "#teaser",
+            "imageDataParamName" : "imageFileInfo",
+            "imageAllowedTypes" : ["jpeg", "jpg", "png"],
+            "articleBodyEditorHeight" : 300,
+            "squareImagePreviewElemSel" : "#square-article-image-preview",
+            "squareImageBrowseBtnSel" : "#square-image-browse-btn",
+            "flatImagePreviewElemSel" : "#flat-article-image-preview",
+            "flatImageBrowseBtnSel" : "#flat-image-browse-btn",
+            "displayedImgesHeight" : "292px"
+        },
+        "articleCategoriesList" : {
+            "reorgTable" : {
+                "tableHeadSel" : ".article-categories-list-table__body tr:first-child",
+                "rowWidthClass" : "draggedRowsWidth",
+                "styleTagId" : "for-sortable-articles-categories-table",
+                "tablesClass" : ".article-categories-list-table__body",
+                "containment" : "parent",
+                "placeholdersClass" : "border border-success"
+            },
+            "deleteArticleAlert" : {
+                "deleteArticleLinksSel" : ".article-categories-list-table__body__row__delete-link",
+                "deleteArticleConfirmationWarningAlert" : "are your sure you want to delete this article cateogire?"    
+            }
+        },
+        "registerUser" : {
+            "imagePreviewElemSel" : ".user-avatar-image-preview",
+            "imageBrowseBtnSel" : ".image-browse-btn-sel",
+            "displayedImgesHeight" : "250px"
+            
+        }
+    },
+    "froala" : {
+        "events" : {
+            "image" : {
+                "uploaded" : "froalaEditor.image.uploaded",
+                "inserted" : "froalaEditor.image.inserted",
+                "replaced" : "froalaEditor.image.replaced",
+                "removed" : "froalaEditor.image.removed",
+                "error" : "froalaEditor.image.error"
+            }
+        },
+        "general" : {
+            "imgRemovedMsg" : "Image was deleted",
+            "imageCouldntBeDeletedErrMsg" : "Image delete problem: ",
+        }
+        
+    }
+}
+},{}],2:[function(require,module,exports){
+const frontEndConfig = require('./assets/front-end-config.json');
+
+module.exports = frontEndConfig;
+},{"./assets/front-end-config.json":1}],3:[function(require,module,exports){
+const frontEndConf = require('front-end-config');
 const blogNavbar = require('front-end-widgets/blog-navbar');
 const FlashMessage = require('front-end-widgets/flash-message');
 
+const WINDOW_MOBILE_WIDTH = frontEndConf.general.windowSmallSize;
+
 FlashMessage.activateCloseBtns();
-blogNavbar();
-},{"front-end-widgets/blog-navbar":2,"front-end-widgets/flash-message":10}],2:[function(require,module,exports){
+blogNavbar({WINDOW_MOBILE_WIDTH});
+},{"front-end-config":2,"front-end-widgets/blog-navbar":4,"front-end-widgets/flash-message":12}],4:[function(require,module,exports){
 const navDropDown = require('front-end-widgets/nav-drop-down');
 const resizeNavbar = require('./modules/resize-navbar/resize-navbar.js');
 const dropDownNavOnMobile = require('./modules/drop-down-nav-on-mobile/drop-down-nav-on-mobile.js');
@@ -39,7 +137,7 @@ function makeCurrNavLiActive() {
     }
 };
 
-},{"./modules/drop-down-nav-on-mobile/drop-down-nav-on-mobile.js":3,"./modules/resize-navbar/resize-navbar.js":8,"front-end-widgets/nav-drop-down":11}],3:[function(require,module,exports){
+},{"./modules/drop-down-nav-on-mobile/drop-down-nav-on-mobile.js":5,"./modules/resize-navbar/resize-navbar.js":10,"front-end-widgets/nav-drop-down":13}],5:[function(require,module,exports){
 const toggleOnLeftInOutCloseBtn = require('./moduls/toggle-on-left-in-out-close-btn/toggle-on-left-in-out-close-btn.js');
 const addEventListenerFn = require('./moduls/add-event-listener/add-event-listener.js');
 const {checkIfSceenIsOnMobileView, cssAnimationClasses} = require('../utils/utils.js');
@@ -92,7 +190,7 @@ module.exports = () => {
 		navbarMenu.addClass(smoothSlideUp)	
 	}
 }
-},{"../utils/utils.js":9,"./moduls/add-event-listener/add-event-listener.js":4,"./moduls/toggle-on-left-in-out-close-btn/toggle-on-left-in-out-close-btn.js":5}],4:[function(require,module,exports){
+},{"../utils/utils.js":11,"./moduls/add-event-listener/add-event-listener.js":6,"./moduls/toggle-on-left-in-out-close-btn/toggle-on-left-in-out-close-btn.js":7}],6:[function(require,module,exports){
 function addEventListenerFn(eventsArr, listenerElem, callBack) {
 	isCallbackArrayOfMultiCallbacks = Array.isArray(callBack);
 
@@ -117,7 +215,7 @@ function addEventListener(eventsArr, listenerElem, callBack) {
 }
 
 module.exports = addEventListenerFn;
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 const {cssAnimationClasses} = require('../../../utils/utils.js');
 const {hideNavDropdownBtn} = cssAnimationClasses;
 
@@ -140,7 +238,7 @@ function slideCloseBtnIntoScreen(dropDownBtn) {
 }
 
 module.exports = toggleOnLeftInOutCloseBtn;
-},{"../../../utils/utils.js":9}],6:[function(require,module,exports){
+},{"../../../utils/utils.js":11}],8:[function(require,module,exports){
 const {cssAnimationClasses} = require('../../../utils/utils.js');
 
 module.exports = (navbarsPositioningDiv, navbarDropDownBtn, IsScreenOnMobileView) => {
@@ -227,7 +325,7 @@ module.exports = (navbarsPositioningDiv, navbarDropDownBtn, IsScreenOnMobileView
 		}
 	}
 }
-},{"../../../utils/utils.js":9}],7:[function(require,module,exports){
+},{"../../../utils/utils.js":11}],9:[function(require,module,exports){
 const {checkIfSceenIsOnMobileView, cssAnimationClasses} = require('../../../utils/utils.js');
 const {smoothSlideUp, showNavOnDesktop} = cssAnimationClasses;
 
@@ -258,7 +356,7 @@ module.exports = (navbarsPositioningDiv, IsScreenOnMobileView) => {
 		navbarsPositioningDiv.removeClass(showNavOnDesktop);
 	}
 }
-},{"../../../utils/utils.js":9}],8:[function(require,module,exports){
+},{"../../../utils/utils.js":11}],10:[function(require,module,exports){
 /*
 	data-on-mobile-view, data-on-desktop-view
 	the navbar element is marked with data attributes to show where the website was when resized sceen.
@@ -312,7 +410,7 @@ module.exports = () => {
 		}
 	}
 }
-},{"../utils/utils.js":9,"./moduls/adjust-nav-if-screen-gone-to-desktop-view/adjust-nav-if-screen-gone-to-desktop-view.js":6,"./moduls/adjust-nav-if-screen-gone-to-mobile-view/adjust-nav-if-screen-gone-to-mobile-view.js":7}],9:[function(require,module,exports){
+},{"../utils/utils.js":11,"./moduls/adjust-nav-if-screen-gone-to-desktop-view/adjust-nav-if-screen-gone-to-desktop-view.js":8,"./moduls/adjust-nav-if-screen-gone-to-mobile-view/adjust-nav-if-screen-gone-to-mobile-view.js":9}],11:[function(require,module,exports){
 function checkIfSceenIsOnMobileView() {
 	let windowInnerWidth = window.innerWidth;
 	
@@ -366,7 +464,7 @@ module.exports = {
 
 	return navsCssClasses;
 }*/
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = FlashMessage;
 
 function FlashMessage(type, flashMsg, flashMsgsDivsCssSel) {
@@ -416,7 +514,7 @@ FlashMessage.prototype.displayMessage = function() {
 
     flashMsgsDiv.prepend(this.flashElem);
 }
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = ((config) => {
     const {
         WINDOW_MOBILE_WIDTH,    
@@ -584,4 +682,4 @@ module.exports = ((config) => {
         mainDropDownElem.hide();
     }
 });
-},{}]},{},[1]);
+},{}]},{},[3]);

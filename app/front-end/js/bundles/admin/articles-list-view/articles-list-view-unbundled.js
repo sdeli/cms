@@ -1,7 +1,6 @@
 const frontEndConfig = require('front-end-config');
 const reorganizeArticles = require('front-end-widgets/reorganize-table')
 const letConfirmArticleDeletion = require('front-end-widgets/utils').alertOnClick;
-const blogNavbar = require('front-end-widgets/blog-navbar');
 let {sendDeleteRequestOnEvent} = require('front-end-widgets/utils');
 
 const FLASH_MSGS_DIV__SEL = frontEndConfig.bundles.articleList.flashMsgsDivSel;
@@ -25,6 +24,4 @@ $(document).ready(() => {
         alertTriggerElemClass : frontEndConfig.bundles.articleList.deleteArticleLinksSel, 
         alertMsg : frontEndConfig.bundles.articleList.deleteArticleConfirmationWarningAlert
     }, sendDeleteRequestOnEvent);
-
-    blogNavbar();
 });

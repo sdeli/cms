@@ -64,9 +64,7 @@
             "main" : "/blog",
             "hotelList" : "/blog/partners/:pageNumber"
         },
-        "error" : {
-            "fourOfour" : "/error/404"
-        }
+        "error" : "/error/:errorCode"
     },
     "viewPathes" : {
         "blog" : {
@@ -77,7 +75,7 @@
             "aboutUs" : "blog/about-us.ejs",
             "hotelList" : "blog/hotel-list.ejs"
         },
-        "fourOFour" : "blog/error/404.ejs",
+        "error" : "error.ejs",
         "admin" : {
             "index" : "admin/index.ejs",
             "register" : "admin/auth/register.ejs",
@@ -187,6 +185,10 @@
         "fourOFour" : {
             "title" : "PageNotFound",
             "id" : "404"
+        },
+        "fiveOOne" : {
+            "title" : "Internal Error",
+            "id" : "501"
         }
     },
     "errorMsgs" : {
@@ -201,7 +203,9 @@
             "dataNotFoundInDb" : "requested data not found in db",
             "articleCategoryNotFoundInDb" : "article category not found in db",
             "fileDoesntExist" : "the file trying to read doesnt exist",
-            "articleNotFound" : "requested article not found in the system"
+            "articleNotFound" : "requested article not found in the system",
+            "fourOfour" : "Bocsánat, nem találtuk meg az ön által keresett weboldalt... Kérjük nézzen körül fönt a navigációs bárban vagy cikkeink között", 
+            "fiveOOne" : "Bocsánat, valamilyen belső hiba történt, ha ez Önnek gondot okoz, kérjük értesítse a weboldal technikusát." 
         }
     },
     "errHandling" : {
@@ -290,10 +294,10 @@
             "err" : "You couldnt be logged in, because eather your username or temporary password was not correct, or the termporary password has expired. Please try it again or if the temporary password has expires please requesta new account. Thank you."
         },
         "furthereUserQuestion" : {
-            "succ" : "Nagyon koszonjuk, hogy elkuldte nekunk a kerdeset, Amilyen gyorsan csak tudunk jelentkezunk onnel a valsszal."
+            "succ" : "Nagyon köszönjük, hogy elküldte nekünk a kérdését, amilyen gyorsan csak tudunk, jelentkezünk Önnél a válasszal."
         },
         "furtherApplication" : {
-            "succ" : "Nagyon koszonjuk, hogy Megitsztelt minket jelentkezesevel, Amilyen gyorsan csak tudunk tudatjuk onnel a kovetkezo lepeseket."
+            "succ" : "Nagyon köszönjük, hogy megtisztelt minket jelentkezésével. Amilyen gyorsan csak tudunk, tudatjuk Önnel a következő lépéseket."
         },
         "validationErr" : {
             "userAlreadyExists" : "With this email there is a user already, please choose an other email.",
@@ -308,6 +312,9 @@
             "teaser" : {
                 "notEmpty" : "teaser shouldn`t be empty!"
             },
+            "articleCateg" : {
+                "notEmpty" : "There should be at least one article category checked"
+            },
             "article" : {
                 "notEmpty" : "article shouldn`t be empty!"
             },
@@ -317,11 +324,20 @@
                 "notUnique" : "The new article category is already in the list, so it couldnt be created."
             },
             "email" : {
-                "notEmpty" : "please enter a name",
-                "charCount" : "The Name should be between 4 and 15 characters"
+                "notEmpty" : "please enter an email",
+                "charCount" : "The length of your email should be between 5 and 100 characters",
+                "notEmail" : "The email you entered is invalid, please try it again."
             },
             "password" : "Your password should be at least 9 characters long, contain at least one uppercase letter and at least one lowercase letter and one number, furthermore one from the following characters: !\"#$%&\\'()*+,-./:;<=>?@[\\]^_`{|}~",
-            "passwordConf" : "The confirmation of the passowrd doesnt match the passowrd."
+            "passwordConf" : "The confirmation of the passowrd doesnt match the passowrd.",
+            "userName" : {
+                "notEmpty" : "please enter a name",
+                "charCount" : "The Name should be between 4 and 30 characters."
+            },
+            "privilage" : {
+                "notEmpty" : "Please specify a privilage for the new user.",
+                "unKnown" : "Please specify a correct privilage."
+            }
         },
         "articlesBlogList" : {
             "noArtiles" : "There is an issue with the requested page, so you have been redirected"
@@ -392,30 +408,30 @@
             "host" : "smtp.gmail.com"
         },
         "application" : {
-            "confMsg" : "Nagyon koszonjuk jelentkezesed, amilyen gyorsan csak tudjuk feldolgozzuk es jelentkezunk nalad, addig is minden jot kivanunk.",
-            "confSubj" : "Jelentkezes megerositese"
+            "confMsg" : "Nagyon köszönjük jelentkezésedet, amilyen gyorsan csak tudjuk, feldolgozzuk, és jelentkezünk Nálad.Addig is minden jót kívánunk.",
+            "confSubj" : "Jelentkezés megerősítése"
         },
         "question" : {
-            "confMsg" : "Nagyon koszonjuk hogy elkuldted nekunk a kerdesed, amilyen gyorsan csak tudjuk feldolgozzuk es jelentkezunk nalad, addig is minden jot kivanunk.",
-            "confSubj" : "elkuldott kerdes megerositese"
+            "confMsg" : "Nagyon köszönjük, hogy elküldted nekünk a kérdésed. Amilyen gyorsan csak tudjuk feldolgozzuk, és jelentkezünk Nálad. Addig is minden jót kívánunk.",
+            "confSubj" : "Elküldött kérdés megerősítése"
         }
     },
     "blogNavStaticEndPoints" : {
         "getMainView" : {
             "ep" : "/blog",
-            "text" : "Fooldal"
+            "text" : "Főoldal"
         },
         "getAboutUsView" : {
             "ep" : "/blog/about-us",
-            "text" : "rolunk"
+            "text" : "Rólunk"
         },
         "getApplyView" : {
             "ep" : "/blog/apply",
-            "text" : "jelentkezes"
+            "text" : "Jelentkezés"
         },
         "getHotelListView" : {
             "ep" : "/blog/partners/1",
-            "text" : "Partner Hotelek"
+            "text" : "gulp"
         },
         "articlesList" : {
             "text" : "Blog",

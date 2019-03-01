@@ -65,5 +65,6 @@ function redirect(type, res) {
         res.flash.toNext(res.flash.WARNING, DELETE_ARTICLE__ERR_FLASH);
     }
 
+    // ajax will redirect on front end
     res.send(SUCC_REDIRECT__EP);
 } 

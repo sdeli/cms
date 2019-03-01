@@ -35,6 +35,10 @@ const flashMessaging = require('widgets/flash-messaging');
 let middlewares = require('widgets/middlewares');
 let errorHandler = require('widgets/error-handler/error-handler')
 
+// ==== Constants ====
+const FOUR_O_FOUR__ID = config.templateConf.fourOFour.id;
+const FOUR_O_FOUR__EP = config.restEndpoints.error.replace(/(.*\/)(:\w+)/, `$1${FOUR_O_FOUR__ID}`);
+
 // ==== Routers ====
 const blogRouter = require('./routers/blog-router/blog-router.js');
 const adminRouter = require('./routers/admin-router/admin-router.js');
@@ -77,13 +81,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(middlewares.keepTrackOfPrevUrl);
+app.get("/as", function (req, res) {
+    throw new Error("BROKEN"); // Express will catch this on its own.
+});
 
 app.use(blogRouter);
 app.use(adminRouter);
 app.use(errorRouter);
 app.use((req, res) => {
     console.log(req.url);
-    res.redirect(config.restEndpoints.error.fourOfour);
+    if (req.method === "GET" || req.method === "POST") {
+        res.redirect(FOUR_O_FOUR__EP);
+    } else {
+        // node.js redirect doesnt change the method from DELETE and from PUT to GET. thatswhy if the initial request was put or delete and it gets redirected, then the redirect request will be the same DELTE or PUT and so express wont find the route where it has been redirected. Here I would redirect to /error/404 but due to that is a GET route it wont be found and the request would loop inot here again and again. So I use DELETE OR PUT requests just in ajax and just send the error redirects ep where on the front end will be redirected /error/404.
+        res.send(FOUR_O_FOUR__EP);
+    }
 });
 
 // ==== Err Handling ====
