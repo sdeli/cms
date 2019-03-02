@@ -1,5 +1,3 @@
-correctCwdWhenDeubug();
-
 // ==== Set up module linking ====
 const path = require('path');
 let moduleLinker = require('./widgets/modules-linker/module-linker.js');
@@ -101,13 +99,5 @@ app.use((req, res) => {
 // ==== Err Handling ====
 app.use(errorHandler);
 
-app.listen(3500);
-
-function correctCwdWhenDeubug() {
-    if (process.cwd() !== '/home/sandor/Documents/cms-tut/app') {
-        process.chdir('./app');
-    } else {
-        console.log('minden fain');
-    }
-}
+app.listen(8080);
 

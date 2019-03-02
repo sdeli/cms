@@ -354,10 +354,10 @@
         }
     },
     "absolutePathes" : {
-        "wwwPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www",
-        "articlesPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www/articles",
-        "teasersPath" : "/home/sandor/Documents/austria-recruitment-cms/app/www/teasers",
-        "modelsPath" : "/home/sandor/Documents/austria-recruitment-cms/app/models"
+        "wwwPath" : "/home/sandor/cms/app/www",
+        "articlesPath" : "/home/sandor/cms/app/www/articles",
+        "teasersPath" : "/home/sandor/cms/app/www/teasers",
+        "modelsPath" : "/home/sandor/cms/app/models"
     },
     "relativePathes" : {
         "public" : {
@@ -431,7 +431,7 @@
         },
         "getHotelListView" : {
             "ep" : "/blog/partners/1",
-            "text" : "gulp"
+            "text" : "partner"
         },
         "articlesList" : {
             "text" : "Blog",

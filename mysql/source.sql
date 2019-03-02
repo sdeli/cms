@@ -1,5 +1,6 @@
 # create db and tables
-source ./dbs/create-db-and-tables.sql
+source ./dbs/cms.sql
+source ./dbs/users.sql
 
 # create procedures
 source ./procedures/update-article-details.sql

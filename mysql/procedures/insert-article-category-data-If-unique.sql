@@ -25,5 +25,3 @@ begin
     COMMIT;
 end //
 delimiter ;
-
-#call insertArticleCategoryDataIfUnique('news');

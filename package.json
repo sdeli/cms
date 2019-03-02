@@ -33,6 +33,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
+    "pm2": "^3.3.1",
     "serve-favicon": "^2.5.0",
     "uniqid": "^5.0.3",
     "wysiwyg-editor-node-sdk": "^2.3.4"

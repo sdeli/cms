@@ -48,12 +48,3 @@ begin
     set global autocommit = 1;
 end //
 delimiter ;
-
-use cms;call updateArticleDetails(
-'18nt88sjsjb16xo', 
-'asdasdasdsadas', 
-'sdadsadsadad', 
-'asdasdasdsadas-18nt88sjsjb16xo', 
-'squarearticleprofileimg-1551038797885', 
-'flatarticleprofileimg-1551038797890'
-);
